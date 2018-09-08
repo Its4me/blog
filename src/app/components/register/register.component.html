@@ -1,0 +1,111 @@
+<section class="login">
+  <div class="form">
+      <div class="row">
+          <div class="form-header" >
+              <div class="form-header-logo"><img src="assets/logo.png" alt="logo"></div>
+              <div class="form-header-greedings">
+                  Добро пожаловать в
+              </div>
+              <h1 class="form-header-name">
+                  Саня пидор кучерявый
+              </h1>
+          </div>
+          <div class="form-choises" >
+              <button mat-button class="form-choises-item"
+                  
+                   (click)="_switchForm(true)"  >Войти
+              </button>
+              <button mat-button class="form-choises-item" 
+                  
+                  (click)="_switchForm(false)" >Регистрация
+              </button>
+              <div class="active"
+              [ngClass]="(loginForm)?'left':'right'"
+                  
+                  ></div>
+          </div>
+          <form *ngIf="this.loginForm" [formGroup]="enterForm">
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Email" formControlName="email" >
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Password" type="password" formControlName="password">
+              </mat-form-field>
+              <button (click)="sys()">sys</button>
+              <button class="button"
+                      mat-raised-button
+                      color="primary"
+                      (click)="_enter()">Вход</button>
+          </form> 
+          <form *ngIf="!this.loginForm" [formGroup]="registerForm" >
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Email" formControlName="email">
+                  <mat-hint *ngIf="registerForm.get('email').valid">Все вроде ок)</mat-hint>
+                  <mat-error *ngIf="registerForm.get('email').hasError('email')
+                                    && !registerForm.get('email').hasError('required')">
+                      Введите коректный email
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                      Поле <strong>обязательное</strong>
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Имя" formControlName="name" >
+                  <mat-hint *ngIf="registerForm.get('name').valid">Тут тоже ок</mat-hint>
+                  <mat-error *ngIf="(registerForm.get('name').value.length <= 2
+                                   || registerForm.get('name').value.length >= 50)
+                                    && !registerForm.get('name').hasError('required')">
+                      От 2 до 50 символов, прости)
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('name').hasError('required')">
+                      Я должен знать <strong>твоё имя</strong>
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Фамилия" formControlName="surname" >
+                  <mat-hint *ngIf="registerForm.get('surname').valid">Давай дальше</mat-hint>
+                  <mat-error *ngIf="(registerForm.get('surname').value.length <= 2
+                                   || registerForm.get('surname').value.length >= 50)
+                                    && !registerForm.get('surname').hasError('required')">
+                      От 2 до 50 символов, прости)
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('surname').hasError('required')">
+                      Интересно какая у тебя <strong>Фамилия</strong>
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Ник" formControlName="nick" >
+                  <mat-hint *ngIf="registerForm.get('nick').valid">Ого успехи ;)</mat-hint>
+                  <mat-error *ngIf="(registerForm.get('nick').value.length <= 2
+                                   || registerForm.get('nick').value.length >= 50)
+                                    && !registerForm.get('nick').hasError('required')">
+                      От 2 до 50 символов, прости)
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('nick').hasError('required')">
+                      Ну же придумай себе <strong>ник</strong>
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Пароль" type="password" formControlName="password" >
+                  <mat-hint *ngIf="registerForm.get('password').valid">Надеюсь не забудешь</mat-hint>
+                  <mat-error *ngIf="(registerForm.get('password').value.length <= 6
+                                   || registerForm.get('password').value.length >= 50)
+                                    && !registerForm.get('password').hasError('required')">
+                      Это не сложно введи от 6 до 50 символов
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                      Ничего подумай и введи <strong>Пароль</strong>
+                  </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input-wrapper">
+                  <input matInput placeholder="Подтвердите пароль" type="password" formControlName="password_confim" >
+              </mat-form-field>
+              <button class="button"
+                      mat-raised-button
+                      color="primary"
+                      (click)="_register()">Регистрация
+              </button>
+          </form>
+      </div>
+  </div>
+</section>

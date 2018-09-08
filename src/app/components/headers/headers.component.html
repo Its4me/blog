@@ -1,0 +1,30 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="logo"><img src="assets/logo.png" alt="logo"></div>
+      <div class="seach">
+          <i class="material-icons find"
+              >
+            search
+          </i>
+        <input matInput type="text" placeholder="Поиск" [(ngModel)]="seachValue">
+        <i class="material-icons clear"
+           *ngIf="seachValue"
+          (click)="seachValue = ''">clear
+        </i>
+      </div>
+      <nav>
+        <ul>
+          <li><a mat-button href="">Новости</a></li>
+          <li><a mat-button href="">Случайное</a></li>
+          <li><a mat-button href="">Уведомления</a></li>
+          <li><a mat-button href="">userNick</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div> 
+</header>
+<main>
+    <router-outlet></router-outlet>
+</main>
+
