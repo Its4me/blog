@@ -1,0 +1,15 @@
+<article class="content-block">
+  <div class="description" *ngIf="post.description">{{post.description}}</div>
+  <div class="img-wrapper" *ngIf="post.photoSrc">
+    <img [src]="photo_src" alt="post.description">
+  </div>
+  <div class="bottom-panel">
+    <div class="likes" (click)="_like()">
+      <i class="material-icons"
+        [ngClass]="{'active-like': activeLike}">
+        favorite
+      </i>
+      <div class="likes-count">{{post.likes_count}}</div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,51 @@
+@import "../../../var";
+
+article{
+    margin-top: 1em;
+    width: 100%;
+}
+.bottom-panel{
+    float: left;
+    width: 100%;
+}
+.description{
+    float: left;
+    width: 100%;
+}
+
+.likes{
+    float: left;
+    display: flex;
+    align-items: center;
+    i{
+        float: left;
+        color: $icon;
+        transition: all 0.35s ease-in-out;
+        &.active-like{
+            color: #ea1616e8;
+            animation: like 0.35s ease-in-out;
+        }
+    }
+    &:hover{
+        cursor: pointer;
+    }
+    
+}
+.likes-count{
+    float: left;
+    margin-left: 0.2em;
+}
+@keyframes like{
+    from{
+        transform: scale(1);
+    }
+    35%{
+        transform: scale(1.1);
+    }
+    80%{
+        transform: scale(0.9);
+    }
+    to{
+        transform: scale(1);
+    }
+}

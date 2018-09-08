@@ -1,0 +1,71 @@
+@import "../../../var.scss";
+
+
+.head-info{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    grid-template-rows: 180px 1fr;
+    grid-column-gap: 1em;
+    
+}
+.wrapper-for-img{
+
+    img{
+        border-radius: 50%;
+        max-width: 100%;
+    }
+}
+.head-info-user{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+.head-info-user-left-nick{
+    font-size: 1.8em;
+}
+.head-info-user-left-name{
+    font-size: 1em;
+    color: $icon;
+}
+.head-info-user-right{
+    display: flex;
+    justify-content: space-around;
+}
+section{
+    margin-top: 1em;
+}
+.content .row{
+    display: grid;
+    grid-template-columns: 6fr 2fr;
+    grid-column-gap: 1em;
+}
+.content-all-newPost{
+    width: 100%;
+    
+}
+aside{
+    position: sticky;
+    max-height: 200px;
+    top: calc(50px + 1em);
+    li{
+        list-style: none;
+    }
+}
+.textarea-wrapper{
+    width: 100%;
+}
+.content-all-newPost-bottom{
+    float: left;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button, i{
+        margin-left: 1em;
+    }
+    i{
+        cursor: pointer;
+    }
+}

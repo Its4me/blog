@@ -1,0 +1,76 @@
+@import "../../../var";
+
+header .row{
+    display: grid;
+    grid-template-columns: 50px 1fr 400px;
+}
+.logo{
+    height: 100%;
+    img{
+        max-width: 100%;
+        max-width: 100%;;
+    }
+}
+header{
+    z-index: 100;
+    background-color: #fff;
+}
+header, .row{
+    height: 50px;
+}
+.seach{
+    display: flex;
+    align-items: center;
+    input{
+        width: 90%;
+        height: 30px;
+        padding:  3px 3px 3px 28px;
+        margin-left: 5%;
+        border-radius: 4px;
+        background-color: $bg;
+        border: 1px solid transparent;
+        &:focus{
+            border: 1px solid $primary-l;
+        }
+        
+    }
+    position: relative;
+    height: 100%;
+    i{
+        position: absolute;
+        color: $icon;
+        font-size: 1.1em;
+        &:hover{
+            cursor: pointer;
+        } 
+    }
+    .find{
+        transition:  all 0.3s ease;
+        left: 7%;
+    }
+    
+    .clear{
+        right: 7%;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+nav{
+    height: 100%;
+}
+ul{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+    li{
+        list-style: none;
+        position: relative;
+    }
+}
+main{
+    margin-top: 50px;
+    float: left;
+    width: 100%;
+}

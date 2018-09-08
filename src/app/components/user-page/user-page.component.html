@@ -1,0 +1,62 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="content-block head-info">
+                <div class="wrapper-for-img"><img [src]="this.userService.user.photoSrc" alt="user-photo"></div>
+                <div class="head-info-user">
+                    <div class="head-info-user-left">
+                        <div class="head-info-user-left-nick">{{this.userService.user.username}}</div>
+                        <h1 class="head-info-user-left-name">
+                                {{this.userService.user.firstname}} 
+                                {{this.userService.user.lastname}}
+                        </h1>
+                    </div>
+                    <div class="head-info-user-right">
+                        <span>Подписки(8)</span>
+                        <span>Подписчики(16)</span>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container">
+        <div class="row">
+            <div class="content-all">
+                <div class="content-block content-all-newPost">
+                    <mat-form-field class="textarea-wrapper" appearance="outline">
+                        <mat-label>Что у вас нового?</mat-label>
+                        <textarea matInput
+                                placeholder="Расскажите нам"
+                                [(ngModel)]="postText">
+                        </textarea>      
+                    </mat-form-field>
+                    <div class="content-all-newPost-bottom">
+                        <i class="material-icons">add_a_photo</i>
+                        <button mat-raised-button
+                                color="primary"
+                                (click)="_add_post()"
+                                >Запостить</button>
+                    </div>
+                </div>
+                <div class="content-all-posts">
+                    <app-post *ngFor="let post of this.postService.posts; let i = index"
+                                [post]='post' [i]='i'>
+                    </app-post>
+                </div>
+            </div>
+            <aside class="content-block">
+                <ul>
+                    <li><a href="">Lorem ipsum dolor sit.</a></li>
+                    <li><a href="">Totam autem excepturi blanditiis.</a></li>
+                    <li><a href="">Eligendi error doloremque delectus?</a></li>
+                    <li><a href="">Nisi nihil explicabo deleniti.</a></li>
+                    <li><a href="">Non quae id minus.</a></li>
+                    <li><a href="">Quo vero ut nobis?</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>

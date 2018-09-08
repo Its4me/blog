@@ -1,0 +1,93 @@
+@import "../../../var";
+.form{
+    width: 340px;
+    margin: 100px auto 0;
+    .row{
+        background-color: #fff;
+        padding: 0.9em;
+        box-shadow: 0 0 1px 0 $primary-d;
+        border-radius: 4px;
+    }
+   
+}
+.login{
+    background-color: #72af8a;
+    background-image: -webkit-gradient(radial, left bottom, 0, left bottom, 723,color-stop(0, rgb(228, 243, 21)),color-stop(1, rgb(0, 106, 254)));
+    /* Android 2.3 */
+    background-image: -webkit-repeating-radial-gradient(left bottom, ellipse farthest-corner,rgb(228, 243, 21) 0%,rgb(0, 106, 254) 100%);
+        /* IE10+ */
+    background-image: repeating-radial-gradient(ellipse farthest-corner at left bottom,rgb(228, 243, 21) 0%,rgb(0, 106, 254) 100%);
+    background-image: -ms-repeating-radial-gradient(left bottom, ellipse farthest-corner,rgb(228, 243, 21) 0%,rgb(0, 106, 254) 100%);
+    min-height: 100vh;
+}
+.form-header,
+.form-header-greedings,
+.form-header-name{
+    float: left;
+    width: 100%;
+}
+.form-header,
+.form-choises{
+    margin-bottom: 1em;
+    
+}
+.form-header{
+    text-align: center;
+}
+.form-header-logo{
+    width: 100%;
+    float: left;
+   
+    img{
+        max-width: 50px;
+    }
+}
+h1{
+    font-size: 1.7em;
+    font-weight: 400;
+    margin: 0.4em 0 0;
+    font-family: 'Bad Script', cursive;
+}
+.form-choises{
+    float: left;
+    width: 100%;
+    display: flex;
+    position: relative;
+    & .left{
+      left: 0;  
+    }
+    & .right{
+        left: 50%;
+    }
+}
+.form-choises-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 0.5em;
+    border-radius: 0;
+    font-family: 'Bad Script', cursive;
+    font-size: 1.3em;
+   
+}
+.active{
+    width: 50%;
+    border-bottom: 1px solid $primary;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.47, 0, 0.75, 0.72);
+    bottom: 0;
+    height: 5px;
+    box-shadow: inset 0 -10px 5px -10px $primary;
+}
+.input-wrapper{
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.button{
+    float: right;
+}
+.mat-form-field-appearance-legacy .mat-hint{
+    color: $primary;
+}
