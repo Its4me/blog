@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule }   from '@angular/common/http';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
@@ -32,7 +34,8 @@ import { PostComponent } from './components/post/post.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
- 
+    MatTabsModule,
+    MatCheckboxModule
   ],
   providers: [UserServiceService, PostServiceService],
   bootstrap: [AppComponent]

@@ -53,3 +53,14 @@ header{
     float: left;
     padding: 1em;
 }
+#mat-tab-label-0-1,#mat-tab-label-0-0{
+    width: 50%;
+    min-width: 0;
+}
+.mat-tab-body.mat-tab-body-active{
+    overflow-x: inherit!important;
+    overflow-y: inherit!important;
+}
+.mat-tab-body-content, .mat-tab-body-wrapper{
+    overflow: visible!important;
+}

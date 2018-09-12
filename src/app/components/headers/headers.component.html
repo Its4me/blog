@@ -4,10 +4,10 @@
       <div class="logo"><img src="assets/logo.png" alt="logo"></div>
       <div class="seach">
           <i class="material-icons find"
-              >
+              (click)="_seach()">
             search
           </i>
-        <input matInput type="text" placeholder="Поиск" [(ngModel)]="seachValue">
+        <input matInput type="text" placeholder="Поиск" (keyup.enter)="_seach()" [(ngModel)]="seachValue">
         <i class="material-icons clear"
            *ngIf="seachValue"
           (click)="seachValue = ''">clear

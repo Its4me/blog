@@ -7,9 +7,20 @@
         padding: 0.9em;
         box-shadow: 0 0 1px 0 $primary-d;
         border-radius: 4px;
+        overflow: hidden;
     }
    
 }
+mat-tab-group{
+    float: left;
+    width: 100%;
+    display: flex;
+}
+mat-tab{
+    width: 100%;
+    float: left;
+}
+
 .login{
     background-color: #72af8a;
     background-image: -webkit-gradient(radial, left bottom, 0, left bottom, 723,color-stop(0, rgb(228, 243, 21)),color-stop(1, rgb(0, 106, 254)));
@@ -90,4 +101,10 @@ h1{
 }
 .mat-form-field-appearance-legacy .mat-hint{
     color: $primary;
+}
+.error_pass{
+    color: $error;
+    font-size: 75%;
+    bottom: -15px;
+    position: absolute;
 }
