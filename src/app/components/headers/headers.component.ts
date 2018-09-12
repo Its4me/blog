@@ -1,3 +1,4 @@
+import { UserServiceService } from './../../servises/user-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +10,20 @@ export class HeadersComponent implements OnInit {
 
   seachValue: string = '';
 
-  constructor() { }
+  constructor(public userService: UserServiceService) { }
 
   ngOnInit() {
   }
 
+
+  _seach(){
+    if(this.seachValue == ''){return;}
+    this.userService.findUser(this.seachValue).subscribe(
+      res => console.log(res),
+      err => console.error(err),
+      () => {
+        console.log('done');
+      }
+    );
+  }
 }

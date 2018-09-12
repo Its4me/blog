@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class UserServiceService {
 
-  url: string = 'http://localhost:3000';
+  url: string = 'https://boiling-gorge-94174.herokuapp.com';
 
 
   user: User = new User('email','Sanya_butilka_47','Тупоц ', 'из 63 ');
@@ -30,6 +30,13 @@ export class UserServiceService {
   }
   public enterAccount(user): Observable<any>{
     return this.http.post(`${this.url}/users/sign_in.json`, user, httpOptions);
+  }
+
+  public findUser(user_name: string): Observable<any>{
+    return this.http.get(`${this.url}/profiles/search?${user_name}`)
+  }
+  public checkPosts(): Observable<any>{
+    return this.http.get(`${this.url}/posts.json`)
   }
 }
  
