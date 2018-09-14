@@ -1,7 +1,9 @@
+import { HttpHeaders } from '@angular/common/http';
 import { UserServiceService } from './../../servises/user-service.service';
 import { User } from './../../clasess/user';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SignInData } from 'angular2-token';
 
 
 @Component({
@@ -11,20 +13,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
- 
-
-
 
   diff_password: boolean = false;
   remember_me: boolean = false;
+
 
 
   constructor(
     public userService: UserServiceService
   ) { }
 
-  ngOnInit(){
-   
+  ngOnInit() {
+
   }
 
   registerForm: FormGroup = new FormGroup({
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(50),
-        ])
+      ])
     ),
 
   });
@@ -80,16 +80,16 @@ export class RegisterComponent implements OnInit {
 
 
 
-  fuck(){
+  fuck() {
     this.userService.checkPosts().subscribe(
       res => {
         console.log(res);
-        
+
       }
     );
   }
   _register(): void {
-    if(this.registerForm.invalid){return;}
+    if (this.registerForm.invalid) { return; }
     let registerUser: User;
     registerUser = new User(
       this.registerForm.get("email").value,
@@ -100,19 +100,15 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get("password_confim").value,
     );
 
-      if(registerUser.password != registerUser.password_confirmation){
-        this.diff_password= true;
-        return;
-      } else{
-        this.diff_password = false;
-      }
-
-    
-
-    let object = JSON.stringify({ user: registerUser });
+    if (registerUser.password != registerUser.password_confirmation) {
+      this.diff_password = true;
+      return;
+    } else {
+      this.diff_password = false;
+    }
 
 
-    this.userService.registerUser(object)
+    this.userService.registerUser(registerUser)
       .subscribe(
         () => {
           console.log('done');
@@ -121,24 +117,31 @@ export class RegisterComponent implements OnInit {
   }
 
   _enter(): void {
+
     let enterAccount = {
       email: this.enterForm.get('email').value,
-      password: this.enterForm.get('password').value,
-      remember_me: this.remember_me
+      password: this.enterForm.get('password').value.toString(),
+      //remember_me: this.remember_me
     }
-    this.userService.enterAccount( JSON.stringify({user: enterAccount})).subscribe(
-      () => {
-        console.log('Лох на парах');
-        
-      }
-      
-    )
     
+    let output: any;
 
+    this.userService.enterAccount(enterAccount).subscribe(
+      res => {
+
+        output = res.headers._headers;
+
+        let newOutput: any = [];
+
+        output.forEach(element => {
+          newOutput.push(element);
+        });
+
+        this.userService.tokenAuth = newOutput;
+
+      },
+      err => console.log(err)
+    )
   }
-
-   
-
-
 
 }

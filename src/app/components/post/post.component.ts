@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   constructor(public postService: PostServiceService) { }
 
   ngOnInit() {
+    this.post.id = this.i.toString();
   }
   _like(){
     if(!this.activeLike){
@@ -27,5 +28,7 @@ export class PostComponent implements OnInit {
     }
     
   }
-
+  _open_post(){
+    this.postService.current_post_id = this.post.id;
+  }
 }

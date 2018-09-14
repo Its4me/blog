@@ -1,7 +1,7 @@
-<article class="content-block">
+<article class="content-block" (click)="_open_post()">
   <div class="description" *ngIf="post.description">{{post.description}}</div>
-  <div class="img-wrapper" *ngIf="post.photoSrc">
-    <img [src]="photo_src" alt="post.description">
+  <div class="img-wrapper" *ngIf="post.photo_src">
+    <img [src]="post.photo_src" alt="post.description">
   </div>
   <div class="bottom-panel">
     <div class="likes" (click)="_like()">

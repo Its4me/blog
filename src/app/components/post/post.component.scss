@@ -6,13 +6,20 @@ article{
 }
 .bottom-panel{
     float: left;
+    padding-top: 0.5em;
     width: 100%;
 }
 .description{
     float: left;
     width: 100%;
 }
-
+.img-wrapper{
+    border-bottom:  1px solid #e7e8ec;
+    padding-bottom: 0.5em;
+    img{
+        max-width: 100%;
+    }
+}
 .likes{
     float: left;
     display: flex;

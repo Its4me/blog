@@ -21,9 +21,6 @@ export class HeadersComponent implements OnInit {
     this.userService.findUser(this.seachValue).subscribe(
       res => console.log(res),
       err => console.error(err),
-      () => {
-        console.log('done');
-      }
     );
   }
 }
