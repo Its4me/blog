@@ -1,3 +1,4 @@
+import { MainService } from './main.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Angular2TokenService, SignInData } from "angular2-token";
 import { Injectable } from '@angular/core';
@@ -19,17 +20,12 @@ export const httpOptions = {
 })
 export class UserServiceService {
 
-  url: string = 'https://frozen-citadel-55909.herokuapp.com';
-
-
-
-  user: User = new User('email', 'Sanya_butilka_47', 'Тупоц ', 'из 63 ');
-
-  tokenAuth: any;
+  user: User = new User();
 
   constructor(
     public http: HttpClient,
-    public token: Angular2TokenService
+    public token: Angular2TokenService,
+    public main: MainService
   ) { 
 
     this.token.init(environment.token_auth_config);
@@ -48,30 +44,30 @@ export class UserServiceService {
     })
   }
   public enterAccount(user: any): Observable<any> {
-    //return this.http.post(`${this.url}/users/sign_in.json`, user, httpOptions); 
-    return this.token.signIn({email: `${user.email}`, password: `${user.password}`});
+    return this.token.signIn({email: `${user.email}`,
+                              password: `${user.password}`
+                            });
  
   }
 
   public findUser(user_name: string): Observable<any> {
-    return this.http.get(`${this.url}/search?user=${user_name}`);
+    return this.http.get(`${this.main.url}/search?user=${user_name}`);
   }
 
-
   public checkPosts(): Observable<any> {
-    
-    let hraders = {
+
+    let headers = {
       headers: new HttpHeaders({
-        'access-token': this.tokenAuth[0],
-        'client': this.tokenAuth[1],
-        'expiry': this.tokenAuth[2],
-        'uid': this.tokenAuth[3],
-        'token-type': this.tokenAuth[4],
-        'content-type': this.tokenAuth[5]
+        'access-token': this.main.tokenAuth[0],
+        'client': this.main.tokenAuth[1],
+        'expiry': this.main.tokenAuth[2],
+        'uid': this.main.tokenAuth[3],
+        'token-type': this.main.tokenAuth[4],
+        'content-type': this.main.tokenAuth[5]
       })
     };
     
-    return this.http.get(`${this.url}/posts`, hraders);
+    return this.http.get(`${this.main.url}/posts`, headers);
   }
 
 }

@@ -1,3 +1,4 @@
+import { MainService } from './servises/main.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  
+  constructor(
+    public main: MainService
+  ){}
 }

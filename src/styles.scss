@@ -64,3 +64,15 @@ header{
 .mat-tab-body-content, .mat-tab-body-wrapper{
     overflow: visible!important;
 }
+.mat-progress-bar-fill::after{
+  
+        background-color: #72b080;
+        background-image: -webkit-gradient(linear, 0% 0%, 100% 0%,color-stop(0, rgb(228, 245, 2)),color-stop(1, rgb(0, 106, 254)));
+        /* Android 2.3 */
+        background-image: -webkit-repeating-linear-gradient(left,rgb(228, 245, 2) 0%,rgb(0, 106, 254) 100%);
+        /* IE10+ */
+        background-image: repeating-linear-gradient(to right,rgb(228, 245, 2) 0%,rgb(0, 106, 254) 100%);
+        background-image: -ms-repeating-linear-gradient(left,rgb(228, 245, 2) 0%,rgb(0, 106, 254) 100%);
+    
+    
+}

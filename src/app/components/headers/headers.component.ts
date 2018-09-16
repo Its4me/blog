@@ -1,3 +1,4 @@
+import { MainService } from './../../servises/main.service';
 import { UserServiceService } from './../../servises/user-service.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +11,10 @@ export class HeadersComponent implements OnInit {
 
   seachValue: string = '';
 
-  constructor(public userService: UserServiceService) { }
+  constructor(
+    public userService: UserServiceService,
+    public main: MainService
+    ) { }
 
   ngOnInit() {
   }
