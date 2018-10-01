@@ -76,3 +76,15 @@ header{
     
     
 }
+.error{
+    position: fixed;
+    z-index: 150;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+    padding: 0.7em;
+    background-color: $error;
+    top: 1em;
+    color: #fff;
+    border-radius: 4px;
+}

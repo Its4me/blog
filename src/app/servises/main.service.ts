@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { myError } from '../clasess/error';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class MainService {
   tokenAuth: any;
 
   loader: boolean = false;
+
+  client_error = new myError();
 
   constructor() { }
 }

@@ -19,9 +19,13 @@
                     <mat-form-field class="input-wrapper">
                         <input matInput placeholder="Password" type="password" formControlName="password">
                     </mat-form-field>
-                    <mat-checkbox class="check-box" color="primary">Запомнить меня</mat-checkbox>
+                    <mat-checkbox 
+                        formControlName="remember_me"
+                        class="check-box"
+                        color="primary"
+                        >Запомнить меня
+                    </mat-checkbox>
                     <button class="button" mat-raised-button color="primary" (click)="_enter()">Вход</button>
-                    <button mat-raised-button color="primary" (click)="fuck()">+</button>
                 </form>
             </mat-tab>
             <mat-tab label="Регистрация">
@@ -76,10 +80,10 @@
                     <mat-form-field class="input-wrapper">
                         <input matInput placeholder="Пароль" type="password" formControlName="password">
                         <mat-hint *ngIf="registerForm.get('password').valid">Надеюсь не забудешь</mat-hint>
-                        <mat-error *ngIf="(registerForm.get('password').value.length <= 6
+                        <mat-error *ngIf="(registerForm.get('password').value.length <= 8
                                              || registerForm.get('password').value.length >= 50)
                                               && !registerForm.get('password').hasError('required')">
-                            Это не сложно введи от 6 до 50 символов
+                            Это не сложно введи от 8 до 50 символов
                         </mat-error>
                         <mat-error *ngIf="registerForm.get('password').hasError('required')">
                             Ничего подумай и введи <strong>Пароль</strong>

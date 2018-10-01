@@ -14,6 +14,7 @@ export class UserPageComponent implements OnInit {
   postText: string = '';
 
   photoSrc: string = 'assets/post.jpg';
+
   constructor(public userService: UserServiceService,
               public postService: PostServiceService
               ) { }
@@ -24,13 +25,15 @@ export class UserPageComponent implements OnInit {
   }
   _add_post(){
     let post: Post = new Post(this.photoSrc, this.postText);
-    this.postService.addPost(post).subscribe(
+    /*this.postService.addPost(post).subscribe(
       res => console.log(res),
       err => console.log(err),
       () => {
         this.postService.posts.unshift(post); 
         this.postText = '';
       }
-    )
+    )*/
+    this.postService.posts.unshift(post);
+    this.postText = '';
   }
 }

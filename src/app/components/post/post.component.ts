@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Post } from './../../clasess/Post';
 import { Component, OnInit, Input } from '@angular/core';
@@ -13,7 +14,10 @@ export class PostComponent implements OnInit {
 
   activeLike: boolean= false;
 
-  constructor(public postService: PostServiceService) { }
+  constructor(
+    public postService: PostServiceService,
+    public router: Router
+    ) { }
 
   ngOnInit() {
     this.post.id = this.i.toString();
@@ -30,5 +34,11 @@ export class PostComponent implements OnInit {
   }
   _open_post(){
     this.postService.current_post_id = this.post.id;
+    this.router.navigate([
+      {outlets: {'post': [`${this.postService.current_post_id}`]}}
+    ]); 
+ 
+    console.log(this.postService.current_post_id);
+    
   }
 }

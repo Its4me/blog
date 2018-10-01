@@ -3,4 +3,11 @@
     class="main-loader"
     *ngIf="this.main.loader"
     ></mat-progress-bar>
+
+<div class="error"
+    *ngIf="main.client_error.showError"
+>
+{{main.client_error.text_error}}
+</div>
 <router-outlet></router-outlet>
+<router-outlet name="post"></router-outlet>

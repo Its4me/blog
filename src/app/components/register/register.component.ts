@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
 
   diff_password: boolean = false;
-  remember_me: boolean = false;
+ 
 
 
 
@@ -59,13 +59,13 @@ export class RegisterComponent implements OnInit {
     "password": new FormControl("",
       Validators.compose([
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
         Validators.maxLength(50)])
     ),
     "password_confim": new FormControl("",
       Validators.compose([
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
         Validators.maxLength(50),
       ])
     ),
@@ -79,7 +79,10 @@ export class RegisterComponent implements OnInit {
         Validators.email,
       ])
     ),
-    "password": new FormControl('', Validators.required)
+    "password": new FormControl('', Validators.required),
+    "remember_me": new FormControl('')
+ 
+
   });
 
 
@@ -105,7 +108,7 @@ export class RegisterComponent implements OnInit {
       this.diff_password = false;
     }
 
-
+    console.log(registerUser);
     this.userService.registerUser(registerUser)
       .subscribe(
         res => {
@@ -113,10 +116,14 @@ export class RegisterComponent implements OnInit {
           this.ititiall_user(res);
         },
         err => {
-
+          let new_err = JSON.parse(err._body);
+          this.main.client_error.togle_error(
+            new_err.errors.full_messages[0]
+          );
+          this.main.loader = false;          
         },
         () => {
-          this.router.navigate([`/${this.userService.user.nickname}`]);
+          this.router.navigate([`user/${this.userService.user.nickname}`]);
           this.main.loader = false;
         });
 
@@ -128,7 +135,7 @@ export class RegisterComponent implements OnInit {
     let enterAccount = {
       email: this.enterForm.get('email').value,
       password: this.enterForm.get('password').value.toString(),
-      remember_me: this.remember_me
+      remember_created_at: this.enterForm.get('remember_me').value
     }
 
     let output: any;
@@ -149,10 +156,17 @@ export class RegisterComponent implements OnInit {
         this.ititiall_user(res);
 
       },
-      err => console.log(err),
+      err => {
+        
+        
+        this.main.client_error.togle_error(
+          `Нет такой комбинации логина и пароля`
+        );
+        this.main.loader = false;
+      },
       () => {
         
-        this.router.navigate([`/${this.userService.user.nickname}`]);
+        this.router.navigate([`user/${this.userService.user.nickname}`]);
         this.main.loader = false;
       
       }

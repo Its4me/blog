@@ -23,6 +23,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HeadersComponent } from './components/headers/headers.component';
 import { PostComponent } from './components/post/post.component';
+import { FullPostComponent } from './components/full-post/full-post.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PostComponent } from './components/post/post.component';
     RegisterComponent,
     HeadersComponent,
     PostComponent,
-    OpenPostComponent
+    OpenPostComponent,
+    FullPostComponent
   ],
   imports: [
     BrowserModule,
