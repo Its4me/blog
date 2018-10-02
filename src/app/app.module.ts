@@ -11,7 +11,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Angular2TokenService, A2tUiModule } from 'angular2-token';
 import { HttpModule } from '@angular/http';
-import { OpenPostComponent } from './components/open-post/open-post.component';
 import { RouterModule } from '@angular/router';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
@@ -33,7 +32,6 @@ import { FullPostComponent } from './components/full-post/full-post.component';
     RegisterComponent,
     HeadersComponent,
     PostComponent,
-    OpenPostComponent,
     FullPostComponent
   ],
   imports: [

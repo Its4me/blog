@@ -23,22 +23,22 @@ export class PostComponent implements OnInit {
     this.post.id = this.i.toString();
   }
   _like(){
-    if(!this.activeLike){
-      this.postService.posts[this.i].likes_count++;
-      this.activeLike = true;
-    }else{
-      this.postService.posts[this.i].likes_count--;
-      this.activeLike = false;
-    }
-    
+    this.activeLike = this.postService.like(this.i, this.activeLike);
   }
+
   _open_post(){
-    this.postService.current_post_id = this.post.id;
+    this.postService.prev_open_post_url = this.router.url; 
+    this.postService.current_post_id = this.i.toString();
     this.router.navigate([
       {outlets: {'post': [`${this.postService.current_post_id}`]}}
     ]); 
  
-    console.log(this.postService.current_post_id);
+    
+  }
+  _delete(){
+
+  }
+  _edit(){
     
   }
 }

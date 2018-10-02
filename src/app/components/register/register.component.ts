@@ -1,5 +1,4 @@
 import { MainService } from './../../servises/main.service';
-import { HttpHeaders } from '@angular/common/http';
 import { UserServiceService } from './../../servises/user-service.service';
 import { User } from './../../clasess/user';
 
@@ -100,7 +99,7 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get("password").value,
       this.registerForm.get("password_confim").value,
     );
-
+ 
     if (registerUser.password != registerUser.password_confirmation) {
       this.diff_password = true;
       return;
@@ -108,7 +107,6 @@ export class RegisterComponent implements OnInit {
       this.diff_password = false;
     }
 
-    console.log(registerUser);
     this.userService.registerUser(registerUser)
       .subscribe(
         res => {
@@ -123,7 +121,7 @@ export class RegisterComponent implements OnInit {
           this.main.loader = false;          
         },
         () => {
-          this.router.navigate([`user/${this.userService.user.nickname}`]);
+          this.router.navigate([`user/${this.userService.user.id}`]);
           this.main.loader = false;
         });
 
@@ -151,14 +149,16 @@ export class RegisterComponent implements OnInit {
           newOutput.push(element);
         });
 
-        this.main.tokenAuth = newOutput;
+        console.log(res);
+        
 
+        this.main.tokenAuth = newOutput;
+        
         this.ititiall_user(res);
 
       },
       err => {
-        
-        
+       
         this.main.client_error.togle_error(
           `Нет такой комбинации логина и пароля`
         );
@@ -166,7 +166,7 @@ export class RegisterComponent implements OnInit {
       },
       () => {
         
-        this.router.navigate([`user/${this.userService.user.nickname}`]);
+        this.router.navigate([`user/${this.userService.user.id}`]);
         this.main.loader = false;
       
       }
@@ -175,12 +175,15 @@ export class RegisterComponent implements OnInit {
 
   private ititiall_user(res: any){
     let user = JSON.parse(res._body).data;
+
     this.userService.user = new User(
         user.email,
         user.nickname,
         user.name,
         user.lastname
-    )
+    );
+    this.userService.user.id = user.id;
+    
   }
 
 }

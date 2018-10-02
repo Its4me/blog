@@ -1,5 +1,6 @@
 export class User{
    public  photoSrc = 'assets/user-photo.jpg';
+   public id: string = '';
     constructor(
         public email: string = '',
         public nickname: string = '',

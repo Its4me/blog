@@ -1,6 +1,28 @@
-<article class="content-block" (click)="_open_post()">
-  <div class="description" *ngIf="post.description">{{post.description}}</div>
-  <div class="img-wrapper" *ngIf="post.photo_src">
+<article class="content-block" >
+  <div class="description">
+    <p>
+      <span *ngIf="post.description">{{post.description}}</span>
+    </p>
+    <i class="material-icons">
+        expand_more
+    </i>
+    <ul class="edit">
+      <li>
+        <button mat-button (click)="_edit()">
+          Редактировать
+        </button>
+      </li>
+      <li>
+        <button mat-button  (click)="_delete()">
+          Удалить
+         </button>
+      </li>
+    </ul>
+  </div>
+  <div class="img-wrapper" 
+      *ngIf="post.photo_src"
+      (click)="_open_post()"
+    >
     <img [src]="post.photo_src" alt="post.description">
   </div>
   <div class="bottom-panel">

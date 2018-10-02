@@ -70,4 +70,8 @@ export class UserServiceService {
     return this.http.get(`${this.main.url}/posts`, headers);
   }
 
+
+  public getUser(id: string): Observable<any> {
+    return this.http.get(`${this.main.url}/profiles/${id}`);
+  }
 }

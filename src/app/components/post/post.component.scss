@@ -12,47 +12,53 @@ article{
 .description{
     float: left;
     width: 100%;
+    display: grid;    
+    position: relative;          
+    grid-template-columns: 11fr 1fr;
+    p{
+        margin-bottom: 1em;
+    }
+    i{
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    i:hover + .edit{
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+    }
+}
+.edit:hover{
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+.edit{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transition: all 0.3s ease; 
+    right: 0;
+    padding: 0.5em 0;
+    background-color: #fff;
+    top: 22px;
+    box-shadow: 0 0 2px 1px $primary-d;
+    li{
+       list-style: none;
+        button{
+            width: 100%;
+        }
+    }
 }
 .img-wrapper{
     border-bottom:  1px solid #e7e8ec;
     padding-bottom: 0.5em;
     img{
         max-width: 100%;
-    }
-}
-.likes{
-    float: left;
-    display: flex;
-    align-items: center;
-    i{
-        float: left;
-        color: $icon;
-        transition: all 0.35s ease-in-out;
-        &.active-like{
-            color: #ea1616e8;
-            animation: like 0.35s ease-in-out;
-        }
-    }
-    &:hover{
-        cursor: pointer;
-    }
-    
-}
-.likes-count{
-    float: left;
-    margin-left: 0.2em;
-}
-@keyframes like{
-    from{
-        transform: scale(1);
-    }
-    35%{
-        transform: scale(1.1);
-    }
-    80%{
-        transform: scale(0.9);
-    }
-    to{
-        transform: scale(1);
     }
 }

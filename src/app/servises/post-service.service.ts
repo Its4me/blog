@@ -16,6 +16,8 @@ export class PostServiceService {
 
   current_post_id: string = '';
 
+  prev_open_post_url: string = ''
+
   constructor(
     private http: HttpClient,
     public main: MainService
@@ -23,6 +25,26 @@ export class PostServiceService {
 
 
   addPost(post: Post): Observable<any>{
-    return this.http.post(this.main.url, post, httpOptions);
+    let newPost = {
+      body: post.description,
+      title: '' 
+    }
+    console.log('df');
+    
+    return this.http.post(`${this.main.url}/posts`, newPost, this.main.tokenAuth);
+  }
+
+  like(i:number, active:boolean): boolean{
+    if(!active){
+      this.posts[i].likes_count++;
+      return  true;
+    }else{
+      this.posts[i].likes_count--;
+      return false;
+    }
+  }
+
+  getPost(id: string): Observable<any>{
+    return this.http.get(`${this.main.url}/posts/${id}`);
   }
 }
