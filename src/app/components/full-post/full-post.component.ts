@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./full-post.component.scss']
 })
 export class FullPostComponent implements OnInit {
+  
   post: Post;
   activeLike: boolean;
 
@@ -23,10 +24,6 @@ export class FullPostComponent implements OnInit {
    
   }
 
-  public _like(){
-    this.activeLike = this.postService
-      .like(parseInt(this.postService.current_post_id), this.activeLike);
-  }
   public close(e){
     if(e.path[0].id == 'full-post'){
  

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Post } from './../../clasess/Post';
 import { Component, OnInit, Input } from '@angular/core';
+import { MainService } from '../../servises/main.service';
 
 @Component({
   selector: 'app-post',
@@ -16,14 +17,23 @@ export class PostComponent implements OnInit {
 
   constructor(
     public postService: PostServiceService,
-    public router: Router
+    public router: Router,
+    public main: MainService
     ) { }
 
   ngOnInit() {
     this.post.id = this.i.toString();
   }
   _like(){
-    this.activeLike = this.postService.like(this.i, this.activeLike);
+    this.postService.like_post(this.post.back_id).subscribe(
+      res => {
+        console.log(res);
+        let new_res = this.main.get_body(res);
+        this.post.likes_count = new_res.likes_count;
+        this.activeLike = new_res.like_status;
+      }
+    );
+   
   }
 
   _open_post(){

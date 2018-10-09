@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="logo"><img src="assets/logo.png" alt="logo"></div>
-      <div class="seach">
+      <div class="seach" >
           <i class="material-icons find"
               (click)="_seach()">
             search
@@ -12,13 +12,30 @@
            *ngIf="seachValue"
           (click)="seachValue = ''">clear
         </i>
+        <div class="seach_result" *ngIf="seach_menu">
+          <ul>
+            <li>
+              <button mat-button>text</button>
+            </li>
+            <li>
+                <button mat-button>text2</button>
+              </li>
+          </ul>
+        </div>
       </div>
       <nav>
-        <ul>
+        <ul class="menu">
           <li><a mat-button href="">Новости</a></li>
           <li><a mat-button href="">Случайное</a></li>
           <li><a mat-button href="">Уведомления</a></li>
-          <li><a mat-button href="">userNick</a></li>
+          <li>
+            <button mat-button (click)="_tougle()">userNick</button>
+            <ul class="sub-menu" *ngIf="user_menu">
+              <li>
+                <button mat-button (click)="_exit()">Выход</button>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

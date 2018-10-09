@@ -59,7 +59,7 @@ header, .row{
 nav{
     height: 100%;
 }
-ul{
+.menu{
     display: flex;
     height: 100%;
     align-items: center;
@@ -73,4 +73,39 @@ main{
     margin-top: 50px;
     float: left;
     width: 100%;
+}
+.sub-menu{
+    opacity: 1;
+    width: 116px;
+    left: -30px;
+    padding: 0.5em 0;
+    background-color: #fff;
+    position: absolute;
+    box-shadow: 0 0 2px 1px $primary-d;
+    box-sizing: content-box;
+    li{
+        width: 100%;
+        
+    }
+    button{
+        width: 100%;
+    }
+}
+.seach_result{
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    background-color: #fff;
+    padding: 0.5em 0;
+    box-shadow: 0 0 2px 1px #0069c0;
+    li{
+        list-style: none;
+        width: 100%;
+        button{
+            line-height: 20px;
+            width: 100%;
+            display: flex;
+            font-weight: 400;
+        }
+    }
 }

@@ -15,4 +15,9 @@ export class MainService {
   client_error = new myError();
 
   constructor() { }
+
+
+  public get_body(body: any): any{
+    return JSON.parse(body._body); 
+  }
 }

@@ -3,9 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Angular2TokenService, SignInData } from "angular2-token";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RequestMethod } from '@angular/http';
 
 import { environment } from "../../environments/environment";
 import { User } from '../clasess/user';
+
 
 
 export const httpOptions = {
@@ -27,8 +29,7 @@ export class UserServiceService {
     public token: Angular2TokenService,
     public main: MainService
   ) { 
-
-    this.token.init(environment.token_auth_config);
+    this.token.init(environment.token_auth_config); 
   }
 
   public registerUser(user: User): Observable<any> {
@@ -47,31 +48,27 @@ export class UserServiceService {
     return this.token.signIn({email: `${user.email}`,
                               password: `${user.password}`
                             });
- 
-  }
+   }
 
   public findUser(user_name: string): Observable<any> {
     return this.http.get(`${this.main.url}/search?user=${user_name}`);
   }
 
-  public checkPosts(): Observable<any> {
-
-    let headers = {
-      headers: new HttpHeaders({
-        'access-token': this.main.tokenAuth[0],
-        'client': this.main.tokenAuth[1],
-        'expiry': this.main.tokenAuth[2],
-        'uid': this.main.tokenAuth[3],
-        'token-type': this.main.tokenAuth[4],
-        'content-type': this.main.tokenAuth[5]
-      })
-    };
-    
-    return this.http.get(`${this.main.url}/posts`, headers);
+  public getPosts(): Observable<any> {
+ 
+    return this.token.request({
+      method: RequestMethod.Get,
+      url:    `${this.main.url}/posts`
+       });
   }
 
 
   public getUser(id: string): Observable<any> {
     return this.http.get(`${this.main.url}/profiles/${id}`);
   }
+
+  public exit_account(): Observable<any> {
+    return this.token.signOut();
+  }
+   
 }

@@ -1,3 +1,5 @@
+import { RequestMethod } from '@angular/http';
+import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './main.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,6 +22,7 @@ export class PostServiceService {
 
   constructor(
     private http: HttpClient,
+    public token: Angular2TokenService,
     public main: MainService
     ) { }
 
@@ -29,22 +32,26 @@ export class PostServiceService {
       body: post.description,
       title: '' 
     }
-    console.log('df');
-    
-    return this.http.post(`${this.main.url}/posts`, newPost, this.main.tokenAuth);
-  }
+     
+    return this.token.request({
+      method: RequestMethod.Post,
+      url: `${this.main.url}/posts`,
+      body: newPost
+    });
 
-  like(i:number, active:boolean): boolean{
-    if(!active){
-      this.posts[i].likes_count++;
-      return  true;
-    }else{
-      this.posts[i].likes_count--;
-      return false;
-    }
   }
+  
+  like_post(id: string): Observable<any>{
 
+    return this.token.request({
+      method: RequestMethod.Get,
+      url:    `${this.main.url}/post/${id}/like`
+       });
+  }
   getPost(id: string): Observable<any>{
     return this.http.get(`${this.main.url}/posts/${id}`);
   }
+
+
+
 }

@@ -4,7 +4,7 @@ import { User } from './../../clasess/user';
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SignInData } from 'angular2-token';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -85,9 +85,6 @@ export class RegisterComponent implements OnInit {
   });
 
 
-
-  
-  
   _register(): void {
     if (this.registerForm.invalid) { return; }
     let registerUser: User;
@@ -140,25 +137,11 @@ export class RegisterComponent implements OnInit {
 
     this.userService.enterAccount(enterAccount).subscribe(
       res => {
-
-        output = res.headers._headers;
-
-        let newOutput: any = [];
-        
-        output.forEach(element => {
-          newOutput.push(element);
-        });
-
-        console.log(res);
-        
-
-        this.main.tokenAuth = newOutput;
         
         this.ititiall_user(res);
 
       },
       err => {
-       
         this.main.client_error.togle_error(
           `Нет такой комбинации логина и пароля`
         );

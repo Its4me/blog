@@ -11,6 +11,10 @@ export class HeadersComponent implements OnInit {
 
   seachValue: string = '';
 
+  user_menu: boolean = false;
+
+  seach_menu: boolean = false;
+
   constructor(
     public userService: UserServiceService,
     public main: MainService
@@ -26,5 +30,11 @@ export class HeadersComponent implements OnInit {
       res => console.log(res),
       err => console.error(err),
     );
+  }
+  _tougle(){
+    this.user_menu = this.user_menu? false:true;
+  }
+  _exit(){
+    this.userService.exit_account().subscribe();
   }
 }
