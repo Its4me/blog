@@ -4,6 +4,7 @@ import { Angular2TokenService, SignInData } from "angular2-token";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestMethod } from '@angular/http';
+import { throttleTime } from 'rxjs/operators';
 
 import { environment } from "../../environments/environment";
 import { User } from '../clasess/user';
@@ -34,7 +35,6 @@ export class UserServiceService {
 
   public registerUser(user: User): Observable<any> {
     
-    //return this.http.post(`${this.url}/users.json`, user, httpOptions);
     return this.token.registerAccount({
         email:                user.email,
         nickname:             user.nickname,
@@ -45,6 +45,8 @@ export class UserServiceService {
     })
   }
   public enterAccount(user: any): Observable<any> {
+
+   
     return this.token.signIn({email: `${user.email}`,
                               password: `${user.password}`
                             });
@@ -64,11 +66,14 @@ export class UserServiceService {
 
 
   public getUser(id: string): Observable<any> {
-    return this.http.get(`${this.main.url}/profiles/${id}`);
+    return this.http.get(`${this.main.url}/profiles/${id}`)
   }
 
   public exit_account(): Observable<any> {
     return this.token.signOut();
   }
-   
+ 
+  public subscribe(): Observable<any>{
+    return this.token.get(`profiles/${this.user.id}/subscribe`);
+  }
 }

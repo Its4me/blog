@@ -137,21 +137,22 @@ export class RegisterComponent implements OnInit {
 
     this.userService.enterAccount(enterAccount).subscribe(
       res => {
+        console.log(res);
         
         this.ititiall_user(res);
 
       },
       err => {
+        console.log(err);
         this.main.client_error.togle_error(
           `Нет такой комбинации логина и пароля`
         );
         this.main.loader = false;
       },
       () => {
-        
+                
         this.router.navigate([`user/${this.userService.user.id}`]);
         this.main.loader = false;
-      
       }
     )
   }
@@ -166,7 +167,7 @@ export class RegisterComponent implements OnInit {
         user.lastname
     );
     this.userService.user.id = user.id;
-    
+    this.main.current_user_id = user.id;
   }
 
 }

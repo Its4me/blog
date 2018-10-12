@@ -23,6 +23,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HeadersComponent } from './components/headers/headers.component';
 import { PostComponent } from './components/post/post.component';
 import { FullPostComponent } from './components/full-post/full-post.component';
+import { NewsComponent } from './components/news/news.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FullPostComponent } from './components/full-post/full-post.component';
     RegisterComponent,
     HeadersComponent,
     PostComponent,
-    FullPostComponent
+    FullPostComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,

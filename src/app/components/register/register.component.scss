@@ -30,6 +30,7 @@ mat-tab{
     background-image: repeating-radial-gradient(ellipse farthest-corner at left bottom,rgb(228, 243, 21) 0%,rgb(0, 106, 254) 100%);
     background-image: -ms-repeating-radial-gradient(left bottom, ellipse farthest-corner,rgb(228, 243, 21) 0%,rgb(0, 106, 254) 100%);
     min-height: 100vh;
+    padding-bottom: 50px;
 }
 .form-header,
 .form-header-greedings,

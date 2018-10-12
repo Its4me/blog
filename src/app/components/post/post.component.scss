@@ -11,27 +11,14 @@ article{
 }
 .description{
     float: left;
-    width: 100%;
-    display: grid;    
+    width: 100%;   
     position: relative;          
-    grid-template-columns: 11fr 1fr;
     p{
         margin-bottom: 1em;
     }
-    i{
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-start;
-        &:hover{
-            cursor: pointer;
-        }
-    }
+    
 
-    i:hover + .edit{
-        opacity: 1;
-        visibility: visible;
-        cursor: pointer;
-    }
+   
 }
 .edit:hover{
     opacity: 1;
@@ -62,3 +49,61 @@ article{
         max-width: 100%;
     }
 }
+.head{
+    width: 100%;
+    float: left;
+    position: relative;
+    display: flex;
+    i{
+        flex: 0 0 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        &:hover{
+            cursor: pointer;
+        }
+        
+    }
+    i:hover + .edit{
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+    }
+    
+}
+.head_owner{
+    width: 100%;
+    float: left;
+    display: flex;
+
+}
+.head_owner_img{
+    width: 70px;
+    height: 70px;
+    flex: 0 0 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        min-width: 100%;
+        max-height: 100%;
+    }
+}
+.head_descr{
+    display: flex;
+    align-content:  center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 0.5em;
+    
+}
+.post-date{
+    width: 100%;
+    color: $icon;
+    font-size: 0.8em;
+}
+.post-nick{
+    font-size: 1.2em;
+    width: 100%;
+}
+

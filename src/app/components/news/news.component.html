@@ -1,0 +1,12 @@
+<section class="news">
+  <div class="container">
+    <div class="row">
+      <app-post 
+        *ngFor="let post of this.postService.posts; let i = index" 
+        [post]='post'
+        [i]='i'
+      >
+      </app-post>
+    </div>
+  </div>
+</section>

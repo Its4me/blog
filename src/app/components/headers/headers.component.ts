@@ -1,6 +1,7 @@
 import { MainService } from './../../servises/main.service';
 import { UserServiceService } from './../../servises/user-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-headers',
@@ -15,6 +16,8 @@ export class HeadersComponent implements OnInit {
 
   seach_menu: boolean = false;
 
+  find_users: any = [];
+
   constructor(
     public userService: UserServiceService,
     public main: MainService
@@ -25,16 +28,41 @@ export class HeadersComponent implements OnInit {
 
 
   _seach(){
-    if(this.seachValue == ''){return;}
-    this.userService.findUser(this.seachValue).subscribe(
-      res => console.log(res),
+  
+    if(this.seachValue.length < 2 ){
+      this.seach_menu = false;  
+      return;
+    }
+    this.find_users = [];
+    this.userService.findUser(this.seachValue).pipe(
+      
+    ).subscribe(
+      res => {
+
+        res.forEach(el => {
+          this.find_users.unshift(el.nickname);
+        });
+
+      },
       err => console.error(err),
+      () => {
+        if(this.find_users[0]){
+          this.seach_menu = true;
+        }
+        
+      }
     );
+
   }
   _tougle(){
     this.user_menu = this.user_menu? false:true;
   }
   _exit(){
     this.userService.exit_account().subscribe();
+  }
+  _close_seach(){
+    this.seachValue = '';
+    this.seach_menu = false;
+
   }
 }

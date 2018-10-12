@@ -7,29 +7,33 @@
               (click)="_seach()">
             search
           </i>
-        <input matInput type="text" placeholder="Поиск" (keyup.enter)="_seach()" [(ngModel)]="seachValue">
+        <input 
+          matInput type="text" 
+          placeholder="Поиск" 
+          (keyup.enter)="_seach()" 
+          [(ngModel)]="seachValue"
+          (keyup)="_seach()"
+          >
         <i class="material-icons clear"
            *ngIf="seachValue"
-          (click)="seachValue = ''">clear
+          (click)="_close_seach()">clear
         </i>
         <div class="seach_result" *ngIf="seach_menu">
           <ul>
-            <li>
-              <button mat-button>text</button>
+            <li *ngFor="let user of find_users">
+              <button mat-button>{{user}}</button>
             </li>
-            <li>
-                <button mat-button>text2</button>
-              </li>
+            
           </ul>
         </div>
       </div>
       <nav>
         <ul class="menu">
-          <li><a mat-button href="">Новости</a></li>
+          <li><a mat-button [routerLink]="[ '/news' ]">Новости</a></li>
           <li><a mat-button href="">Случайное</a></li>
           <li><a mat-button href="">Уведомления</a></li>
           <li>
-            <button mat-button (click)="_tougle()">userNick</button>
+            <button mat-button (click)="_tougle()">Профиль</button>
             <ul class="sub-menu" *ngIf="user_menu">
               <li>
                 <button mat-button (click)="_exit()">Выход</button>
@@ -44,6 +48,5 @@
 
 <main>
     <router-outlet></router-outlet>
-   
 </main>
 

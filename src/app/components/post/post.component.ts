@@ -1,3 +1,4 @@
+import { UserServiceService } from './../../servises/user-service.service';
 import { Router } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Post } from './../../clasess/Post';
@@ -18,7 +19,8 @@ export class PostComponent implements OnInit {
   constructor(
     public postService: PostServiceService,
     public router: Router,
-    public main: MainService
+    public main: MainService,
+    public userService: UserServiceService
     ) { }
 
   ngOnInit() {

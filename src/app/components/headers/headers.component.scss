@@ -92,7 +92,8 @@ main{
     }
 }
 .seach_result{
-    width: 100%;
+    width: 88%;
+    left: 6%;
     position: absolute;
     top: 50px;
     background-color: #fff;
@@ -106,6 +107,7 @@ main{
             width: 100%;
             display: flex;
             font-weight: 400;
+            border-radius: 0;
         }
     }
 }

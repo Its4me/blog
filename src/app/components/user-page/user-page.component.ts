@@ -36,29 +36,41 @@ export class UserPageComponent implements OnInit {
           res.lastname
         );
         this.userService.user.id = res.id;
+          
+          
       },
       err => {
         this.main.client_error.togle_error('Ошибка загрузки, обновите страницу');
       }
     );
 
-    this.postService.getPost('23').subscribe(
+    this.postService.getPosts().subscribe(
       res => {
-        console.log(res);
-        let new_post = new Post('',res.body);
-        new_post.back_id = res.id;
-        new_post.likes_count = res.likes_count;
-        this.postService.posts.unshift(new_post);
+        let new_post: Post[] = [];
+        
+        res.forEach((element,index) => {
+          new_post[index] = new Post(
+            '',
+            element.body, 
+            element.id, 
+            element.user_id, 
+            element.likes_count
+          );
+        });
+
+        this.postService.posts = new_post;
+        
+        console.log(this.postService.posts);
+        
       },
       err => console.error(err)
     );
   } 
   _add_post(){
-    let post: Post = new Post(this.photoSrc, this.postText);
+    let post: Post = new Post(this.photoSrc, this.postText, '' ,this.userService.user.id);
 
     this.postService.addPost(post).subscribe(
       res => {
-        
         let new_res = this.main.get_body(res);
         post.back_id = new_res.id;
         post.likes_count = new_res.likes_count;
@@ -68,6 +80,12 @@ export class UserPageComponent implements OnInit {
         this.postService.posts.unshift(post); 
         this.postText = '';
       }
+    );
+  }
+  _subscribe(){
+    this.userService.subscribe().subscribe(
+      res => console.log(res)
+      
     );
   }
   

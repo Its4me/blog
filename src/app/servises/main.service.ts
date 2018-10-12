@@ -8,11 +8,11 @@ export class MainService {
 
   url: string = 'https://frozen-citadel-55909.herokuapp.com';
 
-  tokenAuth: any;
-
   loader: boolean = false;
 
   client_error = new myError();
+
+  current_user_id: string = '';
 
   constructor() { }
 
@@ -20,4 +20,5 @@ export class MainService {
   public get_body(body: any): any{
     return JSON.parse(body._body); 
   }
+ 
 }

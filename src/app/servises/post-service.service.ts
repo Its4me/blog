@@ -51,6 +51,9 @@ export class PostServiceService {
   getPost(id: string): Observable<any>{
     return this.http.get(`${this.main.url}/posts/${id}`);
   }
+  getPosts(): Observable<any>{
+    return this.http.get(`${this.main.url}/posts`);
+  }
 
 
 

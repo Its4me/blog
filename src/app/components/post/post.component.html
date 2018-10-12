@@ -1,8 +1,15 @@
 <article class="content-block" >
-  <div class="description">
-    <p>
-      <span *ngIf="post.description">{{post.description}}</span>
-    </p>
+  <div class="head">
+    <div class="head_owner">
+      <div class="head_owner_img">
+        <img  [src]="this.userService.user.photoSrc"  [alt]="this.userService.user.name">
+      </div>
+      <div class="head_descr">
+          <p class="post-nick">nickname</p>
+          <p class="post-date">date</p>
+      </div>
+      
+    </div>
     <i class="material-icons">
         expand_more
     </i>
@@ -18,6 +25,12 @@
          </button>
       </li>
     </ul>
+  </div>
+  <div class="description">
+    <p>
+      <span *ngIf="post.description">{{post.description}}</span>
+    </p>
+    
   </div>
   <div class="img-wrapper" 
       *ngIf="post.photo_src"

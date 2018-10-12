@@ -1,10 +1,12 @@
 export class Post{
-    public back_id: string;
     public id: string = '';
-    public likes_count: number = 0;
+    public date: any;
 
     constructor(
         public photo_src?: string,
-        public description?: string
+        public description?: string,
+        public back_id?: string,
+        public owner_id?: string,
+        public likes_count?: number
     ){}
 }  
