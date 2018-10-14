@@ -55,6 +55,19 @@ export class PostServiceService {
     return this.http.get(`${this.main.url}/posts`);
   }
 
-
+  get_data_post(res: any): Post[]{
+    let new_post: Post[] = [];
+    res.forEach((element,index) => {
+      new_post[index] = new Post(
+        '',
+        element.body, 
+        element.id, 
+        element.user_id,
+        element.created_at,
+        element.likes_count
+      );
+    });
+    return new_post;
+  }
 
 }

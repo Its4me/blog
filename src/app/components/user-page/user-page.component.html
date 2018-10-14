@@ -10,11 +10,18 @@
                                 {{this.userService.user.name}} 
                                 {{this.userService.user.lastname}}
                         </h1>
+                        <button 
+                            mat-stroked-button
+                            (click)="_subscribe()"
+                            color="primary"
+                            >
+                            Подписатся
+                        </button>
                     </div>
                     <div class="head-info-user-right">
                         <span>Подписки(8)</span>
                         <span>Подписчики(16)</span>
-                        <button mat-button (click)="_subscribe()">Подписатся</button>
+                       
                     </div>
                 </div>
             

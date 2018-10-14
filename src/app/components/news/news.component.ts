@@ -21,19 +21,8 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     this.postService.getPosts().subscribe(
       res => {
-        let new_post: Post[] = [];
-        
-        res.forEach((element,index) => {
-          new_post[index] = new Post(
-            '',
-            element.body, 
-            element.id, 
-            element.user_id, 
-            element.likes_count
-          );
-        });
 
-        this.postService.posts = new_post;
+        this.postService.posts = this.postService.get_data_post(res);
         
         console.log(this.postService.posts);
         

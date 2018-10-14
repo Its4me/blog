@@ -29,13 +29,13 @@ export class PostComponent implements OnInit {
   _like(){
     this.postService.like_post(this.post.back_id).subscribe(
       res => {
-        console.log(res);
         let new_res = this.main.get_body(res);
         this.post.likes_count = new_res.likes_count;
         this.activeLike = new_res.like_status;
       }
     );
-   
+
+    
   }
 
   _open_post(){

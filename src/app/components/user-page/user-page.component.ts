@@ -46,19 +46,8 @@ export class UserPageComponent implements OnInit {
 
     this.postService.getPosts().subscribe(
       res => {
-        let new_post: Post[] = [];
         
-        res.forEach((element,index) => {
-          new_post[index] = new Post(
-            '',
-            element.body, 
-            element.id, 
-            element.user_id, 
-            element.likes_count
-          );
-        });
-
-        this.postService.posts = new_post;
+        this.postService.posts = this.postService.get_data_post(res);
         
         console.log(this.postService.posts);
         
@@ -67,7 +56,13 @@ export class UserPageComponent implements OnInit {
     );
   } 
   _add_post(){
-    let post: Post = new Post(this.photoSrc, this.postText, '' ,this.userService.user.id);
+    let post: Post = new Post(
+      this.photoSrc,
+      this.postText, 
+      '',
+      this.userService.user.id,
+      new Date()
+      );
 
     this.postService.addPost(post).subscribe(
       res => {
@@ -83,10 +78,12 @@ export class UserPageComponent implements OnInit {
     );
   }
   _subscribe(){
-    this.userService.subscribe().subscribe(
+    /*this.userService.subscribe().subscribe(
       res => console.log(res)
       
-    );
+    );*/
+    
+    
   }
   
 }
