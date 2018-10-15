@@ -48,7 +48,11 @@ export class PostComponent implements OnInit {
     
   }
   _delete(){
-
+    this.postService.delete_post(this.post.back_id).subscribe(
+      () => {
+        this.postService.posts.splice(this.i,1);
+      }
+    )
   }
   _edit(){
     

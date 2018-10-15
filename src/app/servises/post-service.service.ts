@@ -70,4 +70,11 @@ export class PostServiceService {
     return new_post;
   }
 
+
+  delete_post(id): Observable<any>{
+    return this.token.request({
+      method: RequestMethod.Delete,
+      url:    `${this.main.url}/posts/${id}`
+    })
+  }
 }
