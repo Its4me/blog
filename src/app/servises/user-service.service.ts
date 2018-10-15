@@ -52,7 +52,8 @@ export class UserServiceService {
                             });
    }
 
-  public findUser(user_name: string): Observable<any> {
+  public findUser(user_name: string): Observable<any>{
+ 
     return this.http.get(`${this.main.url}/search?user=${user_name}`);
   }
 

@@ -3,27 +3,27 @@
     <div class="row">
       <div class="logo"><img src="assets/logo.png" alt="logo"></div>
       <div class="seach" >
-          <i class="material-icons find"
-              (click)="_seach()">
+          <i class="material-icons find">
             search
           </i>
         <input 
-          matInput type="text" 
+          matInput
+          type="text" 
           placeholder="Поиск" 
-          (keyup.enter)="_seach()" 
           [(ngModel)]="seachValue"
-          (keyup)="_seach()"
+          #seach
           >
         <i class="material-icons clear"
-           *ngIf="seachValue"
           (click)="_close_seach()">clear
         </i>
-        <div class="seach_result" *ngIf="seach_menu">
+        <div class="seach_result" *ngIf="seach_menu || nothing_finds">
           <ul>
             <li *ngFor="let user of find_users">
-              <button mat-button>{{user}}</button>
+              <button mat-button>{{user.nickname}}</button>
             </li>
-            
+            <li class="nothing-finds" *ngIf="nothing_finds">
+              Никого не найдено(
+            </li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,8 @@
+import { debounceTime, mergeMap, switchMap } from 'rxjs/operators';
 import { MainService } from './../../servises/main.service';
 import { UserServiceService } from './../../servises/user-service.service';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 
 @Component({
@@ -9,12 +11,16 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./headers.component.scss']
 })
 export class HeadersComponent implements OnInit {
+  @ViewChild('seach') seach_element: ElementRef;
+
 
   seachValue: string = '';
 
   user_menu: boolean = false;
 
   seach_menu: boolean = false;
+
+  nothing_finds: boolean = false;
 
   find_users: any = [];
 
@@ -24,36 +30,32 @@ export class HeadersComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-  }
-
-
-  _seach(){
-  
-    if(this.seachValue.length < 2 ){
-      this.seach_menu = false;  
-      return;
-    }
-    this.find_users = [];
-    this.userService.findUser(this.seachValue).pipe(
-      
-    ).subscribe(
-      res => {
-
-        res.forEach(el => {
-          this.find_users.unshift(el.nickname);
-        });
-
-      },
-      err => console.error(err),
-      () => {
-        if(this.find_users[0]){
-          this.seach_menu = true;
+    fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
+      debounceTime(1200),
+      switchMap(res =>this.userService.findUser(this.seachValue))
+    )
+      .subscribe(
+        res =>{
+          this.find_users = [];
+          res.forEach(el => {
+            this.find_users.unshift({
+              nickname: el.nickname,
+              id: el.id
+            });
+            
+          });
+       
+          if(this.find_users[0]){
+            this.seach_menu = true;
+          }else{
+            this.nothing_finds = true;
+          }
+          
         }
-        
-      }
-    );
+      )}
 
-  }
+
+  
   _tougle(){
     this.user_menu = this.user_menu? false:true;
   }
@@ -63,6 +65,7 @@ export class HeadersComponent implements OnInit {
   _close_seach(){
     this.seachValue = '';
     this.seach_menu = false;
-
+    this.nothing_finds = false;
   }
 }
+ 
