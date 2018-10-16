@@ -1,8 +1,9 @@
 @import "../../../var";
 
 article{
-    margin-top: 1em;
+    margin-bottom: 1em;
     width: 100%;
+    
 }
 .bottom-panel{
     float: left;
@@ -16,9 +17,6 @@ article{
     p{
         margin-bottom: 1em;
     }
-    
-
-   
 }
 .edit:hover{
     opacity: 1;

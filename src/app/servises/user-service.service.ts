@@ -25,6 +25,8 @@ export class UserServiceService {
 
   user: User = new User();
 
+  current_user: User = new User();
+
   constructor(
     public http: HttpClient,
     public token: Angular2TokenService,
@@ -76,5 +78,8 @@ export class UserServiceService {
  
   public subscribe(): Observable<any>{
     return this.token.get(`profiles/${this.user.id}/subscribe`);
+  }
+  public check_me(): boolean{
+    return this.current_user.email == this.user.email;
   }
 }

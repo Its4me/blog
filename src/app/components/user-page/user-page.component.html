@@ -14,6 +14,7 @@
                             mat-stroked-button
                             (click)="_subscribe()"
                             color="primary"
+                            *ngIf="!this.userService.check_me()"
                             >
                             Подписатся
                         </button>
@@ -35,9 +36,9 @@
             <div class="content-all">
                 <div 
                     class="content-block content-all-newPost"
-                   
+                    *ngIf="this.userService.check_me()"
                     >   
-                    <!--  *ngIf="this.main.current_user_id == this.userService.user.id" -->
+                    
                     <mat-form-field class="textarea-wrapper" appearance="outline">
                         <mat-label>Что у вас нового?</mat-label>
                         <textarea matInput

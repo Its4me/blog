@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token';
 import { debounceTime, mergeMap, switchMap } from 'rxjs/operators';
 import { MainService } from './../../servises/main.service';
 import { UserServiceService } from './../../servises/user-service.service';
@@ -26,10 +28,15 @@ export class HeadersComponent implements OnInit {
 
   constructor(
     public userService: UserServiceService,
-    public main: MainService
+    public main: MainService,
+    public token: Angular2TokenService,
+    public router: Router
     ) { }
 
   ngOnInit() {
+
+    this.userService.current_user.email = this.token.currentAuthData.uid;
+
     fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
       debounceTime(1200),
       switchMap(res =>this.userService.findUser(this.seachValue))
@@ -52,7 +59,11 @@ export class HeadersComponent implements OnInit {
           }
           
         }
-      )}
+      )
+    
+    
+    
+    }
 
 
   
@@ -66,6 +77,11 @@ export class HeadersComponent implements OnInit {
     this.seachValue = '';
     this.seach_menu = false;
     this.nothing_finds = false;
+  }
+  _my_page(){
+    if(this.userService.current_user.id){
+      this.router.navigate([`user/${this.userService.current_user.id}`]);
+    }
   }
 }
  

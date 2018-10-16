@@ -1,3 +1,4 @@
+import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './../../servises/main.service';
 import { Router } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
@@ -21,12 +22,15 @@ export class UserPageComponent implements OnInit {
   constructor(public userService: UserServiceService,
               public postService: PostServiceService,
               public router: Router,
-              public main: MainService
+              public main: MainService,
+              public token: Angular2TokenService
               ) { }
 
 
   ngOnInit() {
-  
+
+   
+
     this.userService.getUser(this.router.url.slice(6)).subscribe(
       res => {
         this.userService.user = new User(
@@ -36,20 +40,21 @@ export class UserPageComponent implements OnInit {
           res.lastname
         );
         this.userService.user.id = res.id;
-          
-          
       },
       err => {
         this.main.client_error.togle_error('Ошибка загрузки, обновите страницу');
+      },
+      () =>{
+        if(this.userService.check_me()){
+          this.userService.current_user = this.userService.user;
+        }
       }
     );
 
     this.postService.getPosts().subscribe(
       res => {
         
-        this.postService.posts = this.postService.get_data_post(res);
-        
-        console.log(this.postService.posts);
+        this.postService.posts = this.postService.get_data_post(res); 
         
       },
       err => console.error(err)
