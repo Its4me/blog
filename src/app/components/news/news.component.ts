@@ -24,11 +24,9 @@ export class NewsComponent implements OnInit {
 
         this.postService.posts = this.postService.get_data_post(res);
         
-        console.log(this.postService.posts);
-        
       },
       err =>{
-        
+        this.main.client_error.togle_error('Кто-то схавал ваши новости...');
       },
       () =>{
         
@@ -36,7 +34,5 @@ export class NewsComponent implements OnInit {
     );
   }
   
-  ngAfterContentInit(){
- 
-  }
+
 }

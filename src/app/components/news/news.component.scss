@@ -1,0 +1,13 @@
+aside{
+    position: sticky;
+    max-height: 200px;
+    top: calc(50px + 1em);
+}
+.row{
+    display: grid;
+    grid-template-columns: 6fr 2fr;
+    grid-column-gap: 1em;
+}
+.posts{
+    margin-top: 1em;
+}

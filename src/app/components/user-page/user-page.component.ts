@@ -57,9 +57,10 @@ export class UserPageComponent implements OnInit {
         this.postService.posts = this.postService.get_data_post(res); 
         
       },
-      err => console.error(err)
+      err => this.main.client_error.togle_error('Ошибка при получении постов, обновите плиз)')
     );
   } 
+
   _add_post(){
     let post: Post = new Post(
       this.photoSrc,

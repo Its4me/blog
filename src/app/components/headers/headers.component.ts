@@ -35,7 +35,10 @@ export class HeadersComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userService.current_user.email = this.token.currentAuthData.uid;
+    if(this.token.currentAuthData){
+      this.userService.current_user.email = this.token.currentAuthData.uid;
+    }
+      
 
     fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
       debounceTime(1200),
@@ -79,8 +82,13 @@ export class HeadersComponent implements OnInit {
     this.nothing_finds = false;
   }
   _my_page(){
+    console.log();
+    
     if(this.userService.current_user.id){
+      
       this.router.navigate([`user/${this.userService.current_user.id}`]);
+    }else if(!this.token.currentUserData){
+      this.router.navigate([``]);
     }
   }
 }

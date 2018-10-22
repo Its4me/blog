@@ -78,8 +78,7 @@ export class RegisterComponent implements OnInit {
         Validators.email,
       ])
     ),
-    "password": new FormControl('', Validators.required),
-    "remember_me": new FormControl('')
+    "password": new FormControl('', Validators.required)
  
 
   });
@@ -129,8 +128,8 @@ export class RegisterComponent implements OnInit {
     this.main.loader = true;
     let enterAccount = {
       email: this.enterForm.get('email').value,
-      password: this.enterForm.get('password').value.toString(),
-      remember_created_at: this.enterForm.get('remember_me').value
+      password: this.enterForm.get('password').value.toString()
+      
     }
 
     let output: any;
