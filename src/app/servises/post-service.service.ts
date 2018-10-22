@@ -16,6 +16,8 @@ export class PostServiceService {
 
   posts: Post[] = [];
 
+  open_post: Post;
+
   current_post_id: string = '';
 
   prev_open_post_url: string = ''
@@ -59,7 +61,7 @@ export class PostServiceService {
     let new_post: Post[] = [];
     res.forEach((element,index) => {
       new_post[index] = new Post(
-        '',
+        'assets/post.jpg',
         element.body, 
         element.id, 
         element.user_id,

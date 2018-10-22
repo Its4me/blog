@@ -1,3 +1,5 @@
+@import "../../../var";
+
 article{
     width: 100%;
     height: 100vh;
@@ -13,10 +15,12 @@ article{
     padding: 0 0 0 15px; 
     .row{
         background-color: #fff;
+        margin-bottom: 1em;
     }
 }
 .post-wrapper-img{
     width: 100%;
+    float: left;
     img{
         max-width: 100%;
 
@@ -31,4 +35,40 @@ article{
     float: left;
     width: 100%;
     padding: 0.5em 1em;
+}
+.head_owner{
+    width: 100%;
+    float: left;
+    display: flex;
+    padding: 0.5em 1em ;
+
+}
+.head_owner_img{
+    width: 70px;
+    height: 70px;
+    flex: 0 0 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        min-width: 100%;
+        max-height: 100%;
+    }
+}
+.head_descr{
+    display: flex;
+    align-content:  center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 0.5em;
+    
+}
+.post-date{
+    width: 100%;
+    color: $icon;
+    font-size: 0.8em;
+}
+.post-nick{
+    font-size: 1.2em;
+    width: 100%;
 }

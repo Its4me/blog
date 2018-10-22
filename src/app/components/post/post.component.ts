@@ -39,10 +39,11 @@ export class PostComponent implements OnInit {
   }
 
   _open_post(){
+    this.postService.open_post = this.postService.posts[this.i];
     this.postService.prev_open_post_url = this.router.url; 
-    this.postService.current_post_id = this.i.toString();
+    
     this.router.navigate([
-      {outlets: {'post': [`${this.postService.current_post_id}`]}}
+      {outlets: {'post': [`${this.postService.open_post.back_id}`]}}
     ]); 
  
     

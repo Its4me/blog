@@ -1,23 +1,33 @@
 <article id="full-post" (click)="close($event)">
     <div class="container">
-        <div class="row" >
-            <div class="post-wrapper-img">
-                <img 
-                [src]='post.photo_src'
-                 alt="">
+        <div class="row">
+            <div class="head_owner">
+                <div class="head_owner_img">
+                    <img [src]="this.userService.user.photoSrc" [alt]="this.userService.user.name">
+                </div>
+                <div class="head_descr">
+                    <p class="post-nick">nickname</p>
+                    <p class="post-date">
+                        {{post.get_time()}}
+                    </p>
+                </div>
+            </div>
+            <div class="post-wrapper-img" *ngIf="post.photo_src">
+                <img [src]='post.photo_src' alt="">
             </div>
             <div class="post-wrapper-bottom">
+                    <div class="post-wrapper-description">
+                        <p>
+                            {{post.description}}
+                        </p>
+                    </div>
                 <div class="likes" (click)="_like()">
                     <i class="material-icons" [ngClass]="{'active-like': activeLike}">
                         favorite
                     </i>
                     <div class="likes-count">{{post.likes_count}}</div>
                 </div>
-                <div class="post-wrapper-description">
-                    <p>
-                        {{post.description}}
-                    </p>
-                </div>
+               
             </div>
         </div>
     </div>
