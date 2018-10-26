@@ -1,3 +1,4 @@
+@import "../../../var.scss";
 aside{
     position: sticky;
     max-height: 200px;
@@ -10,4 +11,79 @@ aside{
 }
 .posts{
     margin-top: 1em;
+    width: 687px;
+}
+.item-carousel{
+    width: auto!important;
+}
+.people-slider{
+    margin-bottom: 1em;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+   
+}
+.carousel{
+    width: 100%;
+}
+.item-carousel-img-wrapper{
+  max-width: 200px;
+    img{
+        max-width: 100%;
+        border-radius: 50%;
+    }
+}
+.item-carousel-container{
+    padding: 1em;
+    padding-bottom: calc(1em + 36px);
+    text-align: center;
+    position: relative;
+    button{
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        margin-left: -58.3px;
+    }
+}
+.swiper-wrapper{
+    display: grid;
+}
+.next, .prev{
+    height: 100%;
+    top: 0;
+    background-color: rgba($color: #fff, $alpha: 0.8);
+    position: absolute;
+    width: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 15;
+    border: none;
+    outline: none!important;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.item-carouse-nick{
+    font-size: 1em;
+    color: #000;
+    word-wrap: break-word;
+}
+.item-carouse-name{
+    color: $icon;
+    font-size: 0.8em;
+    
+}
+.swiper-button-disabled{
+    opacity: 0.33;
+}
+.next{
+    right: 0.5em;
+    box-shadow: -30px 0px 30px 13px rgba(255, 255, 255, 0.8);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+}
+.prev{
+    left: 0.5em;
+    box-shadow: 30px 0px 30px 13px rgba(255, 255, 255, 0.8);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
 }

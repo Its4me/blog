@@ -3,7 +3,7 @@ import { MainService } from './../../servises/main.service';
 import { Router } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { UserServiceService } from './../../servises/user-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-news',
@@ -32,7 +32,18 @@ export class NewsComponent implements OnInit {
         
       }
     );
+    this.similar_height();
+    
   }
   
-
+  
+  private similar_height(): void{
+    let slides = document.getElementsByClassName('item-carousel-container');
+    let max_height:number = 0;
+    for (let i = 0; i < slides.length; i++) {
+      console.log(slides[i].clientHeight);
+      
+      
+    }
+  }
 }
