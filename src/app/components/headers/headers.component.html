@@ -18,14 +18,16 @@
           [(ngModel)]="seachValue"
           #seach
           autocomplete="off"
+          (focusout)="_close_seach()"
           >
         <i class="material-icons clear"
+          *ngIf="seachValue"
           (click)="_close_seach()">clear
         </i>
         <div class="seach_result" *ngIf="seach_menu || nothing_finds">
           <ul>
             <li *ngFor="let user of find_users">
-              <button mat-button>{{user.nickname}}</button>
+              <button (click)='_navigate_user(user)' mat-button>{{user.nickname}}</button>
             </li>
             <li class="nothing-finds" *ngIf="nothing_finds">
               Никого не найдено(

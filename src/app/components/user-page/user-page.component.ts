@@ -1,6 +1,6 @@
 import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './../../servises/main.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../servises/user-service.service';
@@ -28,9 +28,6 @@ export class UserPageComponent implements OnInit {
 
 
   ngOnInit() {
-
-   
-
     this.userService.getUser(this.router.url.slice(6)).subscribe(
       res => {
         this.userService.user = new User(
@@ -43,11 +40,6 @@ export class UserPageComponent implements OnInit {
       },
       err => {
         this.main.client_error.togle_error('Ошибка загрузки, обновите страницу');
-      },
-      () =>{
-        if(this.userService.check_me()){
-          this.userService.current_user = this.userService.user;
-        }
       }
     );
 
@@ -58,6 +50,15 @@ export class UserPageComponent implements OnInit {
         
       },
       err => this.main.client_error.togle_error('Ошибка при получении постов, обновите плиз)')
+    );
+
+
+    this.router.events.subscribe(
+      (e) =>{
+        if(e instanceof NavigationEnd && e.url == 'user'){
+          this.ngOnInit();
+        }
+      }
     );
   } 
 
@@ -84,12 +85,12 @@ export class UserPageComponent implements OnInit {
     );
   }
   _subscribe(){
-    /*this.userService.subscribe().subscribe(
+    this.userService.subscribe().subscribe(
       res => console.log(res)
-      
-    );*/
-    
+    );
     
   }
-  
+  _navigate_subscribers(){
+    this.router.navigate(['subscribers']);
+  }
 }

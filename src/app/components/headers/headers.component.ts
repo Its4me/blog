@@ -1,3 +1,4 @@
+import { User } from './../../clasess/user';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { debounceTime, mergeMap, switchMap } from 'rxjs/operators';
@@ -64,12 +65,7 @@ export class HeadersComponent implements OnInit {
         }
       )
     
-    
-    
     }
-
-
-  
   _tougle(){
     this.user_menu = this.user_menu? false:true;
   }
@@ -82,14 +78,17 @@ export class HeadersComponent implements OnInit {
     this.nothing_finds = false;
   }
   _my_page(){
-    console.log();
-    
-    if(this.userService.current_user.id){
+    if(localStorage.getItem('current_user_id')){
       
-      this.router.navigate([`user/${this.userService.current_user.id}`]);
+      this.router.navigate([`user/${localStorage.getItem('current_user_id')}`]);
     }else if(!this.token.currentUserData){
       this.router.navigate([``]);
     }
+    
+  }
+  _navigate_user(user: User){
+    this.router.navigate([`user/${user.id}`]);
+    this._close_seach();
   }
 }
  

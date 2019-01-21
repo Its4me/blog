@@ -12,6 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Angular2TokenService, A2tUiModule } from 'angular2-token';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MainService } from './servises/main.service';
 import { PostServiceService } from './servises/post-service.service';
@@ -23,10 +24,12 @@ import { HeadersComponent } from './components/headers/headers.component';
 import { PostComponent } from './components/post/post.component';
 import { FullPostComponent } from './components/full-post/full-post.component';
 import { NewsComponent } from './components/news/news.component';
+import { SubscribersComponent } from './components/subscribers/subscribers.component';
 // swiper(slider)
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   speed: 600,
@@ -46,7 +49,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     HeadersComponent,
     PostComponent,
     FullPostComponent,
-    NewsComponent
+    NewsComponent,
+    SubscribersComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatTabsModule,
     MatCheckboxModule,
     MatProgressBarModule,
-    SwiperModule
+    SwiperModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     UserServiceService,

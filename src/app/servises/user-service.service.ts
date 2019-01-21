@@ -47,8 +47,7 @@ export class UserServiceService {
     })
   }
   public enterAccount(user: any): Observable<any> {
-
-   
+    
     return this.token.signIn({email: `${user.email}`,
                               password: `${user.password}`
                             });
@@ -81,5 +80,8 @@ export class UserServiceService {
   }
   public check_me(): boolean{
     return this.current_user.email == this.user.email;
+  }
+  public getSubscribers(): Observable<any>{
+    return this.token.get('profiles/subscribes_list');
   }
 }

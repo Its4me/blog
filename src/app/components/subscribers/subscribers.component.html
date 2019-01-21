@@ -1,0 +1,27 @@
+<section class="subscribers">
+  <div class="container">
+    <div class="row">
+        <div class="content-block">
+          <mat-spinner class="loader" *ngIf="loader" [diameter]='40' ></mat-spinner>
+          <ul>
+            <li *ngFor="let user of users" > 
+              <button class="user" (click)='_navigate_user(user.id)'>
+                <div class="logo">
+                  <img src='{{user.imageSrc}}' alt='{{user.name}} {{user.lastname}}'>
+                </div>
+                <div class="user-info">
+                    <div class="nick">{{user.nickname}}</div>
+                    <div class="name">{{user.name}} {{user.lastname}}</div>
+                </div>
+                
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="content-block">
+
+        </aside>
+      </div>
+    </div>
+</section>

@@ -32,12 +32,12 @@ export class NewsComponent implements OnInit {
         
       }
     );
-    this.similar_height();
+    //this.similar_height();
     
   }
   
   
-  private similar_height(): void{
+  /*private similar_height(): void{
     let slides = document.getElementsByClassName('item-carousel-container');
     let max_height:number = 0;
     for (let i = 0; i < slides.length; i++) {
@@ -45,5 +45,5 @@ export class NewsComponent implements OnInit {
       
       
     }
-  }
+  }*/
 }
