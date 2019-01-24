@@ -19,6 +19,8 @@ export class UserPageComponent implements OnInit {
 
   photoSrc: string = 'assets/post.jpg';
 
+  file: any = null;
+
   constructor(public userService: UserServiceService,
               public postService: PostServiceService,
               public router: Router,
@@ -71,17 +73,20 @@ export class UserPageComponent implements OnInit {
       new Date()
       );
 
+      post.photo = this.file;
+      
+      
     this.postService.addPost(post).subscribe(
       res => {
         let new_res = this.main.get_body(res);
         post.back_id = new_res.id;
         post.likes_count = new_res.likes_count;
-       },
-      err => {},
-      () => {
+        post.photo_src = new_res.image.medium.url;
+        
+        
         this.postService.posts.unshift(post); 
         this.postText = '';
-      }
+       }
     );
   }
   _subscribe(){
@@ -92,5 +97,13 @@ export class UserPageComponent implements OnInit {
   }
   _navigate_subscribers(){
     this.router.navigate(['subscribers']);
+  }
+  _upload_photo(e){
+    this.file = e.target.files[0] || e.dataTransfer.files[0];
+  }
+
+
+  _new_avatar(){
+    this.userService.upload_photo(this.file).subscribe();
   }
 }

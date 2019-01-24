@@ -11,6 +11,7 @@ import { User } from '../clasess/user';
 
 
 
+
 export const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -83,5 +84,15 @@ export class UserServiceService {
   }
   public getSubscribers(): Observable<any>{
     return this.token.get('profiles/subscribes_list');
+  }
+
+  public upload_photo(photo:any): Observable<any>{
+
+    const formData = new FormData();
+    formData.append('avatar', 
+                    photo, 
+                    'any');
+
+    return this.http.post(`${this.main.url}/auth`, formData);
   }
 }

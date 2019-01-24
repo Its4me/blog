@@ -1,18 +1,15 @@
-import { RequestMethod } from '@angular/http';
+import { RequestMethod, RequestOptions, Headers } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './main.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../clasess/Post';
-import { httpOptions } from './user-service.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostServiceService {
-
-
 
   posts: Post[] = [];
 
@@ -30,15 +27,27 @@ export class PostServiceService {
 
 
   addPost(post: Post): Observable<any>{
-    let newPost = {
-      body: post.description,
-      title: '' 
-    }
-     
+
+    const formData = new FormData();
+    formData.append('post[image]', 
+                    post.photo, 
+                    'image');
+    formData.append('body', post.description);
+    formData.append('title', '');
+
+    const headers = new Headers();
+    
+    headers.append('access-token', this.token.currentAuthData.accessToken);
+    headers.append('client', this.token.currentAuthData.client);
+    headers.append('expiry', this.token.currentAuthData.expiry);
+    headers.append('tokenType', this.token.currentAuthData.tokenType);
+    headers.append('uid', this.token.currentAuthData.uid);
+   
     return this.token.request({
       method: RequestMethod.Post,
       url: `${this.main.url}/posts`,
-      body: newPost
+      body: formData,
+      headers: headers
     });
 
   }

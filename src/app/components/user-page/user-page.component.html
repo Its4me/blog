@@ -2,7 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="content-block head-info">
-                <div class="wrapper-for-img"><img [src]="this.userService.user.photoSrc" alt="user-photo"></div>
+                <div class="wrapper-for-img">
+                    <img 
+                        [src]="this.userService.user.photoSrc" 
+                        alt="user-photo"
+                        (click)="_new_avatar()"
+                        >
+                </div>
                 <div class="head-info-user">
                     <div class="head-info-user-left">
                         <div class="head-info-user-left-nick">{{this.userService.user.nickname}}</div>
@@ -52,11 +58,15 @@
                         </textarea>      
                     </mat-form-field>
                     <div class="content-all-newPost-bottom">
+                        <input type="file" name="photo" (change)="_upload_photo($event)">
                         <i class="material-icons">add_a_photo</i>
-                        <button mat-raised-button
-                                color="primary"
-                                (click)="_add_post()"
-                                >Запостить</button>
+                        <button 
+                            mat-raised-button
+                            color="primary"
+                            (click)="_add_post()"
+                            >
+                            Запостить
+                        </button>
                     </div>
                 </div>
                 <div class="content-all-posts">

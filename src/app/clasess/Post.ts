@@ -1,7 +1,6 @@
 export class Post{
     public id: string = '';
-  
-
+    public photo: File = null;
     constructor(
         public photo_src?: string,
         public description?: string,
