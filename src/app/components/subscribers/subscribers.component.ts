@@ -33,7 +33,9 @@ export class SubscribersComponent implements OnInit {
 
   ngOnInit() {
     this.loader = true;
-    this.UserService.getSubscribers().subscribe(
+    let url = this.router.url;
+    if(url == '/followers'){
+      this.UserService.getSubscribers().subscribe(
         res => {
           this.users = this.main.get_body(res).map((user) => {
             return new User(
@@ -46,9 +48,23 @@ export class SubscribersComponent implements OnInit {
           });
           this.loader = false;
         }
-    )
+      )
+    }else if(url == '/following'){
+      this.UserService.getFollowing()
+    }
+    
   }
   _navigate_user(id: number){
     this.router.navigate([`user/${id}`]);
+  }
+  _unsubscribe(id: number, i: number){
+    this.UserService.unsubscribe(id).subscribe(
+      res => {
+         this.users.splice(i,1);
+      },
+      err => {
+        this.main.client_error.togle_error(`Ошибка, хз что случилось, вот сам посмотри: ${err}`)
+      }
+    );
   }
 }

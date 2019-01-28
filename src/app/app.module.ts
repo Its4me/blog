@@ -25,10 +25,14 @@ import { PostComponent } from './components/post/post.component';
 import { FullPostComponent } from './components/full-post/full-post.component';
 import { NewsComponent } from './components/news/news.component';
 import { SubscribersComponent } from './components/subscribers/subscribers.component';
+import { MatRippleModule } from '@angular/material/core';
+
 // swiper(slider)
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AsideComponent } from './components/aside/aside.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -50,7 +54,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     PostComponent,
     FullPostComponent,
     NewsComponent,
-    SubscribersComponent
+    SubscribersComponent,
+    EditProfileComponent,
+    AsideComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +74,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatCheckboxModule,
     MatProgressBarModule,
     SwiperModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatRippleModule
   ],
   providers: [
     UserServiceService,

@@ -14,7 +14,6 @@ export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() i: number;
 
-  activeLike: boolean= false;
 
   constructor(
     public postService: PostServiceService,
@@ -30,8 +29,8 @@ export class PostComponent implements OnInit {
     this.postService.like_post(this.post.back_id).subscribe(
       res => {
         let new_res = this.main.get_body(res);
-        this.post.likes_count = new_res.likes_count;
-        this.activeLike = new_res.like_status;
+        this.postService.posts[this.post.id].likes_count = new_res.likes_count;
+        this.postService.posts[this.post.id].activeLike = new_res.like_status;
       }
     );
 

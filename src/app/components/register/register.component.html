@@ -6,7 +6,7 @@
               <div class="form-header-greedings">
                   Добро пожаловать в
               </div>
-              <h1 class="form-header-name">
+              <h1 class="form-header-name" (click)="_register()">
                 Alpha(Не Ярик из 90)
               </h1>
           </div>
@@ -88,9 +88,10 @@
                                 placeholder="Подтвердите пароль"
                                 type="password"
                                 formControlName="password_confim">
-                        <div class="error_pass" *ngIf="diff_password">
+                        <mat-hint *ngIf="registerForm.get('password_confim').valid">Да, совпали</mat-hint>
+                        <mat-error *ngIf="registerForm.get('password_confim').value != registerForm.get('password').value">
                             Увы пароли не совпадают, попробуйте еще раз
-                        </div>
+                        </mat-error>
                     </mat-form-field>
                     <button class="button" 
                             mat-raised-button color="primary"

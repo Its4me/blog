@@ -19,17 +19,13 @@ export class NewsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.postService.getPosts().subscribe(
+    this.postService.posts = null;
+    this.postService.get_news_Posts().subscribe(
       res => {
-
-        this.postService.posts = this.postService.get_data_post(res);
-        
+        this.postService.posts = this.postService.get_data_post(this.main.get_body(res));
       },
       err =>{
         this.main.client_error.togle_error('Кто-то схавал ваши новости...');
-      },
-      () =>{
-        
       }
     );
     //this.similar_height();

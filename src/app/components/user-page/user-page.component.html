@@ -5,10 +5,22 @@
                 <div class="wrapper-for-img">
                     <img 
                         [src]="this.userService.user.photoSrc" 
-                        alt="user-photo"
-                        (click)="_new_avatar()"
-                        >
+                        alt="user-photo">
+                    <div class="new-img">
+                        <i 
+                            class="material-icons"
+                            (click)="user_photo.click($event)">
+                            photo_camera
+                        </i>
+                    </div>
                 </div>
+                <input 
+                    class="none"
+                    type="file"
+                    name="photo"
+                    (change)="_update_photo($event)"
+                    #user_photo
+                >
                 <div class="head-info-user">
                     <div class="head-info-user-left">
                         <div class="head-info-user-left-nick">{{this.userService.user.nickname}}</div>
@@ -22,7 +34,7 @@
                             color="primary"
                             *ngIf="!this.userService.check_me()"
                             >
-                            Подписатся
+                            {{sub_string}}
                         </button>
                     </div>
                     <div class="head-info-user-right">
@@ -32,7 +44,11 @@
                             color="primary">
                             Подписки (8)
                         </button>
-                        <button mat-stroked-button color="primary">Подписчики (16)</button>
+                        <button 
+                            mat-stroked-button 
+                            color="primary">
+                            Подписчики (16)
+                        </button>
                        
                     </div>
                 </div>
@@ -58,15 +74,43 @@
                         </textarea>      
                     </mat-form-field>
                     <div class="content-all-newPost-bottom">
-                        <input type="file" name="photo" (change)="_upload_photo($event)">
-                        <i class="material-icons">add_a_photo</i>
+                        <div class="wrapper-preview-img" *ngIf="postImage">
+                            <img [src]="postImage" alt="Post preview">
+                            <div class="close-img">
+                                <i 
+                                    class="material-icons"
+                                    (click)='_delete_img()'
+                                    >
+                                    close
+                                </i>
+                            </div>
+                        </div>
+                        <input 
+                            class="none"
+                            type="file"
+                            name="photo"
+                            (change)="_upload_photo($event)"
+                            #post_photo
+                            >
+                        <i 
+                            class="material-icons"
+                            (click)="post_photo.click($event)"    
+                        >
+                        add_a_photo</i>
                         <button 
+                            *ngIf="!postLoader"
                             mat-raised-button
                             color="primary"
                             (click)="_add_post()"
                             >
                             Запостить
                         </button>
+                        <mat-spinner
+                            *ngIf="postLoader"
+                            class="spinner-post"
+                            diameter="30"
+                            >
+                        </mat-spinner>
                     </div>
                 </div>
                 <div class="content-all-posts">

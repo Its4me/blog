@@ -10,10 +10,34 @@
     
 }
 .wrapper-for-img{
-
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
     img{
-        border-radius: 50%;
+        
         max-width: 100%;
+    }
+    &:hover .new-img{
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+    }
+}
+.new-img{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    transition: all 0.4s ease-in-out;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    i{
+        font-size: 65px;
+        color: #fff;
     }
 }
 .head-info-user{
@@ -62,11 +86,46 @@ aside{
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     button, i{
         margin-left: 1em;
     }
     i{
         cursor: pointer;
+    }
+}
+.spinner-post{
+    margin: 3px 42.5px;
+}
+.wrapper-preview-img{
+    max-width: 200px;
+    height: 70px;
+    margin-right: 20px;
+    position: relative;
+    img{
+        float: right;
+        max-height: 100%; 
+        max-width: 100%;
+       
+    }
+    &:hover .close-img{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.close-img{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    i{
+        color: #fff;
+        margin: 0;
     }
 }

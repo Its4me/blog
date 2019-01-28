@@ -38,7 +38,7 @@
   <div class="bottom-panel">
     <div class="likes" (click)="_like()">
       <i class="material-icons"
-        [ngClass]="{'active-like': activeLike}">
+        [ngClass]="{'active-like': post.activeLike}">
         favorite
       </i>
       <div class="likes-count">{{post.likes_count}}</div>

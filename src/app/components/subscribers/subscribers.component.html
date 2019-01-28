@@ -1,11 +1,11 @@
 <section class="subscribers">
   <div class="container">
     <div class="row">
-        <div class="content-block">
+        <div class="content-block subs">
           <mat-spinner class="loader" *ngIf="loader" [diameter]='40' ></mat-spinner>
           <ul>
-            <li *ngFor="let user of users" > 
-              <button mat-button class="user" (click)='_navigate_user(user.id)'>
+            <li class="user" *ngFor="let user of users; let i = index" > 
+              <div matRipple class="user-wrapper" (click)='_navigate_user(user.id)'>
                 <div class="logo">
                   <img src='{{user.imageSrc}}' alt='{{user.name}} {{user.lastname}}'>
                 </div>
@@ -14,12 +14,18 @@
                     <div class="name">{{user.name}} {{user.lastname}}</div>
                 </div>
                 
+              </div>
+              <button 
+                class="subscribe-btn" 
+                (click)='_unsubscribe(user.id, i)' 
+                mat-button>
+                Отписка
               </button>
             </li>
-            <li>
-              <button mat-button class="user" *ngIf="!users[0] && !loader">
+            <li class="user">
+              <div matRipple class="user-wrapper" *ngIf="!users[0] && !loader">
                 Пока тут пусто, но надеюсь вы хорошо покушали
-              </button>
+              </div>
             </li>
           </ul>
         </div>

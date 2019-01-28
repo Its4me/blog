@@ -2,10 +2,11 @@ import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './../../servises/main.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserServiceService } from '../../servises/user-service.service';
 import { Post } from '../../clasess/Post';
 import { User } from '../../clasess/user';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-page',
@@ -13,13 +14,17 @@ import { User } from '../../clasess/user';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
-
+  @ViewChild('post_photo') post_photo: ElementRef;
 
   postText: string = '';
 
-  photoSrc: string = 'assets/post.jpg';
+  postLoader: boolean = false;
+
+  postImage: any = '';
 
   file: any = null;
+
+  sub_string: string = 'Подписаться';
 
   constructor(public userService: UserServiceService,
               public postService: PostServiceService,
@@ -30,34 +35,29 @@ export class UserPageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userService.getUser(this.router.url.slice(6)).subscribe(
-      res => {
+    forkJoin(
+      this.userService.getUser(this.router.url.slice(6)),
+      this.postService.getPosts()
+    ).subscribe(
+      ([res1, res2]) => {
         this.userService.user = new User(
-          res.email,
-          res.nickname,
-          res.name,
-          res.lastname
+          res1.email,
+          res1.nickname,
+          res1.name,
+          res1.lastname
         );
-        this.userService.user.id = res.id;
+        this.userService.user.id = res1.id; //user result
+
+        this.postService.posts = this.postService.get_data_post(res2); // posts result
       },
       err => {
-        this.main.client_error.togle_error('Ошибка загрузки, обновите страницу');
+        this.main.client_error.togle_error('Ошибка загрузки, обновите страницу'); //error
       }
     );
 
-    this.postService.getPosts().subscribe(
-      res => {
-        
-        this.postService.posts = this.postService.get_data_post(res); 
-        
-      },
-      err => this.main.client_error.togle_error('Ошибка при получении постов, обновите плиз)')
-    );
-
-
     this.router.events.subscribe(
       (e) =>{
-        if(e instanceof NavigationEnd && e.url == 'user'){
+        if(e instanceof NavigationEnd && e.url.slice(0,5) == '/user'){
           this.ngOnInit();
         }
       }
@@ -66,7 +66,7 @@ export class UserPageComponent implements OnInit {
 
   _add_post(){
     let post: Post = new Post(
-      this.photoSrc,
+      '',
       this.postText, 
       '',
       this.userService.user.id,
@@ -75,35 +75,68 @@ export class UserPageComponent implements OnInit {
 
       post.photo = this.file;
       
-      
+      if(!post.description && !post.photo){
+        return;
+      }
+    this.postLoader = true;
     this.postService.addPost(post).subscribe(
       res => {
         let new_res = this.main.get_body(res);
         post.back_id = new_res.id;
         post.likes_count = new_res.likes_count;
-        post.photo_src = new_res.image.medium.url;
-        
-        
+        post.photo_src = new_res.image.url;
         this.postService.posts.unshift(post); 
         this.postText = '';
+        this.post_photo.nativeElement.value = null;
+       },
+       err => {
+         this.main.client_error.togle_error('Какая-то там ошибка), извините')
+       },
+       () =>{
+        this.postLoader = false;
        }
     );
   }
   _subscribe(){
-    this.userService.subscribe().subscribe(
-      res => console.log(res)
-    );
+    if(this.sub_string == 'Подписаться'){
+      this.userService.subscribe().subscribe(
+        res => {
+          this.sub_string = 'Отписка';
+        },
+        err => this.main.client_error.togle_error('Ошибка, увы')
+      );
+    }else{
+      this.userService.unsubscribe().subscribe(
+        res => {
+         this.sub_string = 'Подписаться';
+        },
+        err => this.main.client_error.togle_error('Снова ошибкаб простите')
+      )
+    }
+    
     
   }
   _navigate_subscribers(){
-    this.router.navigate(['subscribers']);
+    this.router.navigate(['followers']);
   }
   _upload_photo(e){
     this.file = e.target.files[0] || e.dataTransfer.files[0];
+    let file =  new FileReader();
+    file.readAsDataURL(this.file)
+    file.onload = () =>{
+      this.postImage = file.result;
+      
+    }
+    
   }
 
-
-  _new_avatar(){
-    this.userService.upload_photo(this.file).subscribe();
+  _update_photo(e){
+    let file = e.target.files[0] || e.dataTransfer.files[0];
+    //this.userService.update_photo();
+  }
+  _delete_img(){
+    this.postImage = null;
+    this.post_photo.nativeElement.value = null;
+    this.file = null;
   }
 }

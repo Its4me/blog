@@ -32,7 +32,7 @@ export class PostServiceService {
     formData.append('post[image]', 
                     post.photo, 
                     'image');
-    formData.append('body', post.description);
+    formData.append('post[body]', post.description);
     formData.append('title', '');
 
     const headers = new Headers();
@@ -66,11 +66,19 @@ export class PostServiceService {
     return this.http.get(`${this.main.url}/posts`);
   }
 
+  get_news_Posts(): Observable<any>{
+    return this.token.get(`/profiles/friends_posts`);
+  }
+
   get_data_post(res: any): Post[]{
     let new_post: Post[] = [];
+    
+    if(!res){
+      return new_post;
+    }
     res.forEach((element,index) => {
       new_post[index] = new Post(
-        'assets/post.jpg',
+        element.image.url,
         element.body, 
         element.id, 
         element.user_id,
@@ -82,7 +90,7 @@ export class PostServiceService {
   }
 
 
-  delete_post(id): Observable<any>{
+  delete_post(id: string): Observable<any>{
     return this.token.request({
       method: RequestMethod.Delete,
       url:    `${this.main.url}/posts/${id}`

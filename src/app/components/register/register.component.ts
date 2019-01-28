@@ -3,7 +3,7 @@ import { UserServiceService } from './../../servises/user-service.service';
 import { User } from './../../clasess/user';
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
@@ -14,23 +14,20 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-
   diff_password: boolean = false;
- 
-
-
 
   constructor(
     public userService: UserServiceService,
     public router:  Router,
-    public main: MainService
+    public main: MainService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
 
   }
 
-  registerForm: FormGroup = new FormGroup({
+  registerForm: FormGroup = this.formBuilder.group({
     "email": new FormControl("",
       Validators.compose([
         Validators.required,
@@ -55,22 +52,24 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(50)])
     ),
-    "password": new FormControl("",
+  
+    'password': new FormControl("",
       Validators.compose([
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(50)])
     ),
-    "password_confim": new FormControl("",
+    'password_confim': new FormControl("",
       Validators.compose([
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(50),
-      ])
-    ),
+        Validators.maxLength(50)
+      ]))
+  },{    validator: this.MustMatch('password', 'password_confim')  
+});
 
-  });
-
+  
+  
   enterForm: FormGroup = new FormGroup({
     "email": new FormControl('',
       Validators.compose([
@@ -85,6 +84,7 @@ export class RegisterComponent implements OnInit {
 
 
   _register(): void {
+    
     if (this.registerForm.invalid) { return; }
     let registerUser: User;
     registerUser = new User(
@@ -119,6 +119,7 @@ export class RegisterComponent implements OnInit {
         () => {
           this.router.navigate([`user/${this.userService.user.id}`]);
           this.main.loader = false;
+          localStorage.setItem('current_user_id', this.userService.user.id);
         });
 
   }
@@ -146,8 +147,6 @@ export class RegisterComponent implements OnInit {
       },
       () => {
              
-        this.userService.current_user = this.userService.user;
-
         this.router.navigate([`user/${this.userService.user.id}`]);
         this.main.loader = false;
         
@@ -169,4 +168,20 @@ export class RegisterComponent implements OnInit {
     this.userService.user.id = user.id;
   }
 
+  public  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+            return;
+        }
+
+        if (control.value !== matchingControl.value) {
+            matchingControl.setErrors({ mustMatch: true });
+        } else {
+            matchingControl.setErrors(null);
+        }
+    }
+  }
 }

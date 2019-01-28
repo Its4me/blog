@@ -34,12 +34,7 @@ export class HeadersComponent implements OnInit {
     public router: Router
     ) { }
 
-  ngOnInit() {
-
-    if(this.token.currentAuthData){
-      this.userService.current_user.email = this.token.currentAuthData.uid;
-    }
-      
+  ngOnInit() {      
 
     fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
       debounceTime(1200),
@@ -47,8 +42,10 @@ export class HeadersComponent implements OnInit {
     )
       .subscribe(
         res =>{
+          
+          let newRes = this.main.get_body(res);
           this.find_users = [];
-          res.forEach(el => {
+          newRes.forEach(el => {
             this.find_users.unshift({
               nickname: el.nickname,
               id: el.id
@@ -58,6 +55,7 @@ export class HeadersComponent implements OnInit {
        
           if(this.find_users[0]){
             this.seach_menu = true;
+            this.nothing_finds = false;
           }else{
             this.nothing_finds = true;
           }
@@ -66,11 +64,16 @@ export class HeadersComponent implements OnInit {
       )
     
     }
-  _tougle(){
+  _tougle_menu(){
     this.user_menu = this.user_menu? false:true;
   }
   _exit(){
-    this.userService.exit_account().subscribe();
+    this.userService.exit_account().subscribe(
+      res =>{
+        localStorage.removeItem('current_user_id');
+        this._tougle_menu();
+      }
+    );
   }
   _close_seach(){
     this.seachValue = '';
@@ -79,7 +82,6 @@ export class HeadersComponent implements OnInit {
   }
   _my_page(){
     if(localStorage.getItem('current_user_id')){
-      
       this.router.navigate([`user/${localStorage.getItem('current_user_id')}`]);
     }else if(!this.token.currentUserData){
       this.router.navigate([``]);
@@ -88,7 +90,12 @@ export class HeadersComponent implements OnInit {
   }
   _navigate_user(user: User){
     this.router.navigate([`user/${user.id}`]);
+    this._close_seach()
+  }
+  _navigate_edit(){
+    this.router.navigate(['edit-profile']);
     this._close_seach();
+    this._tougle_menu();
   }
 }
  

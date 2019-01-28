@@ -1,3 +1,4 @@
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { SubscribersComponent } from './components/subscribers/subscribers.component';
 import { NewsComponent } from './components/news/news.component';
 import { FullPostComponent } from './components/full-post/full-post.component';
@@ -15,7 +16,9 @@ const routes: Routes = [
     path: "", component: HeadersComponent, children: [
       { path: "user/:id", component: UserPageComponent },
       { path: "news", component: NewsComponent},
-      { path: "subscribers", component: SubscribersComponent }
+      { path: "followers", component: SubscribersComponent },
+      { path: "following", component: SubscribersComponent },
+      { path: "edit-profile", component: EditProfileComponent }
     ]
   },
   

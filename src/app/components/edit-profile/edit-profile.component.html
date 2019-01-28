@@ -1,0 +1,56 @@
+<section class="edit">
+    <div class="container">
+        <div class="row">
+            <div class="content-block edit-profile">
+                <div class="edit-head">
+                    <div class="edit-photo">
+                        <div class="wrapper-for-img">
+                            <img 
+                                [src]="this.userService.getUserPhoto(user.photoSrc)"
+                                alt="user-photo">
+                            <div class="new-img"> 
+                                <i class="material-icons" (click)="user_photo.click($event)">
+                                    photo_camera
+                                </i>
+                            </div>
+                        </div>
+                        <input 
+                            class="none" 
+                            type="file" 
+                            name="photo" 
+                            (change)="_update_photo($event)" 
+                            #user_photo>
+                    </div>
+                </div>
+                <div class="edit-body">
+                    <div class="edit-input-wrapper">
+                        <mat-form-field class="edit-input">
+                            <input matInput placeholder="Имя" value='{{user.name}}'>
+                        </mat-form-field>
+                    </div>
+                    <div class="edit-input-wrapper">
+                        <mat-form-field class="edit-input">
+                            <input matInput placeholder="Фамилия" value='{{user.lastname}}'>
+                        </mat-form-field>
+                    </div>
+                    <div class="edit-input-wrapper">
+                        <mat-form-field class="edit-input">
+                            <input matInput type="Email" placeholder="Email" value='{{user.email}}'>
+                        </mat-form-field>
+                    </div>
+                    <div class="edit-input-wrapper">
+                        <mat-form-field class="edit-input">
+                            <input matInput placeholder="Ник" value='{{user.nickname}}'>
+                        </mat-form-field>
+                    </div>
+                    <button 
+                        mat-raised-button
+                        class="save-btn"
+                        color="primary">
+                        Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,13 +1,11 @@
 export class myError {
-    showError: boolean = false;
-    text_error: string;
-    time:number = 4000;
+    public showError: boolean = false;
+    public text_error: string;
+    private time: number = 4000;
 
     constructor(
        
     ){}
-
-
 
     public togle_error(text?: string){
         this.showError = true;

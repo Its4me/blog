@@ -3,6 +3,8 @@ import { Post } from './../../clasess/Post';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from 'src/app/servises/user-service.service';
+import { MainService } from 'src/app/servises/main.service';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-full-post',
@@ -12,15 +14,13 @@ import { UserServiceService } from 'src/app/servises/user-service.service';
 export class FullPostComponent implements OnInit {
   
   post: Post= new Post();
-  activeLike: boolean;
-
-
 
   constructor(
     public postService: PostServiceService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public userService: UserServiceService
+    public userService: UserServiceService,
+    public main: MainService
     ) { }
 
   ngOnInit() {
@@ -44,11 +44,7 @@ export class FullPostComponent implements OnInit {
         }
 
       );
-
     }
-    
-   
-   
   }
 
   public close(e){
@@ -58,7 +54,15 @@ export class FullPostComponent implements OnInit {
           [{ outlets: { post: null } }]
       );
     }
+  }
 
-    
+  _like(){
+    this.postService.like_post(this.post.back_id).subscribe(
+      res => {
+        let new_res = this.main.get_body(res);
+        this.postService.posts[this.post.id].likes_count = new_res.likes_count;
+        this.postService.posts[this.post.id].activeLike = new_res.like_status;
+      }
+    );
   }
 }

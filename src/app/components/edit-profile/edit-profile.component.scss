@@ -1,0 +1,64 @@
+.edit{
+    margin: 1em 0;
+}
+.edit-profile{
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.wrapper-for-img{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    border-radius: 50%;
+    height: 180px;
+    img{
+        
+        max-width: 100%;
+    }
+    &:hover .new-img{
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+    }
+}
+.edit-photo{
+    width: 180px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.new-img{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    transition: all 0.4s ease-in-out;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    i{
+        font-size: 65px;
+        color: #fff;
+    }
+}
+.edit-input-wrapper{
+    width: 40%;
+    float: left;
+    mat-form-field{
+        width: 100%;
+    }
+    &:nth-child(2n){
+        float: right;
+        mat-form-field{
+            float: right;
+        }
+    }
+}
+.save-btn{
+    width: 150px;
+    margin: 0 auto;
+    display: block;
+}

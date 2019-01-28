@@ -26,7 +26,8 @@ export class UserServiceService {
 
   user: User = new User();
 
-  current_user: User = new User();
+  userPhotoSrc: string = 'assets/user-photo.jpg';
+
 
   constructor(
     public http: HttpClient,
@@ -56,7 +57,7 @@ export class UserServiceService {
 
   public findUser(user_name: string): Observable<any>{
  
-    return this.http.get(`${this.main.url}/search?user=${user_name}`);
+    return this.token.get(`/search?user=${user_name}`);
   }
 
   public getPosts(): Observable<any> {
@@ -80,19 +81,27 @@ export class UserServiceService {
     return this.token.get(`profiles/${this.user.id}/subscribe`);
   }
   public check_me(): boolean{
-    return this.current_user.email == this.user.email;
+    return localStorage.getItem('current_user_id') == this.user.id;
   }
   public getSubscribers(): Observable<any>{
     return this.token.get('profiles/subscribes_list');
   }
-
-  public upload_photo(photo:any): Observable<any>{
-
-    const formData = new FormData();
-    formData.append('avatar', 
-                    photo, 
-                    'any');
-
-    return this.http.post(`${this.main.url}/auth`, formData);
+  public unsubscribe(id: number = Number(this.user.id)): Observable<any>{
+    return this.token.get(`profiles/${id}/unsubscribe`);
   }
+  public getFollowing(): Observable<any>{
+    return this.token.get('profiles/unsubscribes_list');
+  }
+  public getUserPhoto(src: string): string{
+    return (src == null)? this.userPhotoSrc :  src;
+  }
+
+ /* public update_photo(photo: any): Observable<any>{
+    const formData = new FormData();
+    formData.append('user[avatar]', 
+                    photo, 
+                    '');
+
+    return this.http.post(`${this.main.url}/`, formData);
+  }*/
 }

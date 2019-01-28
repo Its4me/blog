@@ -18,7 +18,6 @@
           [(ngModel)]="seachValue"
           #seach
           autocomplete="off"
-          (focusout)="_close_seach()"
           >
         <i class="material-icons clear"
           *ngIf="seachValue"
@@ -41,9 +40,10 @@
           <li><a mat-button href="">Случайное</a></li>
           <li><a mat-button href="">Уведомления</a></li>
           <li>
-            <button mat-button (click)="_tougle()">Профиль</button>
+            <button mat-button (click)="_tougle_menu()">Профиль</button>
             <ul class="sub-menu" *ngIf="user_menu">
-              <li>
+              <li> 
+                <button mat-button (click)="_navigate_edit()">Редактировать</button>
                 <button mat-button (click)="_exit()">Выход</button>
               </li>
             </ul>

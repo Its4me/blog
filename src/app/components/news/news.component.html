@@ -116,6 +116,9 @@
         </div>
         <app-post *ngFor="let post of this.postService.posts; let i = index" [post]='post' [i]='i'>
         </app-post>
+        <div class="content-block empty" *ngIf="this.postService.posts">
+          Тут пока ничего нет, подпишитесь на кого-то
+        </div>
       </div>
 
       <aside class="content-block">
