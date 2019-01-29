@@ -27,12 +27,12 @@ export class EditProfileComponent implements OnInit {
     this.userService.getUser(id).subscribe(
       res =>{
         this.user = new User(
-          res.email,
-          res.nickname,
-          res.name,
-          res.lastname
+          res.user.email,
+          res.user.nickname,
+          res.user.name,
+          res.user.lastname
         );
-        this.user.photoSrc = res.avatar.url;
+        this.user.photoSrc = res.user.avatar.url;
       }, 
       err => {
         this.main.client_error.togle_error('Ошибка, обновите страницу позже')
@@ -49,6 +49,9 @@ export class EditProfileComponent implements OnInit {
     file.onload = () =>{
       this.user.photoSrc = file.result.toString();
     }
+  }
+  _edit_data(){
+    this.userService.update_user(this.user, this.file)
   }
 
 }

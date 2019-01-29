@@ -25,28 +25,46 @@
                 <div class="edit-body">
                     <div class="edit-input-wrapper">
                         <mat-form-field class="edit-input">
-                            <input matInput placeholder="Имя" value='{{user.name}}'>
+                            <input 
+                                matInput 
+                                placeholder="Имя" 
+                                [(ngModel)]="user.name" 
+                                value='{{user.name}}'>
                         </mat-form-field>
                     </div>
                     <div class="edit-input-wrapper">
                         <mat-form-field class="edit-input">
-                            <input matInput placeholder="Фамилия" value='{{user.lastname}}'>
+                            <input 
+                                matInput 
+                                placeholder="Фамилия" 
+                                [(ngModel)]="user.lastname" 
+                                value='{{user.lastname}}'>
                         </mat-form-field>
                     </div>
                     <div class="edit-input-wrapper">
                         <mat-form-field class="edit-input">
-                            <input matInput type="Email" placeholder="Email" value='{{user.email}}'>
+                            <input 
+                                matInput 
+                                type="Email" 
+                                placeholder="Email" 
+                                [(ngModel)]="user.email" 
+                                value='{{user.email}}'>
                         </mat-form-field>
                     </div>
                     <div class="edit-input-wrapper">
                         <mat-form-field class="edit-input">
-                            <input matInput placeholder="Ник" value='{{user.nickname}}'>
+                            <input 
+                                matInput 
+                                placeholder="Ник" 
+                                [(ngModel)]="user.nickname"
+                                value='{{user.nickname}}'>
                         </mat-form-field>
                     </div>
                     <button 
                         mat-raised-button
                         class="save-btn"
-                        color="primary">
+                        color="primary"
+                        (click)="_edit_data()">
                         Сохранить
                     </button>
                 </div>

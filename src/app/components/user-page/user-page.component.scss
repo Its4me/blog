@@ -23,6 +23,9 @@
         cursor: pointer;
     }
 }
+.sub-button{
+    width: 119px;
+}
 .new-img{
     position: absolute;
     width: 100%;
@@ -70,14 +73,7 @@ section{
     width: 100%;
     margin-bottom: 1em;
 }
-aside{
-    position: sticky;
-    max-height: 200px;
-    top: calc(50px + 1em);
-    li{
-        list-style: none;
-    }
-}
+
 .textarea-wrapper{
     width: 100%;
 }
@@ -128,4 +124,9 @@ aside{
         color: #fff;
         margin: 0;
     }
+}
+.post{
+    margin-bottom: 1em;
+    width: 100%;
+    text-align: center;
 }

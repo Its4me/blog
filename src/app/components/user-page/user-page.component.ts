@@ -26,6 +26,8 @@ export class UserPageComponent implements OnInit {
 
   sub_string: string = 'Подписаться';
 
+  subCount: number = 0;
+
   constructor(public userService: UserServiceService,
               public postService: PostServiceService,
               public router: Router,
@@ -37,17 +39,30 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
     forkJoin(
       this.userService.getUser(this.router.url.slice(6)),
-      this.postService.getPosts()
+      this.postService.getPosts(Number(this.router.url.slice(6)))
     ).subscribe(
       ([res1, res2]) => {
+        
         this.userService.user = new User(
-          res1.email,
-          res1.nickname,
-          res1.name,
-          res1.lastname
+          res1.user.email,
+          res1.user.nickname,
+          res1.user.name,
+          res1.user.lastname
         );
-        this.userService.user.id = res1.id; //user result
+        this.userService.user.id = res1.user.id; 
+        this.userService.user.photoSrc = res1.user.avatar.url || this.userService.userPhotoSrc;
+        this.subCount = res1.subscribe.length;                //user result
+        
+        let id = localStorage.getItem('current_user_id'); //check sub or no
 
+        if(this.userService.user.id != id ){
+          res1.subscribe.forEach(element => {
+            if( element.user_id == id){
+              this.sub_string = 'Отписка';
+            }
+          });
+        }
+        
         this.postService.posts = this.postService.get_data_post(res2); // posts result
       },
       err => {
@@ -110,7 +125,7 @@ export class UserPageComponent implements OnInit {
         res => {
          this.sub_string = 'Подписаться';
         },
-        err => this.main.client_error.togle_error('Снова ошибкаб простите')
+        err => this.main.client_error.togle_error('Снова ошибка, простите')
       )
     }
     
@@ -132,7 +147,12 @@ export class UserPageComponent implements OnInit {
 
   _update_photo(e){
     let file = e.target.files[0] || e.dataTransfer.files[0];
-    //this.userService.update_photo();
+    this.userService.update_photo(file).subscribe(res => {
+      let user = this.main.get_body(res).data;
+      this.userService.user.photoSrc = user.avatar.url;
+    },
+    err => this.main.client_error.togle_error('Ошибка при загрузке фото')
+    );
   }
   _delete_img(){
     this.postImage = null;

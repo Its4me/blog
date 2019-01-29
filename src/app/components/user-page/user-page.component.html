@@ -6,7 +6,7 @@
                     <img 
                         [src]="this.userService.user.photoSrc" 
                         alt="user-photo">
-                    <div class="new-img">
+                    <div class="new-img" *ngIf="this.userService.check_me()">
                         <i 
                             class="material-icons"
                             (click)="user_photo.click($event)">
@@ -30,6 +30,7 @@
                         </h1>
                         <button 
                             mat-stroked-button
+                            class="sub-button"
                             (click)="_subscribe()"
                             color="primary"
                             *ngIf="!this.userService.check_me()"
@@ -42,12 +43,12 @@
                             mat-stroked-button 
                             (click)="_navigate_subscribers()" 
                             color="primary">
-                            Подписки (8)
+                            Подписки ( {{subCount}} )
                         </button>
                         <button 
                             mat-stroked-button 
                             color="primary">
-                            Подписчики (16)
+                            Подписчики
                         </button>
                        
                     </div>
@@ -67,7 +68,9 @@
                     >   
                     
                     <mat-form-field class="textarea-wrapper" appearance="outline">
-                        <mat-label>Что у вас нового?</mat-label>
+                        <mat-label>
+                            Что у вас нового?
+                        </mat-label>
                         <textarea matInput
                                 placeholder="Расскажите нам"
                                 [(ngModel)]="postText">
@@ -117,18 +120,12 @@
                     <app-post *ngFor="let post of this.postService.posts; let i = index"
                                 [post]='post' [i]='i'>
                     </app-post>
+                    <article class="content-block post" *ngIf="!this.postService.posts[0]">
+                        Тут пока нет записей
+                    </article>
                 </div>
             </div>
-            <aside class="content-block">
-                <ul>
-                    <li><a href="">Lorem ipsum dolor sit.</a></li>
-                    <li><a href="">Totam autem excepturi blanditiis.</a></li>
-                    <li><a href="">Eligendi error doloremque delectus?</a></li>
-                    <li><a href="">Nisi nihil explicabo deleniti.</a></li>
-                    <li><a href="">Non quae id minus.</a></li>
-                    <li><a href="">Quo vero ut nobis?</a></li>
-                </ul>
-            </aside>
+            <app-aside></app-aside>
         </div>
     </div>
 </section>

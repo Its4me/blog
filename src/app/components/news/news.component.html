@@ -4,111 +4,32 @@
       <div class="posts">
         <div class="content-block  people-slider">
          
-            <swiper class="carousel" [config]="config" [(index)]="index">
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
+            <swiper 
+              class="carousel" 
+              [config]="config" 
+              [(index)]="index"
+              >
+              <div 
+                class="item-carousel-container"  
+                *ngFor="let user of usersRecommendation; let i = index"
+                (click)="navigate_user($event,user.id)">
+                  <div class="item-carousel-img-wrapper">
+                    <img 
+                      [src]="this.userService.getUserPhoto(user.photoSrc)"
+                      [alt]="user.name + user.lastname">
+                  </div>
+                  <div class="item-carouse-nick">{{user.nickname}}</div>
+                  <div class="item-carouse-name">{{user.name}} {{user.lastname}}</div>
+                  <button 
+                    mat-stroked-button
+                    color="primary"
+                    class="subscribe-button"
+                    id="subscribe-button"
+                    (click)="_subscribe(user.id, i)">
+                    {{sub_string[i]}}
+                  </button>
                 </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
-              <div class="item-carousel-container">
-                <div class="item-carousel-img-wrapper">
-                  <img src="assets/user-photo.jpg" alt="">
-                </div>
-                <div class="item-carouse-nick">OOOIts_a_pizdets54</div>
-                <div class="item-carouse-name">Name Sorname</div>
-                <button 
-                  mat-stroked-button
-                  color="primary"
-                  class="subscribe-button">
-                  Подписаться
-                </button>
-              </div>
+              
               
             </swiper>
             <button class="prev"></button>
@@ -116,14 +37,12 @@
         </div>
         <app-post *ngFor="let post of this.postService.posts; let i = index" [post]='post' [i]='i'>
         </app-post>
-        <div class="content-block empty" *ngIf="this.postService.posts">
+        <div class="content-block empty" *ngIf="!this.postService.posts">
           Тут пока ничего нет, подпишитесь на кого-то
         </div>
       </div>
 
-      <aside class="content-block">
-
-      </aside>
+      <app-aside></app-aside>
     </div>
   </div>
 </section>

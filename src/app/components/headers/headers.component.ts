@@ -1,7 +1,7 @@
 import { User } from './../../clasess/user';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
-import { debounceTime, mergeMap, switchMap } from 'rxjs/operators';
+import { debounceTime, mergeMap, switchMap, filter } from 'rxjs/operators';
 import { MainService } from './../../servises/main.service';
 import { UserServiceService } from './../../servises/user-service.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -38,26 +38,31 @@ export class HeadersComponent implements OnInit {
 
     fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
       debounceTime(1200),
-      switchMap(res =>this.userService.findUser(this.seachValue))
+      //filter(x => this.seachValue != ''),
+      switchMap(res =>  this.userService.findUser(this.seachValue))
     )
       .subscribe(
         res =>{
-          
-          let newRes = this.main.get_body(res);
-          this.find_users = [];
-          newRes.forEach(el => {
-            this.find_users.unshift({
-              nickname: el.nickname,
-              id: el.id
-            });
-            
-          });
-       
-          if(this.find_users[0]){
-            this.seach_menu = true;
-            this.nothing_finds = false;
+          if(!this.seachValue){
+            this._close_seach()
           }else{
-            this.nothing_finds = true;
+
+            let newRes = this.main.get_body(res);
+            this.find_users = [];
+            newRes.forEach(el => {
+              this.find_users.unshift({
+                nickname: el.nickname,
+                id: el.id
+              });
+              
+            });
+            if(this.find_users[0]){
+              this.seach_menu = true;
+              this.nothing_finds = false;
+            }else{
+              this.nothing_finds = true;
+            }
+            
           }
           
         }
@@ -67,8 +72,13 @@ export class HeadersComponent implements OnInit {
   _tougle_menu(){
     this.user_menu = this.user_menu? false:true;
   }
+  public close(e){
+    if(e.path[0].id != 'user_menu_button' ){
+      this.user_menu = false;
+    }
+  }
   _exit(){
-    this.userService.exit_account().subscribe(
+    this.userService.exitAccount().subscribe(
       res =>{
         localStorage.removeItem('current_user_id');
         this._tougle_menu();
@@ -86,16 +96,22 @@ export class HeadersComponent implements OnInit {
     }else if(!this.token.currentUserData){
       this.router.navigate([``]);
     }
+    this._close_all();
     
   }
   _navigate_user(user: User){
     this.router.navigate([`user/${user.id}`]);
-    this._close_seach()
+    this._close_seach();
+    this.user_menu = false;
   }
   _navigate_edit(){
     this.router.navigate(['edit-profile']);
-    this._close_seach();
-    this._tougle_menu();
+    this._close_all();
   }
+  public _close_all(){
+    this._close_seach();
+    this.user_menu = false;
+  }
+  
 }
  

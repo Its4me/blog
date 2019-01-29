@@ -1,0 +1,109 @@
+@import "../../../var.scss";
+aside{
+  position: sticky;
+  max-height: 200px;
+  top: calc(50px + 1em);
+  width: 100%;
+}
+.left, .right{
+  width: 50%;
+  padding: 0.5em;
+  text-align: center;
+}
+.left{
+  border-right: 1px solid $primary-l;
+}
+.head .left,.head .right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stack-logo{
+  width: 24px;
+  height: 24px;
+  margin-left: 5px; 
+  img{
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+li{
+  list-style: none;
+  margin: 0.5em 0;
+  position: relative;
+  &:hover .text{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.right li{
+  &:hover .img-wrapper{
+    margin-left: 7%;
+  }
+  &:hover .text{
+    opacity: 1;
+    visibility: visible;
+    right: 5%;
+  }
+}
+.left li{
+  &:hover .img-wrapper{
+    margin-left: 60%;
+  }
+  &:hover .text{
+    opacity: 1;
+    visibility: visible;
+    left: 4%;
+  }
+}
+ul.left, ul.right{
+  padding: 0;
+}
+.head{
+  display: flex;
+  border-bottom: 1px solid $primary-l;
+}
+.body{
+  display: flex;
+}
+.img-wrapper{
+  width: 30px;
+  margin-left: 34%;
+  height: 30px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease-in-out;
+  img{
+    transition: all 0.3s ease-in-out;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+.text{
+  top: 5px;
+  position: absolute;
+  opacity: 0;
+  border-radius: 2px;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+
+  width: 60%;
+  visibility: hidden;
+  font-size: 0.75em;
+  padding: 3px;
+  background-color: $primary-d;
+  color: #fff;
+}
+.left{
+  .text{
+    left: 30%;
+  }
+}
+.right{
+  .img-wrapper{
+    margin-left: 34%;
+  }
+  .text{
+    right: 30%;
+  }
+}

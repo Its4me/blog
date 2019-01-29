@@ -35,20 +35,15 @@ export class PostServiceService {
     formData.append('post[body]', post.description);
     formData.append('title', '');
 
-    const headers = new Headers();
-    
-    headers.append('access-token', this.token.currentAuthData.accessToken);
-    headers.append('client', this.token.currentAuthData.client);
-    headers.append('expiry', this.token.currentAuthData.expiry);
-    headers.append('tokenType', this.token.currentAuthData.tokenType);
-    headers.append('uid', this.token.currentAuthData.uid);
+    let header: Headers = this.main.get_token();
    
     return this.token.request({
       method: RequestMethod.Post,
       url: `${this.main.url}/posts`,
       body: formData,
-      headers: headers
+      headers: header
     });
+
 
   }
   
@@ -62,17 +57,18 @@ export class PostServiceService {
   getPost(id: string): Observable<any>{
     return this.http.get(`${this.main.url}/posts/${id}`);
   }
-  getPosts(): Observable<any>{
-    return this.http.get(`${this.main.url}/posts`);
+  getPosts(id: number): Observable<any>{
+    return this.token.get(`profiles/${id}/posts`);
   }
 
   get_news_Posts(): Observable<any>{
-    return this.token.get(`/profiles/friends_posts`);
+    return this.token.get(`profiles/friends_posts`);
   }
 
   get_data_post(res: any): Post[]{
     let new_post: Post[] = [];
     
+    res = this.main.get_body(res);
     if(!res){
       return new_post;
     }
@@ -85,7 +81,15 @@ export class PostServiceService {
         element.created_at,
         element.likes_count
       );
+      let id = localStorage.getItem('current_user_id');
+      element.likes.forEach(el => {
+        if(id == el.user_id){
+          new_post[index].activeLike = true;
+        }
+      });
+     
     });
+    
     return new_post;
   }
 

@@ -42,7 +42,11 @@ aside{
         position: absolute;
         bottom: 1em;
         left: 50%;
-        margin-left: -58.3px;
+        width: 119px;
+        margin-left: -59.5px;
+    }
+    &:hover{
+        cursor: pointer;
     }
 }
 .empty{

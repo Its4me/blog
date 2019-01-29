@@ -27,6 +27,7 @@ import { NewsComponent } from './components/news/news.component';
 import { SubscribersComponent } from './components/subscribers/subscribers.component';
 import { MatRippleModule } from '@angular/material/core';
 
+
 // swiper(slider)
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';

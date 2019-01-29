@@ -9,7 +9,8 @@ export class AsideComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { 
+  
   }
 
 }

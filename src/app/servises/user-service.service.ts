@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Angular2TokenService, SignInData } from "angular2-token";
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestMethod } from '@angular/http';
-import { throttleTime } from 'rxjs/operators';
+import { RequestMethod, Headers } from '@angular/http';
 
 import { environment } from "../../environments/environment";
 import { User } from '../clasess/user';
@@ -38,7 +37,7 @@ export class UserServiceService {
   }
 
   public registerUser(user: User): Observable<any> {
-    
+
     return this.token.registerAccount({
         email:                user.email,
         nickname:             user.nickname,
@@ -56,7 +55,6 @@ export class UserServiceService {
    }
 
   public findUser(user_name: string): Observable<any>{
- 
     return this.token.get(`/search?user=${user_name}`);
   }
 
@@ -70,15 +68,16 @@ export class UserServiceService {
 
 
   public getUser(id: string): Observable<any> {
+   
     return this.http.get(`${this.main.url}/profiles/${id}`)
   }
 
-  public exit_account(): Observable<any> {
+  public exitAccount(): Observable<any> {
     return this.token.signOut();
   }
  
-  public subscribe(): Observable<any>{
-    return this.token.get(`profiles/${this.user.id}/subscribe`);
+  public subscribe(id: number = Number(this.user.id)): Observable<any>{
+    return this.token.get(`profiles/${id}/subscribe`);
   }
   public check_me(): boolean{
     return localStorage.getItem('current_user_id') == this.user.id;
@@ -95,13 +94,41 @@ export class UserServiceService {
   public getUserPhoto(src: string): string{
     return (src == null)? this.userPhotoSrc :  src;
   }
-
- /* public update_photo(photo: any): Observable<any>{
+  public getRecommendation(): Observable<any>{
+    return this.token.get(`profile/recommendations`)
+  }
+  public update_photo(photo: any, user: User = this.user): Observable<any>{
     const formData = new FormData();
-    formData.append('user[avatar]', 
+    formData.append('avatar', 
                     photo, 
-                    '');
+                    'avatar');
+    let header: Headers = this.main.get_token();
+    
+    return this.token.request({
+      method: RequestMethod.Put,
+      url: `${this.main.url}/auth`,
+      body: formData,
+      headers: header
+    });
+  }
 
-    return this.http.post(`${this.main.url}/`, formData);
-  }*/
+  public update_user(user: User, file: any){
+    const formData = new FormData();
+    formData.append('avatar', 
+                    file, 
+                    'avatar');
+
+    formData.append('nickname', user.nickname);
+    formData.append('name', user.name);
+    formData.append('lastname', user.lastname);
+    formData.append('email', user.email);        
+    let header: Headers = this.main.get_token();
+    return this.token.request({
+      method: RequestMethod.Put,
+      url: `${this.main.url}/auth`,
+      body: formData,
+      headers: header
+    }); 
+  }
+
 }
