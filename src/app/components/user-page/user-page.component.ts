@@ -1,6 +1,6 @@
 import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './../../servises/main.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { PostServiceService } from './../../servises/post-service.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserServiceService } from '../../servises/user-service.service';
@@ -29,17 +29,28 @@ export class  UserPageComponent implements OnInit {
 
   subCount: number = 0;
 
+  follower: number = 0;
+
   constructor(public userService: UserServiceService,
               public postService: PostServiceService,
               public router: Router,
               public main: MainService,
-              public token: Angular2TokenService
+              public token: Angular2TokenService,
+              public activatedRouter: ActivatedRoute
               ) { }
 
 
   ngOnInit() {
+    this.activatedRouter.params.subscribe(params => { 
+      if(params.id){
+        this.init_page();
+      }
+     });
+  }
+
+   
+  init_page(){
     let srcUser =  this.router.url.match(/[0-9]{1,}/g)[0];
-    
     forkJoin(
       this.userService.getUser(srcUser),
       this.postService.getPosts(Number(srcUser))
@@ -54,12 +65,13 @@ export class  UserPageComponent implements OnInit {
         );
         this.userService.user.id = res1.user.id; 
         this.userService.user.photoSrc = res1.user.avatar.url || this.userService.userPhotoSrc;
-        this.subCount = res1.subscribe.length;                //user result
-        
+        this.subCount = res1.subscriptions.length;                
+        this.follower = res1.subscribers_count;           //user result
+                                                          
         let id = localStorage.getItem('current_user_id'); //check sub or no
 
         if(this.userService.user.id != id ){
-          res1.subscribe.forEach(element => {
+          res1.subscriptions.forEach(element => {
             if( element.user_id == id){
               this.sub_string = 'Отписка';
             }
@@ -72,15 +84,7 @@ export class  UserPageComponent implements OnInit {
         this.main.client_error.togle_error('Ошибка загрузки, обновите страницу'); //error
       }
     );
-
-    this.router.events.subscribe(
-      (e) =>{
-        if(e instanceof NavigationEnd && e.url.slice(0,5) == '/user'){
-          this.ngOnInit();
-        }
-      }
-    );
-  } 
+  }
 
   _add_post(){
     let post: Post = new Post(
@@ -133,6 +137,9 @@ export class  UserPageComponent implements OnInit {
     }
     
     
+  }
+  _navigate_follower(){
+    this.router.navigate(['following']);
   }
   _navigate_subscribers(){
     this.router.navigate(['followers']);

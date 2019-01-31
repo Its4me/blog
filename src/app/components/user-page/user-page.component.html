@@ -41,14 +41,15 @@
                     <div class="head-info-user-right">
                         <button 
                             mat-stroked-button 
-                            (click)="_navigate_subscribers()" 
+                            (click)="_navigate_follower()" 
                             color="primary">
-                            Подписки ( {{subCount}} )
+                            Подписки ( {{follower}} )
                         </button>
                         <button 
                             mat-stroked-button 
+                            (click)="_navigate_subscribers()" 
                             color="primary">
-                            Подписчики
+                            Подписчики ( {{subCount}} )
                         </button>
                        
                     </div>

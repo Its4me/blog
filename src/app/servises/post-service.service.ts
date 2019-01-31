@@ -1,3 +1,4 @@
+import { UserServiceService } from './user-service.service';
 import { RequestMethod, RequestOptions, Headers } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MainService } from './main.service';
@@ -22,7 +23,8 @@ export class PostServiceService {
   constructor(
     private http: HttpClient,
     public token: Angular2TokenService,
-    public main: MainService
+    public main: MainService,
+    public userService: UserServiceService
     ) { }
 
 
@@ -82,6 +84,8 @@ export class PostServiceService {
         element.likes_count
       );
       new_post[index].activeLike = this.check_like(element);
+      new_post[index].owner_nick = element.user.nickname;
+      new_post[index].owner_photo = element.user.avatar.url || this.userService.userPhotoSrc;
     });
     
     return new_post;

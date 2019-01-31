@@ -84,13 +84,15 @@ export class UserServiceService {
     return localStorage.getItem('current_user_id') == this.user.id;
   }
   public getSubscribers(): Observable<any>{
-    return this.token.get('profiles/subscribes_list');
+    let id = this.user.id || this.currentUserId; // КОСТЫЛЬ
+    return this.token.get(`profiles/${id}/subscriptions_list`);
   }
   public unsubscribe(id: number = Number(this.user.id)): Observable<any>{
     return this.token.get(`profiles/${id}/unsubscribe`);
   }
   public getFollowing(): Observable<any>{
-    return this.token.get('profiles/unsubscribes_list');
+    let id = this.user.id || this.currentUserId; // КОСТЫЛЬ
+    return this.token.get(`profiles/${id}/subscribers_list`);
   }
   public getUserPhoto(src: string): string{
     return (src == null)? this.userPhotoSrc :  src;

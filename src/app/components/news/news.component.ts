@@ -26,6 +26,7 @@ export class NewsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    
     this.loader = true;
     this.postService.posts = null;
     forkJoin(

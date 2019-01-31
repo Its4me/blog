@@ -15,12 +15,12 @@
                 </div>
                 
               </div>
-              <button 
+             <!-- <button 
                 class="subscribe-btn" 
                 (click)='_unsubscribe(user.id, i)' 
                 mat-button>
                 Отписка
-              </button>
+              </button> -->
             </li>
             <li class="user">
               <div matRipple class="user-wrapper" *ngIf="!users[0] && !loader">
@@ -30,9 +30,7 @@
           </ul>
         </div>
 
-        <aside class="content-block">
-
-        </aside>
+        <app-aside></app-aside>
       </div>
     </div>
 </section>

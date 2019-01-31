@@ -51,7 +51,8 @@ export class FullPostComponent implements OnInit {
           );
           this.post.id = this.postService.current_post_id;
           this.post.activeLike = this.postService.check_like(res);
-          
+          this.post.owner_nick = res.user.nickname;
+          this.post.owner_photo = res.user.avatar.url || this.userService.userPhotoSrc;
           
         }
 

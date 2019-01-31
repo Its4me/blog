@@ -1,11 +1,11 @@
 <article class="content-block post" >
   <div class="head">
     <div class="head_owner">
-      <div class="head_owner_img">
-        <img  [src]="this.userService.user.photoSrc"  [alt]="this.userService.user.name">
+      <div class="head_owner_img" (click)="_navigate_user()">
+        <img  [src]="post.owner_photo"  [alt]="this.userService.user.name">
       </div>
       <div class="head_descr">
-          <p class="post-nick">nickname</p>
+          <p class="post-nick">{{post.owner_nick}}</p>
           <p class="post-date">
             {{post.get_time()}}
           </p>
@@ -36,7 +36,7 @@
     <img [src]="post.photo_src" alt="post.description">
   </div>
   <div class="bottom-panel">
-    <div class="likes" (click)="_like()">
+    <div class="likes" #like>
       <i class="material-icons"
         [ngClass]="{'active-like': post.activeLike}">
         favorite

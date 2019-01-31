@@ -3,10 +3,10 @@
         <div class="row">
             <div class="head_owner">
                 <div class="head_owner_img">
-                    <img [src]="this.userService.user.photoSrc" [alt]="this.userService.user.name">
+                    <img [src]="post.owner_photo" [alt]="this.userService.user.name">
                 </div>
                 <div class="head_descr">
-                    <p class="post-nick">nickname</p>
+                    <p class="post-nick">{{post.owner_nick}}</p>
                     <p class="post-date">
                         {{post.get_time()}}
                     </p>

@@ -128,6 +128,9 @@ aside{
 .swiper-button-disabled{
     display: none; 
 }
+.likes i {
+    user-select: none;
+}
 @keyframes like{
     from{
         transform: scale(1);
