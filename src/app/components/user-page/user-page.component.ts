@@ -11,9 +11,10 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.scss']
+  styleUrls: ['./user-page.component.scss'],
+  
 })
-export class UserPageComponent implements OnInit {
+export class  UserPageComponent implements OnInit {
   @ViewChild('post_photo') post_photo: ElementRef;
 
   postText: string = '';
@@ -37,9 +38,11 @@ export class UserPageComponent implements OnInit {
 
 
   ngOnInit() {
+    let srcUser =  this.router.url.match(/[0-9]{1,}/g)[0];
+    
     forkJoin(
-      this.userService.getUser(this.router.url.slice(6)),
-      this.postService.getPosts(Number(this.router.url.slice(6)))
+      this.userService.getUser(srcUser),
+      this.postService.getPosts(Number(srcUser))
     ).subscribe(
       ([res1, res2]) => {
         
@@ -103,12 +106,12 @@ export class UserPageComponent implements OnInit {
         this.postService.posts.unshift(post); 
         this.postText = '';
         this.post_photo.nativeElement.value = null;
+        this.postLoader = false;
+        this.postImage = false;
        },
        err => {
-         this.main.client_error.togle_error('Какая-то там ошибка), извините')
-       },
-       () =>{
-        this.postLoader = false;
+         this.main.client_error.togle_error('Какая-то там ошибка), извините');
+         this.postLoader = false;
        }
     );
   }

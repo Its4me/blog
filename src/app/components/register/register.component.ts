@@ -120,6 +120,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate([`user/${this.userService.user.id}`]);
           this.main.loader = false;
           localStorage.setItem('current_user_id', this.userService.user.id);
+          this.userService.currentUserId = localStorage.getItem('current_user_id');
         });
 
   }
@@ -151,7 +152,7 @@ export class RegisterComponent implements OnInit {
         this.main.loader = false;
         
         localStorage.setItem('current_user_id', this.userService.user.id);
-        
+        this.userService.currentUserId = localStorage.getItem('current_user_id');
       }
     )
   }

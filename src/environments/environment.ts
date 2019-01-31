@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   token_auth_config: {
     apiBase: 'https://frozen-citadel-55909.herokuapp.com'
   }

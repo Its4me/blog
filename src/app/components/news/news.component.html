@@ -6,8 +6,7 @@
          
             <swiper 
               class="carousel" 
-              [config]="config" 
-              [(index)]="index"
+             
               >
               <div 
                 class="item-carousel-container"  
@@ -34,6 +33,9 @@
             </swiper>
             <button class="prev"></button>
             <button class="next"></button>
+        </div>
+        <div class="content-block empty" *ngIf="loader">
+          <mat-spinner class="loader"  [diameter]='40' ></mat-spinner>
         </div>
         <app-post *ngFor="let post of this.postService.posts; let i = index" [post]='post' [i]='i'>
         </app-post>

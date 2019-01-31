@@ -28,9 +28,11 @@ aside{
 }
 .item-carousel-img-wrapper{
   max-width: 200px;
+  max-height: 200px;
     img{
         max-width: 100%;
         border-radius: 50%;
+        max-height: 100%;
     }
 }
 .item-carousel-container{
@@ -72,6 +74,10 @@ aside{
     &:hover{
         cursor: pointer;
     }
+}
+.loader{
+    display: block;
+    margin: 0 auto;
 }
 .item-carouse-nick{
     font-size: 1em;

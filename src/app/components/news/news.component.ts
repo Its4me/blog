@@ -16,6 +16,7 @@ export class NewsComponent implements OnInit {
 
   usersRecommendation: User[] = [];
   sub_string: string[] = [];
+  loader: boolean = false;
   
 
   constructor(public userService: UserServiceService,
@@ -25,6 +26,7 @@ export class NewsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.loader = true;
     this.postService.posts = null;
     forkJoin(
       this.postService.get_news_Posts(),
@@ -47,9 +49,11 @@ export class NewsComponent implements OnInit {
           this.usersRecommendation.push(newUser);
           i++;
         })
+        this.loader = false;
       },
       err =>{
         this.main.client_error.togle_error('Кто-то схавал ваши новости...');
+        this.loader = false;
       }
     );
     

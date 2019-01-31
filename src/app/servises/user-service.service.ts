@@ -27,6 +27,7 @@ export class UserServiceService {
 
   userPhotoSrc: string = 'assets/user-photo.jpg';
 
+  currentUserId = localStorage.getItem('current_user_id');
 
   constructor(
     public http: HttpClient,

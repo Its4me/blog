@@ -12,6 +12,7 @@
 .wrapper-for-img{
     position: relative;
     overflow: hidden;
+    user-select: none;
     border-radius: 50%;
     img{
         

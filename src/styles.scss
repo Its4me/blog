@@ -119,9 +119,15 @@ aside{
         text-decoration: none;
     }
 }
-
-
-
+.cbalink{
+    display: none!important;
+}
+.mat-tab-header-pagination{
+    display: none!important;
+}
+.swiper-button-disabled{
+    display: none; 
+}
 @keyframes like{
     from{
         transform: scale(1);

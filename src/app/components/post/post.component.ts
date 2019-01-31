@@ -23,7 +23,10 @@ export class PostComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    
     this.post.id = this.i.toString();
+    console.log(this.post );
+    
   }
   _like(){
     this.postService.like_post(this.post.back_id).subscribe(
@@ -40,6 +43,7 @@ export class PostComponent implements OnInit {
   _open_post(){
     this.postService.open_post = this.postService.posts[this.i];
     this.postService.prev_open_post_url = this.router.url; 
+
     
     this.router.navigate([
       {outlets: {'post': [`${this.postService.open_post.back_id}`]}}

@@ -43,11 +43,16 @@ export class SubscribersComponent implements OnInit {
               user.name,
               user.lastname,
               user.nickname,
-              'assets/user-photo.jpg'
+              user.avatar.url || this.UserService.userPhotoSrc
             )
           });
           this.loader = false;
+        },
+        err => {
+          this.main.client_error.togle_error('Что-то пошло не так...')
+          this.loader = false;
         }
+        
       )
     }else if(url == '/following'){
       this.UserService.getFollowing()

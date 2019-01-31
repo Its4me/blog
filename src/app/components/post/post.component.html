@@ -12,10 +12,10 @@
       </div>
       
     </div>
-    <i class="material-icons">
+    <i class="material-icons" *ngIf="post.owner_id == this.userService.currentUserId">
         expand_more
     </i>
-    <ul class="edit">
+    <ul class="edit" >
       <li>
         <button mat-button  (click)="_delete()">
           Удалить

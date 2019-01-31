@@ -17,7 +17,7 @@ export class PostServiceService {
 
   current_post_id: string = '';
 
-  prev_open_post_url: string = ''
+  prev_open_post_url: string = '';
 
   constructor(
     private http: HttpClient,
@@ -54,7 +54,7 @@ export class PostServiceService {
       url:    `${this.main.url}/post/${id}/like`
        });
   }
-  getPost(id: string): Observable<any>{
+  getPost(id: number): Observable<any>{
     return this.http.get(`${this.main.url}/posts/${id}`);
   }
   getPosts(id: number): Observable<any>{
@@ -81,19 +81,22 @@ export class PostServiceService {
         element.created_at,
         element.likes_count
       );
-      let id = localStorage.getItem('current_user_id');
-      element.likes.forEach(el => {
-        if(id == el.user_id){
-          new_post[index].activeLike = true;
-        }
-      });
-     
+      new_post[index].activeLike = this.check_like(element);
     });
     
     return new_post;
   }
 
-
+  public check_like(element): boolean{
+    let id = localStorage.getItem('current_user_id');
+    let result = false;
+    element.likes.forEach(el => {
+      if(id == el.user_id){
+        result =  true;
+      }
+    });
+    return result;
+  }
   delete_post(id: string): Observable<any>{
     return this.token.request({
       method: RequestMethod.Delete,
