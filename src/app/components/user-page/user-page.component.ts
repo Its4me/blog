@@ -63,6 +63,7 @@ export class  UserPageComponent implements OnInit {
           res1.user.name,
           res1.user.lastname
         );
+        
         this.userService.user.id = res1.user.id; 
         this.userService.user.photoSrc = res1.user.avatar.url || this.userService.userPhotoSrc;
         this.subCount = res1.subscriptions.length;                
@@ -96,7 +97,8 @@ export class  UserPageComponent implements OnInit {
       );
 
       post.photo = this.file;
-      
+      post.owner_nick = this.userService.user.nickname;
+      post.owner_photo = this.userService.user.photoSrc;
       if(!post.description && !post.photo){
         return;
       }
@@ -112,6 +114,7 @@ export class  UserPageComponent implements OnInit {
         this.post_photo.nativeElement.value = null;
         this.postLoader = false;
         this.postImage = false;
+        this._delete_img();
        },
        err => {
          this.main.client_error.togle_error('Какая-то там ошибка), извините');

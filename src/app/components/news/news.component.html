@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="posts">
-        <div class="content-block  people-slider">
+        <div 
+          class="content-block  people-slider" 
+          *ngIf="usersRecommendation && usersRecommendation.length != 0">
          
             <swiper 
               class="carousel" 
@@ -39,11 +41,10 @@
         </div>
         <app-post *ngFor="let post of this.postService.posts; let i = index" [post]='post' [i]='i'>
         </app-post>
-        <div class="content-block empty" *ngIf="!this.postService.posts">
+        <div class="content-block empty" *ngIf="this.postService.posts && this.postService.posts.length == 0">
           Тут пока ничего нет, подпишитесь на кого-то
         </div>
       </div>
-
       <app-aside></app-aside>
     </div>
   </div>

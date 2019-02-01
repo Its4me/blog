@@ -37,7 +37,7 @@ export class HeadersComponent implements OnInit {
   ngOnInit() {      
 
     fromEvent (this.seach_element.nativeElement, 'keyup').pipe(
-      debounceTime(1200),
+      debounceTime(400),
       //filter(x => this.seachValue != ''),
       switchMap(res =>  this.userService.findUser(this.seachValue))
     )

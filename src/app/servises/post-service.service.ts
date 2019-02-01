@@ -81,7 +81,7 @@ export class PostServiceService {
         element.id, 
         element.user_id,
         element.created_at,
-        element.likes_count
+        element.likes.length
       );
       new_post[index].activeLike = this.check_like(element);
       new_post[index].owner_nick = element.user.nickname;

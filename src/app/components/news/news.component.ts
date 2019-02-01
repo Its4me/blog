@@ -17,7 +17,7 @@ export class NewsComponent implements OnInit {
   usersRecommendation: User[] = [];
   sub_string: string[] = [];
   loader: boolean = false;
-  
+
 
   constructor(public userService: UserServiceService,
     public postService: PostServiceService,
@@ -51,6 +51,7 @@ export class NewsComponent implements OnInit {
           i++;
         })
         this.loader = false;
+        
       },
       err =>{
         this.main.client_error.togle_error('Кто-то схавал ваши новости...');
