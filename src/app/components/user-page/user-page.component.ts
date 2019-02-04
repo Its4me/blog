@@ -56,7 +56,9 @@ export class  UserPageComponent implements OnInit {
       this.postService.getPosts(Number(srcUser))
     ).subscribe(
       ([res1, res2]) => {
-        
+
+        this.sub_string = 'Подписаться';
+
         this.userService.user = new User(
           res1.user.email,
           res1.user.nickname,
@@ -72,11 +74,12 @@ export class  UserPageComponent implements OnInit {
         let id = localStorage.getItem('current_user_id'); //check sub or no
 
         if(this.userService.user.id != id ){
-          res1.subscriptions.forEach(element => {
-            if( element.user_id == id){
+          for (let i = 0; i < res1.subscriptions.length; i++) {
+            if( res1.subscriptions[i].user_id == id){
               this.sub_string = 'Отписка';
+              break;
             }
-          });
+          }
         }
         
         this.postService.posts = this.postService.get_data_post(res2); // posts result
