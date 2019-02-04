@@ -1,16 +1,13 @@
 @import "../../../var.scss";
-aside{
-    position: sticky;
-    max-height: 200px;
-    top: calc(50px + 1em);
-}
+section{
+    margin-top: 1em;
+} 
 .row{
     display: grid;
     grid-template-columns: 6fr 2fr;
     grid-column-gap: 1em;
 }
 .posts{
-    margin-top: 1em;
     width: 687px;
 }
 .item-carousel{
@@ -28,7 +25,10 @@ aside{
 }
 .item-carousel-img-wrapper{
   max-width: 200px;
-  max-height: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
     img{
         max-width: 100%;
         border-radius: 50%;

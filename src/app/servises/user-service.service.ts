@@ -115,7 +115,7 @@ export class UserServiceService {
     });
   }
 
-  public update_user(user: User, file: any){
+  public update_user(user: User, file: any): Observable<any>{
     const formData = new FormData();
     formData.append('avatar', 
                     file, 

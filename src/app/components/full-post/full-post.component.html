@@ -8,7 +8,7 @@
                 <div class="head_descr">
                     <p class="post-nick">{{post.owner_nick}}</p>
                     <p class="post-date">
-                        {{post.get_time()}}
+                        {{post.date | date: 'LL.MM.yyyy в HH.mm'}}
                     </p>
                 </div>
             </div>

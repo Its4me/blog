@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MainService } from 'src/app/servises/main.service';
 import { User } from './../../clasess/user';
 import { UserServiceService } from './../../servises/user-service.service';
@@ -16,9 +17,12 @@ export class EditProfileComponent implements OnInit {
   
   file: any;
 
+  loaderSave: boolean = false;
+
   constructor(
     public userService: UserServiceService,
-    public main: MainService
+    public main: MainService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -33,6 +37,7 @@ export class EditProfileComponent implements OnInit {
           res.user.lastname
         );
         this.user.photoSrc = res.user.avatar.url;
+        this.user.id = res.user.id;
       }, 
       err => {
         this.main.client_error.togle_error('Ошибка, обновите страницу позже')
@@ -51,7 +56,16 @@ export class EditProfileComponent implements OnInit {
     }
   }
   _edit_data(){
-    this.userService.update_user(this.user, this.file)
+    this.loaderSave = true;
+    this.userService.update_user(this.user, this.file).subscribe(
+    
+      res =>{
+        this.loaderSave = false;
+        this.router.navigate([`user/${this.user.id}`]);
+        
+      },
+      err => this.main.client_error.togle_error(`Ошибка ${err}`)
+    )
   }
 
 }

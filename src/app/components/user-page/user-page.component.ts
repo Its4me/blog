@@ -127,6 +127,7 @@ export class  UserPageComponent implements OnInit {
       this.userService.subscribe().subscribe(
         res => {
           this.sub_string = 'Отписка';
+          this.subCount += 1;
         },
         err => this.main.client_error.togle_error('Ошибка, увы')
       );
@@ -134,6 +135,7 @@ export class  UserPageComponent implements OnInit {
       this.userService.unsubscribe().subscribe(
         res => {
          this.sub_string = 'Подписаться';
+         this.subCount -= 1;
         },
         err => this.main.client_error.togle_error('Снова ошибка, простите')
       )

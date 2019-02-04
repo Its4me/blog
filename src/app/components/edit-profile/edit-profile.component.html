@@ -61,12 +61,23 @@
                         </mat-form-field>
                     </div>
                     <button 
+                        *ngIf="!loaderSave"
                         mat-raised-button
                         class="save-btn"
                         color="primary"
                         (click)="_edit_data()">
                         Сохранить
+                      
                     </button>
+                    <div class="clear"></div>
+                    <div class="loader-wrapper">
+                        <mat-spinner 
+                            *ngIf="loaderSave" 
+                            class="loader"  
+                            [diameter]='36'>
+                        </mat-spinner>
+                    </div>
+                    
                 </div>
             </div>
         </div>

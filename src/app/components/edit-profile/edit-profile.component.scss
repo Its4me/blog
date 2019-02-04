@@ -22,6 +22,17 @@
         cursor: pointer;
     }
 }
+.clear{
+    width: 100%;
+    float: left;
+}
+.loader-wrapper{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 .edit-photo{
     width: 180px;
     margin: 0 auto;
