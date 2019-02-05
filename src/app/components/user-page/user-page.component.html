@@ -97,10 +97,19 @@
                             #post_photo
                             >
                         <i 
-                            class="material-icons"
+                            class="material-icons mob-none"
                             (click)="post_photo.click($event)"    
                         >
                         add_a_photo</i>
+                        <button 
+                            *ngIf="!postLoader && !postImage"
+                            mat-raised-button
+                            color="primary"
+                            class="mob-uploader"
+                            (click)="post_photo.click($event)"
+                            >
+                            Добавить фото
+                    </button>
                         <button 
                             *ngIf="!postLoader"
                             mat-raised-button

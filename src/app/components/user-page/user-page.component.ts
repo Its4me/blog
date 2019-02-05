@@ -78,7 +78,7 @@ export class  UserPageComponent implements OnInit {
             if( res1.subscriptions[i].user_id == id){
               this.sub_string = 'Отписка';
               break;
-            }
+            }   
           }
         }
         

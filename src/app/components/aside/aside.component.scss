@@ -107,3 +107,8 @@ ul.left, ul.right{
     right: 30%;
   }
 }
+@media (max-width: 992px){
+  aside{
+    display: none;
+  }
+}

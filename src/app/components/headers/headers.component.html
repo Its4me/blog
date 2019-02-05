@@ -34,8 +34,16 @@
           </ul>
         </div>
       </div>
+      
       <nav>
         <ul class="menu">
+          <li class="mob-seach">
+            <button 
+              mat-button 
+              (click)="_open_seach()">
+              Поиск
+            </button>
+          </li>
           <li><a mat-button (click)="_close_all()" [routerLink]="[ '/news' ]">Новости</a></li>
           <li>
             <button mat-button id="user_menu_button" (click)="_tougle_menu()">Профиль</button>

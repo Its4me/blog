@@ -115,6 +115,42 @@ main{
         }
     }
 }
+.mob-seach{
+    display: none;
+}
 .nothing-finds{
     padding-left: 0.5em;
+}
+@media (max-width: 776px){
+    .mob-seach{
+        display: block;
+    }
+    .seach{
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        z-index: 10;
+        input{
+            width: 100%;
+            height: 40px;
+            margin-left: 0;
+        }
+        .find{
+            left: 2%;
+            font-size: 20px;
+        }
+        .clear{
+            right: 2%;
+        }
+    }
+    .seach_result{
+        width: 100%;
+        left: 0;
+    }
+}
+@media (max-width: 560px){
+    .seach{
+        width: 95%;
+        left: 2.5%;
+    }
 }

@@ -16,6 +16,7 @@ import { fromEvent } from 'rxjs';
 export class HeadersComponent implements OnInit {
   @ViewChild('seach') seach_element: ElementRef;
 
+  mobileSeach: boolean = false;
 
   seachValue: string = '';
 
@@ -111,6 +112,10 @@ export class HeadersComponent implements OnInit {
   public _close_all(){
     this._close_seach();
     this.user_menu = false;
+  }
+  _open_seach(){
+    this.user_menu = false;;
+    this.mobileSeach = true;
   }
   
 }

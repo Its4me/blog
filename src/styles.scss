@@ -145,3 +145,28 @@ aside{
         transform: scale(1);
     }
 }
+
+@media (max-width: 992px){
+    .container{
+        width: 720px; 
+    }
+    body{
+        font-size: 14px;
+    }
+    .material-icons{
+        font-size: 30px;
+    }
+    .likes{
+        font-size: 20px;
+    }
+}
+@media (max-width: 776px){
+    .container{
+        width: 540px; 
+    }
+}
+@media (max-width: 560px){
+    .container{
+        width: 100%
+    }
+}
