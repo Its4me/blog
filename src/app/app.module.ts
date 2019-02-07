@@ -26,7 +26,7 @@ import { FullPostComponent } from './components/full-post/full-post.component';
 import { NewsComponent } from './components/news/news.component';
 import { SubscribersComponent } from './components/subscribers/subscribers.component';
 import { MatRippleModule } from '@angular/material/core';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 // swiper(slider)
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -76,7 +76,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatProgressBarModule,
     SwiperModule,
     MatProgressSpinnerModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSidenavModule
   ],
   providers: [
     UserServiceService,

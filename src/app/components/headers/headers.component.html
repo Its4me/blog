@@ -1,3 +1,11 @@
+<mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer #drawer [mode]="'over'">
+      <button mat-button (click)="_close_all(); drawer.toggle()" [routerLink]="[ '/news' ]">Новости</button >
+      <button mat-button (click)="_my_page(); drawer.toggle()">Моя страница</button>
+      <button mat-button (click)="_navigate_edit();drawer.toggle()">Редактировать</button>
+      <button mat-button (click)="_exit();drawer.toggle()">Выход</button>
+    </mat-drawer>
+    <mat-drawer-content>
 <header >
   <div class="container">
     <div class="row">
@@ -35,7 +43,7 @@
         </div>
       </div>
       
-      <nav>
+      <nav class="desktop-nav">
         <ul class="menu">
           <li class="mob-seach">
             <button 
@@ -57,11 +65,23 @@
           </li>
         </ul>
       </nav>
+      <div class="mob-menu-wrapper">
+        <button mat-icon-button>
+          <i 
+            class="material-icons mob-menu"
+            (click)="drawer.toggle()">
+            menu
+          </i>
+        </button>
+      </div>
+      
+
     </div>
   </div> 
 </header>
 
-<main (click)="close($event)" >
-    <router-outlet></router-outlet>
-</main>
-
+    <main (click)="close($event)" >
+        <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>

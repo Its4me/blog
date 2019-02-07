@@ -67,7 +67,7 @@ section{
 }
 .content .row{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 6fr 2fr;
     grid-column-gap: 1em;
 }
 .content-all-newPost{
@@ -133,6 +133,9 @@ section{
 }
 
 @media (max-width: 992px){
+    .content .row{
+        grid-template-columns: 1fr;
+    }
     .head-info{
         grid-template-columns: 120px 1fr;
         grid-template-rows: 120px 1fr;
