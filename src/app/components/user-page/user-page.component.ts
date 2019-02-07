@@ -89,11 +89,10 @@ export class  UserPageComponent implements OnInit {
       }
     );
   }
-
   _add_post(){
     let post: Post = new Post(
       '',
-      this.postText, 
+      this.postText.trim(), 
       '',
       this.userService.user.id,
       new Date()

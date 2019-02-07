@@ -87,3 +87,13 @@ li{
 .subscribe-btn{
     width: 100px;
 }
+@media (max-width: 992px){
+ .row{
+    grid-template-columns: 1fr;
+ }
+} 
+@media (max-width: 560px){
+    .subs{
+        font-size: 13px;
+    }
+}

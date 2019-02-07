@@ -73,3 +73,33 @@
     margin: 0 auto;
     display: block;
 }
+@media (max-width: 992px){
+    .edit-profile{
+        width: 80%;
+        margin: 0 10%;
+    }
+}
+@media (max-width: 776px){
+    .edit-photo{
+        width: 120px;
+    }
+    .wrapper-for-img{
+        height: 120px;
+    }
+}
+@media (max-width: 560px){
+    .edit-input-wrapper{
+        width: 90%;
+        margin: 0 5%;
+    }
+
+}
+@media (max-width: 400px){
+    .edit-input-wrapper{
+        width: 100%;
+        margin: 0;
+    }
+    .save-btn{
+        width: 100%;
+    }
+}

@@ -17,6 +17,9 @@ article{
     p{
         margin-bottom: 1em;
     }
+    span{
+        white-space: pre-line;
+    }
 }
 .edit:hover{
     opacity: 1;
@@ -109,3 +112,21 @@ article{
     width: 100%;
 }
 
+@media (max-width: 560px){
+    .content-block.post{
+        padding: 0;
+    }
+    .head{
+        padding: 1em 0.5em;
+    }
+    .bottom-panel{
+        padding: 0.5em 1em 1em 1em;
+    }
+    .img-wrapper{
+        border: none;
+    }
+    .description{
+        padding: 0 1em;
+        font-size: 1.2em;
+    }
+}

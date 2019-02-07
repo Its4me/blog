@@ -12,7 +12,13 @@
       </div>
       
     </div>
-    <i class="material-icons" *ngIf="post.owner_id == this.userService.currentUserId">
+    <i 
+      class="material-icons" 
+      *ngIf="post.owner_id == this.userService.currentUserId"
+      (click)="_delete()">
+      delete
+      </i>
+    <!-- <i class="material-icons" *ngIf="post.owner_id == this.userService.currentUserId">
         expand_more
     </i>
     <ul class="edit" >
@@ -21,11 +27,11 @@
           Удалить
          </button>
       </li>
-    </ul>
+    </ul> -->
   </div>
-  <div class="description">
+  <div *ngIf="post.description" class="description">
     <p>
-      <span *ngIf="post.description">{{post.description}}</span>
+      <span >{{post.description}}</span>
     </p>
     
   </div>
