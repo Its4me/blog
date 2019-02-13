@@ -12,20 +12,20 @@ export class MainService {
 
   loader: boolean = false;
 
-  client_error = new myError();
+  clientError = new myError();
 
-  current_user_id: string = '';
+  currentUserId: string = '';
 
   constructor(
     public token: Angular2TokenService
   ) { }
 
 
-  public get_body(body: any): any{
+  public getBody(body: any): any{
     return JSON.parse(body._body); 
   }
  
-  public get_token(): Headers{
+  public getToken(): Headers{
     let header = new Headers();
     header.append('access-token', this.token.currentAuthData.accessToken);
     header.append('client', this.token.currentAuthData.client);

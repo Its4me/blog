@@ -6,7 +6,7 @@
                     <img 
                         [src]="this.userService.user.photoSrc" 
                         alt="user-photo">
-                    <div class="new-img" *ngIf="this.userService.check_me()">
+                    <div class="new-img" *ngIf="this.userService.checkMe()">
                         <i 
                             class="material-icons"
                             (click)="user_photo.click($event)">
@@ -18,7 +18,7 @@
                     class="none"
                     type="file"
                     name="photo"
-                    (change)="_update_photo($event)"
+                    (change)="_updatePhoto($event)"
                     #user_photo
                 >
                 <div class="head-info-user">
@@ -33,21 +33,21 @@
                             class="sub-button"
                             (click)="_subscribe()"
                             color="primary"
-                            *ngIf="!this.userService.check_me()"
+                            *ngIf="!this.userService.checkMe()"
                             >
-                            {{sub_string}}
+                            {{subString}}
                         </button>
                     </div>
                     <div class="head-info-user-right">
                         <button 
                             mat-stroked-button 
-                            (click)="_navigate_follower()" 
+                            (click)="_navigateFollower()" 
                             color="primary">
                             Подписки ( {{follower}} )
                         </button>
                         <button 
                             mat-stroked-button 
-                            (click)="_navigate_subscribers()" 
+                            (click)="_navigateSubscribers()" 
                             color="primary">
                             Подписчики ( {{subCount}} )
                         </button>
@@ -65,7 +65,7 @@
             <div class="content-all">
                 <div 
                     class="content-block content-all-newPost"
-                    *ngIf="this.userService.check_me()"
+                    *ngIf="this.userService.checkMe()"
                     >   
                     
                     <mat-form-field class="textarea-wrapper" appearance="outline">
@@ -84,7 +84,7 @@
                             <div class="close-img">
                                 <i 
                                     class="material-icons"
-                                    (click)='_delete_img()'
+                                    (click)='_deleteImg()'
                                     >
                                     close
                                 </i>
@@ -94,7 +94,7 @@
                             class="none"
                             type="file"
                             name="photo"
-                            (change)="_upload_photo($event)"
+                            (change)="_uploadPhoto($event)"
                             #post_photo
                             >
                         <i 
@@ -115,7 +115,7 @@
                             *ngIf="!postLoader"
                             mat-raised-button
                             color="primary"
-                            (click)="_add_post()"
+                            (click)="_addPost()"
                             >
                             Запостить
                         </button>

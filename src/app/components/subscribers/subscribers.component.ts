@@ -37,7 +37,7 @@ export class SubscribersComponent implements OnInit {
     if(url == '/following'){
       this.UserService.getSubscribers().subscribe(
         res => {
-          this.users = this.main.get_body(res).map((user) => {
+          this.users = this.main.getBody(res).map((user) => {
             return new User(
               user.id,
               user.name,
@@ -49,7 +49,7 @@ export class SubscribersComponent implements OnInit {
           this.loader = false;
         },
         err => {
-          this.main.client_error.togle_error('Что-то пошло не так...')
+          this.main.clientError.togleError('Что-то пошло не так...')
           this.loader = false;
         }
         
@@ -57,7 +57,7 @@ export class SubscribersComponent implements OnInit {
     }else if(url == '/followers'){
       this.UserService.getFollowing().subscribe(
         res => {
-          this.users = this.main.get_body(res).map((user) => {
+          this.users = this.main.getBody(res).map((user) => {
             return new User(
               user.id,
               user.name,
@@ -69,7 +69,7 @@ export class SubscribersComponent implements OnInit {
           this.loader = false;
         },
         err => {
-          this.main.client_error.togle_error('Что-то пошло не так...')
+          this.main.clientError.togleError('Что-то пошло не так...')
           this.loader = false;
         }
       );
@@ -85,7 +85,7 @@ export class SubscribersComponent implements OnInit {
          this.users.splice(i,1);
       },
       err => {
-        this.main.client_error.togle_error(`Ошибка, хз что случилось, вот сам посмотри: ${err}`)
+        this.main.clientError.togleError(`Ошибка, хз что случилось, вот сам посмотри: ${err}`)
       }
     );
   }

@@ -25,7 +25,7 @@ export class  UserPageComponent implements OnInit {
 
   file: any = null;
 
-  sub_string: string = 'Подписаться';
+  subString: string = 'Подписаться';
 
   subCount: number = 0;
 
@@ -43,13 +43,13 @@ export class  UserPageComponent implements OnInit {
   ngOnInit() {
     this.activatedRouter.params.subscribe(params => { 
       if(params.id){
-        this.init_page();
+        this.initPage();
       }
      });
   }
 
    
-  init_page(){
+  initPage(){
     let srcUser =  this.router.url.match(/[0-9]{1,}/g)[0];
     forkJoin(
       this.userService.getUser(srcUser),
@@ -57,7 +57,7 @@ export class  UserPageComponent implements OnInit {
     ).subscribe(
       ([res1, res2]) => {
 
-        this.sub_string = 'Подписаться';
+        this.subString = 'Подписаться';
 
         this.userService.user = new User(
           res1.user.email,
@@ -76,20 +76,20 @@ export class  UserPageComponent implements OnInit {
         if(this.userService.user.id != id ){
           for (let i = 0; i < res1.subscriptions.length; i++) {
             if( res1.subscriptions[i].user_id == id){
-              this.sub_string = 'Отписка';
+              this.subString = 'Отписка';
               break;
             }   
           }
         }
         
-        this.postService.posts = this.postService.get_data_post(res2); // posts result
+        this.postService.posts = this.postService.getDataPost(res2); // posts result
       },
       err => {
-        this.main.client_error.togle_error('Ошибка загрузки, обновите страницу'); //error
+        this.main.clientError.togleError('Ошибка загрузки, обновите страницу'); //error
       }
     );
   }
-  _add_post(){
+  _addPost(){
     let post: Post = new Post(
       '',
       this.postText.trim(), 
@@ -99,15 +99,15 @@ export class  UserPageComponent implements OnInit {
       );
 
       post.photo = this.file;
-      post.owner_nick = this.userService.user.nickname;
-      post.owner_photo = this.userService.user.photoSrc;
+      post.ownerNick = this.userService.user.nickname;
+      post.ownerPhoto = this.userService.user.photoSrc;
       if(!post.description && !post.photo){
         return;
       }
     this.postLoader = true;
     this.postService.addPost(post).subscribe(
       res => {
-        let new_res = this.main.get_body(res);
+        let new_res = this.main.getBody(res);
         post.back_id = new_res.id;
         post.likes_count = new_res.likes_count;
         post.photo_src = new_res.image.url;
@@ -116,42 +116,42 @@ export class  UserPageComponent implements OnInit {
         this.post_photo.nativeElement.value = null;
         this.postLoader = false;
         this.postImage = false;
-        this._delete_img();
+        this._deleteImg();
        },
        err => {
-         this.main.client_error.togle_error('Какая-то там ошибка), извините');
+         this.main.clientError.togleError('Какая-то там ошибка), извините');
          this.postLoader = false;
        }
     );
   }
   _subscribe(){
-    if(this.sub_string == 'Подписаться'){
+    if(this.subString == 'Подписаться'){
       this.userService.subscribe().subscribe(
         res => {
-          this.sub_string = 'Отписка';
+          this.subString = 'Отписка';
           this.subCount += 1;
         },
-        err => this.main.client_error.togle_error('Ошибка, увы')
+        err => this.main.clientError.togleError('Ошибка, увы')
       );
     }else{
       this.userService.unsubscribe().subscribe(
         res => {
-         this.sub_string = 'Подписаться';
+         this.subString = 'Подписаться';
          this.subCount -= 1;
         },
-        err => this.main.client_error.togle_error('Снова ошибка, простите')
+        err => this.main.clientError.togleError('Снова ошибка, простите')
       )
     }
     
     
   }
-  _navigate_follower(){
+  _navigateFollower(){
     this.router.navigate(['following']);
   }
-  _navigate_subscribers(){
+  _navigateSubscribers(){
     this.router.navigate(['followers']);
   }
-  _upload_photo(e){
+  _uploadPhoto(e){
     this.file = e.target.files[0] || e.dataTransfer.files[0];
     let file =  new FileReader();
     file.readAsDataURL(this.file)
@@ -162,16 +162,16 @@ export class  UserPageComponent implements OnInit {
     
   }
 
-  _update_photo(e){
+  _updatePhoto(e){
     let file = e.target.files[0] || e.dataTransfer.files[0];
-    this.userService.update_photo(file).subscribe(res => {
-      let user = this.main.get_body(res).data;
+    this.userService.updatePhoto(file).subscribe(res => {
+      let user = this.main.getBody(res).data;
       this.userService.user.photoSrc = user.avatar.url;
     },
-    err => this.main.client_error.togle_error('Ошибка при загрузке фото')
+    err => this.main.clientError.togleError('Ошибка при загрузке фото')
     );
   }
-  _delete_img(){
+  _deleteImg(){
     this.postImage = null;
     this.post_photo.nativeElement.value = null;
     this.file = null;

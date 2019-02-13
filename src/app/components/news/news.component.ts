@@ -15,7 +15,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class NewsComponent implements OnInit {
 
   usersRecommendation: User[] = [];
-  sub_string: string[] = [];
+  subString: string[] = [];
   loader: boolean = false;
 
 
@@ -30,14 +30,14 @@ export class NewsComponent implements OnInit {
     this.loader = true;
     this.postService.posts = null;
     forkJoin(
-      this.postService.get_news_Posts(),
+      this.postService.getNewsPosts(),
       this.userService.getRecommendation()
     )
     .subscribe(
       ([res1,res2]) => {
-        this.postService.posts = this.postService.get_data_post(res1);
+        this.postService.posts = this.postService.getDataPost(res1);
         let i = 0;
-        this.main.get_body(res2).forEach(el => {
+        this.main.getBody(res2).forEach(el => {
           let newUser =  new User(
             el.email,
             el.nickname,
@@ -46,7 +46,7 @@ export class NewsComponent implements OnInit {
           );
           newUser.id = el.id;
           newUser.photoSrc = el.avatar.url;
-          this.sub_string[i] = 'Подписаться';
+          this.subString[i] = 'Подписаться';
           this.usersRecommendation.push(newUser);
           i++;
         })
@@ -54,7 +54,7 @@ export class NewsComponent implements OnInit {
         
       },
       err =>{
-        this.main.client_error.togle_error('Кто-то схавал ваши новости...');
+        this.main.clientError.togleError('Кто-то схавал ваши новости...');
         this.loader = false;
       }
     );
@@ -66,19 +66,19 @@ export class NewsComponent implements OnInit {
     }
   }
   _subscribe(id,i){
-    if(this.sub_string[i] == 'Подписаться'){
+    if(this.subString[i] == 'Подписаться'){
       this.userService.subscribe(id).subscribe(
         res => {
-          this.sub_string[i] = 'Отписка';
+          this.subString[i] = 'Отписка';
         },
-        err => this.main.client_error.togle_error('Ошибка, увы')
+        err => this.main.clientError.togleError('Ошибка, увы')
       );
     }else{
       this.userService.unsubscribe(id).subscribe(
         res => {
-         this.sub_string[i] = 'Подписаться';
+         this.subString[i] = 'Подписаться';
         },
-        err => this.main.client_error.togle_error('Снова ошибка, простите')
+        err => this.main.clientError.togleError('Снова ошибка, простите')
       )
     }
   }

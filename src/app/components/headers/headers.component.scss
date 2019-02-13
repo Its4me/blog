@@ -80,22 +80,10 @@ main{
     float: left;
     width: 100%;
 }
-.sub-menu{
-    opacity: 1;
-    left: -50%;
-    padding: 0.5em 0;
-    background-color: #fff;
-    position: absolute;
-    box-shadow: 0 0 2px 1px $primary-d;
-    box-sizing: content-box;
-    li{
-        width: 100%;
-        
-    }
-    button{
-        width: 100%;
-    }
+.sub-menu-btn{
+    width: 100%;
 }
+ 
 .seach_result{
     width: 88%;
     left: 6%;

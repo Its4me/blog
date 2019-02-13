@@ -3,8 +3,8 @@ export class Post{
     public photo: File = null;
 
     public activeLike: boolean = false;
-    public owner_photo: string = '';
-    public owner_nick: string = '';
+    public ownerPhoto: string = '';
+    public ownerNick: string = '';
     constructor(
         public photo_src?: string,
         public description?: string,

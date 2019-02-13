@@ -32,33 +32,33 @@ export class PostComponent implements OnInit {
       switchMap(res =>this.postService.like_post(this.post.back_id)))
       .subscribe(
         res => {
-          let new_res = this.main.get_body(res);
-          this.postService.posts[this.post.id].likes_count = new_res.likes_count;
-          this.postService.posts[this.post.id].activeLike = new_res.like_status;
+          let newRes = this.main.getBody(res);
+          this.postService.posts[this.post.id].likes_count = newRes.likes_count;
+          this.postService.posts[this.post.id].activeLike = newRes.like_status;
         }); 
     this.post.id = this.i.toString();
   }
     
 
-  _open_post(){
-    this.postService.open_post = this.postService.posts[this.i];
-    this.postService.prev_open_post_url = this.router.url; 
+  _openPost(){
+    this.postService.openPost = this.postService.posts[this.i];
+    this.postService.prevOpenPostUrl = this.router.url; 
 
     
     this.router.navigate([
-      {outlets: {'post': [`${this.postService.open_post.back_id}`]}}
+      {outlets: {'post': [`${this.postService.openPost.back_id}`]}}
     ]); 
  
     
   }
   _delete(){
-    this.postService.delete_post(this.post.back_id).subscribe(
+    this.postService.deletePost(this.post.back_id).subscribe(
       () => {
         this.postService.posts.splice(this.i,1);
       }
     )
   }
-  _navigate_user(){
+  _navigateUser(){
     this.router.navigate([`user/${this.post.owner_id}`]);
   }
   _edit(){

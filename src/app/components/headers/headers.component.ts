@@ -20,13 +20,11 @@ export class HeadersComponent implements OnInit {
 
   seachValue: string = '';
 
-  user_menu: boolean = false;
+  seachMenu: boolean = false;
 
-  seach_menu: boolean = false;
+  nothingFinds: boolean = false;
 
-  nothing_finds: boolean = false;
-
-  find_users: any = [];
+  findUsers: any = [];
 
   constructor(
     public userService: UserServiceService,
@@ -45,23 +43,23 @@ export class HeadersComponent implements OnInit {
       .subscribe(
         res =>{
           if(!this.seachValue){
-            this._close_seach()
+            this._closeSeach()
           }else{
 
-            let newRes = this.main.get_body(res);
-            this.find_users = [];
+            let newRes = this.main.getBody(res);
+            this.findUsers = [];
             newRes.forEach(el => {
-              this.find_users.unshift({
+              this.findUsers.unshift({
                 nickname: el.nickname,
                 id: el.id
               });
               
             });
-            if(this.find_users[0]){
-              this.seach_menu = true;
-              this.nothing_finds = false;
+            if(this.findUsers[0]){
+              this.seachMenu = true;
+              this.nothingFinds = false;
             }else{
-              this.nothing_finds = true;
+              this.nothingFinds = true;
             }
             
           }
@@ -70,51 +68,40 @@ export class HeadersComponent implements OnInit {
       )
     
     }
-  _tougle_menu(){
-    this.user_menu = this.user_menu? false:true;
-  }
-  public close(e){
-    if(e.path[0].id != 'user_menu_button' ){
-      this.user_menu = false;
-    }
-  }
+  
   _exit(){
     this.userService.exitAccount().subscribe(
       res =>{
         localStorage.removeItem('current_user_id');
-        this._tougle_menu();
       }
     );
   }
-  _close_seach(){
+  _closeSeach(){
     this.seachValue = '';
-    this.seach_menu = false;
-    this.nothing_finds = false;
+    this.seachMenu = false;
+    this.nothingFinds = false;
   }
-  _my_page(){
+  _myPage(){
     if(localStorage.getItem('current_user_id')){
       this.router.navigate([`user/${localStorage.getItem('current_user_id')}`]);
     }else if(!this.token.currentUserData){
       this.router.navigate([``]);
     }
-    this._close_all();
+    this._closeAll();
     
   }
   _navigate_user(user: User){
     this.router.navigate([`user/${user.id}`]);
-    this._close_seach();
-    this.user_menu = false;
+    this._closeSeach();
   }
   _navigate_edit(){
     this.router.navigate(['edit-profile']);
-    this._close_all();
+    this._closeAll();
   }
-  public _close_all(){
-    this._close_seach();
-    this.user_menu = false;
+  public _closeAll(){
+    this._closeSeach();
   }
   _open_seach(){
-    this.user_menu = false;;
     this.mobileSeach = true;
   }
   

@@ -14,11 +14,11 @@ export class PostServiceService {
 
   posts: Post[] = [];
 
-  open_post: Post;
+  openPost: Post;
 
-  current_post_id: string = '';
+  currentPostId: string = '';
 
-  prev_open_post_url: string = '';
+  prevOpenPostUrl: string = '';
 
   constructor(
     private http: HttpClient,
@@ -37,7 +37,7 @@ export class PostServiceService {
     formData.append('post[body]', post.description);
     formData.append('title', '');
 
-    let header: Headers = this.main.get_token();
+    let header: Headers = this.main.getToken();
    
     return this.token.request({
       method: RequestMethod.Post,
@@ -63,19 +63,19 @@ export class PostServiceService {
     return this.token.get(`profiles/${id}/posts`);
   }
 
-  get_news_Posts(): Observable<any>{
+  getNewsPosts(): Observable<any>{
     return this.token.get(`profiles/friends_posts`);
   }
 
-  get_data_post(res: any): Post[]{
-    let new_post: Post[] = [];
+  getDataPost(res: any): Post[]{
+    let newPost: Post[] = [];
     
-    res = this.main.get_body(res);
+    res = this.main.getBody(res);
     if(!res){
-      return new_post;
+      return newPost;
     }
     res.forEach((element,index) => {
-      new_post[index] = new Post(
+      newPost[index] = new Post(
         element.image.url,
         element.body, 
         element.id, 
@@ -83,15 +83,15 @@ export class PostServiceService {
         element.created_at,
         element.likes.length
       );
-      new_post[index].activeLike = this.check_like(element);
-      new_post[index].owner_nick = element.user.nickname;
-      new_post[index].owner_photo = element.user.avatar.url || this.userService.userPhotoSrc;
+      newPost[index].activeLike = this.checkLike(element);
+      newPost[index].ownerNick = element.user.nickname;
+      newPost[index].ownerPhoto = element.user.avatar.url || this.userService.userPhotoSrc;
     });
     
-    return new_post;
+    return newPost;
   }
 
-  public check_like(element): boolean{
+  public checkLike(element): boolean{
     let id = localStorage.getItem('current_user_id');
     let result = false;
     element.likes.forEach(el => {
@@ -101,7 +101,7 @@ export class PostServiceService {
     });
     return result;
   }
-  delete_post(id: string): Observable<any>{
+  deletePost(id: string): Observable<any>{
     return this.token.request({
       method: RequestMethod.Delete,
       url:    `${this.main.url}/posts/${id}`

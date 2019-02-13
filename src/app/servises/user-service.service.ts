@@ -55,8 +55,8 @@ export class UserServiceService {
                             });
    }
 
-  public findUser(user_name: string): Observable<any>{
-    return this.token.get(`/search?user=${user_name}`);
+  public findUser(userName: string): Observable<any>{
+    return this.token.get(`/search?user=${userName}`);
   }
 
   public getPosts(): Observable<any> {
@@ -80,7 +80,7 @@ export class UserServiceService {
   public subscribe(id: number = Number(this.user.id)): Observable<any>{
     return this.token.get(`profiles/${id}/subscribe`);
   }
-  public check_me(): boolean{
+  public checkMe(): boolean{
     return localStorage.getItem('current_user_id') == this.user.id;
   }
   public getSubscribers(): Observable<any>{
@@ -100,12 +100,12 @@ export class UserServiceService {
   public getRecommendation(): Observable<any>{
     return this.token.get(`profile/recommendations`)
   }
-  public update_photo(photo: any, user: User = this.user): Observable<any>{
+  public updatePhoto(photo: any, user: User = this.user): Observable<any>{
     const formData = new FormData();
     formData.append('avatar', 
                     photo, 
                     'avatar');
-    let header: Headers = this.main.get_token();
+    let header: Headers = this.main.getToken();
     
     return this.token.request({
       method: RequestMethod.Put,
@@ -115,7 +115,7 @@ export class UserServiceService {
     });
   }
 
-  public update_user(user: User, file: any): Observable<any>{
+  public updateUser(user: User, file: any): Observable<any>{
     const formData = new FormData();
     formData.append('avatar', 
                     file, 
@@ -125,7 +125,7 @@ export class UserServiceService {
     formData.append('name', user.name);
     formData.append('lastname', user.lastname);
     formData.append('email', user.email);        
-    let header: Headers = this.main.get_token();
+    let header: Headers = this.main.getToken();
     return this.token.request({
       method: RequestMethod.Put,
       url: `${this.main.url}/auth`,

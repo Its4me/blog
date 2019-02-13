@@ -1,22 +1,22 @@
 export class myError {
     public showError: boolean = false;
-    public text_error: string;
+    public textError: string;
     private time: number = 4000;
 
     constructor(
        
     ){}
 
-    public togle_error(text?: string){
+    public togleError(text?: string){
         this.showError = true;
 
-        this.text_error = text;
+        this.textError = text;
         
-        setTimeout(()=>this.clear_error(),this.time);
+        setTimeout(()=>this.clearError(),this.time);
     }
-    private clear_error(){
+    private clearError(){
         this.showError = false;
-        this.text_error = '';
+        this.textError = '';
     }
 
 }

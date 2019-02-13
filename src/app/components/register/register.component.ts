@@ -14,8 +14,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  diff_password: boolean = false;
-
   constructor(
     public userService: UserServiceService,
     public router:  Router,
@@ -95,13 +93,6 @@ export class RegisterComponent implements OnInit {
       this.registerForm.get("password").value,
       this.registerForm.get("password_confim").value,
     );
- 
-    if (registerUser.password != registerUser.password_confirmation) {
-      this.diff_password = true;
-      return;
-    } else {
-      this.diff_password = false;
-    }
 
     this.userService.registerUser(registerUser)
       .subscribe(
@@ -111,7 +102,7 @@ export class RegisterComponent implements OnInit {
         },
         err => {
           let new_err = JSON.parse(err._body);
-          this.main.client_error.togle_error(
+          this.main.clientError.togleError(
             new_err.errors.full_messages[0]
           );
           this.main.loader = false;          
@@ -141,7 +132,7 @@ export class RegisterComponent implements OnInit {
         this.ititiall_user(res);
       },
       err => {
-        this.main.client_error.togle_error(
+        this.main.clientError.togleError(
           `Нет такой комбинации логина и пароля`
         );
         this.main.loader = false;

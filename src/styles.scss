@@ -143,6 +143,9 @@ aside{
 .likes i {
     user-select: none;
 }
+.mat-menu-panel.sub-menu{
+    width: 155px!important;
+}
 @keyframes like{
     from{
         transform: scale(1);

@@ -23,8 +23,8 @@ export class FullPostComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    if(this.postService.open_post){
-      this.post = this.postService.open_post;
+    if(this.postService.openPost){
+      this.post = this.postService.openPost;
       
     }else{
       let srcPost: any = '';
@@ -49,10 +49,10 @@ export class FullPostComponent implements OnInit {
             res.created_at,
             res.likes.length
           );
-          this.post.id = this.postService.current_post_id;
-          this.post.activeLike = this.postService.check_like(res);
-          this.post.owner_nick = res.user.nickname;
-          this.post.owner_photo = res.user.avatar.url || this.userService.userPhotoSrc;
+          this.post.id = this.postService.currentPostId;
+          this.post.activeLike = this.postService.checkLike(res);
+          this.post.ownerNick = res.user.nickname;
+          this.post.ownerPhoto = res.user.avatar.url || this.userService.userPhotoSrc;
           
         }
 
@@ -72,7 +72,7 @@ export class FullPostComponent implements OnInit {
   _like(){
     this.postService.like_post(this.post.back_id).subscribe(
       res => {
-        let new_res = this.main.get_body(res);
+        let new_res = this.main.getBody(res);
         this.postService.posts[Number(this.post.id)].likes_count = new_res.likes_count;
         this.postService.posts[Number(this.post.id)].activeLike = new_res.like_status;
         this.post.likes_count = new_res.likes_count;

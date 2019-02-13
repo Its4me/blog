@@ -1,7 +1,7 @@
 <mat-drawer-container [hasBackdrop]="true">
     <mat-drawer #drawer [mode]="'over'">
-      <button mat-button (click)="_close_all(); drawer.toggle()" [routerLink]="[ '/news' ]">Новости</button >
-      <button mat-button (click)="_my_page(); drawer.toggle()">Моя страница</button>
+      <button mat-button (click)="_closeAll(); drawer.toggle()" [routerLink]="[ '/news' ]">Новости</button >
+      <button mat-button (click)="_myPage(); drawer.toggle()">Моя страница</button>
       <button mat-button (click)="_navigate_edit();drawer.toggle()">Редактировать</button>
       <button mat-button (click)="_exit();drawer.toggle()">Выход</button>
     </mat-drawer>
@@ -11,7 +11,7 @@
     <div class="row">
       <div 
         class="logo"
-        (click)="_my_page()"
+        (click)="_myPage()"
         >
         <img src="assets/logo.png" alt="logo">
       </div>
@@ -29,14 +29,14 @@
           >
         <i class="material-icons clear"
           *ngIf="seachValue"
-          (click)="_close_seach()">clear
+          (click)="_closeSeach()">clear
         </i>
-        <div class="seach_result" *ngIf="seach_menu || nothing_finds">
+        <div class="seach_result" *ngIf="seachMenu || nothingFinds">
           <ul>
-            <li *ngFor="let user of find_users">
+            <li *ngFor="let user of findUsers">
               <button (click)='_navigate_user(user)' mat-button>{{user.nickname}}</button>
             </li>
-            <li class="nothing-finds" *ngIf="nothing_finds">
+            <li class="nothing-finds" *ngIf="nothingFinds">
               Никого не найдено(
             </li>
           </ul>
@@ -52,16 +52,20 @@
               Поиск
             </button>
           </li>
-          <li><a mat-button (click)="_close_all()" [routerLink]="[ '/news' ]">Новости</a></li>
+          <li><a mat-button (click)="_closeAll()" [routerLink]="[ '/news' ]">Новости</a></li>
           <li>
-            <button mat-button id="user_menu_button" (click)="_tougle_menu()">Профиль</button>
-            <ul class="sub-menu" id="user_menu" *ngIf="user_menu">
-              <li>
-                <button mat-button (click)="_my_page()">Моя страница</button>
-                <button mat-button (click)="_navigate_edit()">Редактировать</button>
-                <button mat-button (click)="_exit()">Выход</button>
-              </li>
-            </ul>
+            <button 
+              mat-button 
+              id="user_menu_button" 
+              [matMenuTriggerFor]="menu">
+              Профиль
+            </button>
+            <mat-menu [overlapTrigger]="false" #menu="matMenu" class="sub-menu">
+              <button mat-button  class="sub-menu-btn" (click)="_myPage()">Моя страница</button>
+              <button mat-button  class="sub-menu-btn" (click)="_navigate_edit()">Редактировать</button>
+              <button mat-button  class="sub-menu-btn" (click)="_exit()">Выход</button>
+            </mat-menu>
+            
           </li>
         </ul>
       </nav>
@@ -80,7 +84,7 @@
   </div> 
 </header>
 
-    <main (click)="close($event)" >
+    <main>
         <router-outlet></router-outlet>
     </main>
   </mat-drawer-content>

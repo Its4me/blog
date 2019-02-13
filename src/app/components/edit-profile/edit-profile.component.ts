@@ -40,14 +40,14 @@ export class EditProfileComponent implements OnInit {
         this.user.id = res.user.id;
       }, 
       err => {
-        this.main.client_error.togle_error('Ошибка, обновите страницу позже')
+        this.main.clientError.togleError('Ошибка, обновите страницу позже')
       },
       () => {
         this.loader = false;
       }
     )
   }
-  _update_photo(e){
+  _updatePhoto(e){
     this.file = e.target.files[0] || e.dataTransfer.files[0];
     let file =  new FileReader();
     file.readAsDataURL(this.file)
@@ -55,16 +55,16 @@ export class EditProfileComponent implements OnInit {
       this.user.photoSrc = file.result.toString();
     }
   }
-  _edit_data(){
+  _editData(){
     this.loaderSave = true;
-    this.userService.update_user(this.user, this.file).subscribe(
+    this.userService.updateUser(this.user, this.file).subscribe(
     
       res =>{
         this.loaderSave = false;
         this.router.navigate([`user/${this.user.id}`]);
         
       },
-      err => this.main.client_error.togle_error(`Ошибка ${err}`)
+      err => this.main.clientError.togleError(`Ошибка ${err}`)
     )
   }
 
