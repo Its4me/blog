@@ -115,6 +115,7 @@
                             *ngIf="!postLoader"
                             mat-raised-button
                             color="primary"
+                            class="post-btn"
                             (click)="_addPost()"
                             >
                             Запостить
@@ -122,8 +123,7 @@
                         <mat-spinner
                             *ngIf="postLoader"
                             class="spinner-post"
-                            diameter="30"
-                            >
+                            diameter="30">
                         </mat-spinner>
                     </div>
                 </div>

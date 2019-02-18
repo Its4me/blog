@@ -1,6 +1,6 @@
 <mat-drawer-container [hasBackdrop]="true">
     <mat-drawer #drawer [mode]="'over'">
-      <button mat-button (click)="_closeAll(); drawer.toggle()" [routerLink]="[ '/news' ]">Новости</button >
+      <button mat-button (click)="_closeSeach(); drawer.toggle()" [routerLink]="[ '/news' ]">Новости</button >
       <button mat-button (click)="_myPage(); drawer.toggle()">Моя страница</button>
       <button mat-button (click)="_navigate_edit();drawer.toggle()">Редактировать</button>
       <button mat-button (click)="_exit();drawer.toggle()">Выход</button>
@@ -52,11 +52,20 @@
               Поиск
             </button>
           </li>
-          <li><a mat-button (click)="_closeAll()" [routerLink]="[ '/news' ]">Новости</a></li>
+          <li
+            *ngIf="this.userService.currentUserId">
+            <a 
+              mat-button 
+              (click)="_closeSeach()" 
+              [routerLink]="[ '/news' ]">
+              Новости
+            </a>
+          </li>
           <li>
             <button 
               mat-button 
               id="user_menu_button" 
+              *ngIf="this.userService.currentUserId"
               [matMenuTriggerFor]="menu">
               Профиль
             </button>
@@ -73,7 +82,7 @@
         <button mat-icon-button>
           <i 
             class="material-icons mob-menu"
-            (click)="drawer.toggle()">
+            (click)="this.userService.currentUserId? drawer.toggle() : this.main.clientError.togleError('Сначала войдите')">
             menu
           </i>
         </button>

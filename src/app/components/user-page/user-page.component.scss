@@ -169,6 +169,7 @@ section{
         height: 200px;
         display: block;
         margin: 0 auto;
+        
     }
     .head-info-user{
         display: block;
@@ -178,7 +179,7 @@ section{
         text-align: center;
     }
     .content-all-newPost-bottom{
-        flex-wrap: wrap;
+        display: block;
         button{
             width: 100%;
             margin-left: 0;
@@ -189,9 +190,22 @@ section{
     }
     .mob-uploader{
         display: block;
-        margin-bottom: 1em;
+    }
+    .post-btn{
+        margin-top: 1em;
     }
     .wrapper-preview-img{
         margin: 0 auto 1em;
+        height: auto;
+        width: 200px;
+    }
+    .spinner-post{
+        float: left;
+        margin: 1em 45% 0;
+    }
+    .head-info-user-right{
+        button:first-child{
+            margin-bottom: 1em;
+        }
     }
 } 

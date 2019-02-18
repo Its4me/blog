@@ -34,8 +34,9 @@ export class SubscribersComponent implements OnInit {
   ngOnInit() {
     this.loader = true;
     let url = this.router.url;
-    if(url == '/following'){
-      this.UserService.getSubscribers().subscribe(
+    let id: string = url.match(/\d{1,}/)[0];
+    if(url.match( /following/ )){
+      this.UserService.getSubscribers(id).subscribe(
         res => {
           this.users = this.main.getBody(res).map((user) => {
             return new User(
@@ -54,8 +55,8 @@ export class SubscribersComponent implements OnInit {
         }
         
       )
-    }else if(url == '/followers'){
-      this.UserService.getFollowing().subscribe(
+    }else if(url.match( /followers/ )){
+      this.UserService.getFollowing(id).subscribe(
         res => {
           this.users = this.main.getBody(res).map((user) => {
             return new User(

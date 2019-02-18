@@ -73,6 +73,7 @@ export class HeadersComponent implements OnInit {
     this.userService.exitAccount().subscribe(
       res =>{
         localStorage.removeItem('current_user_id');
+        this.userService.currentUserId = null;
       }
     );
   }
@@ -87,7 +88,7 @@ export class HeadersComponent implements OnInit {
     }else if(!this.token.currentUserData){
       this.router.navigate([``]);
     }
-    this._closeAll();
+    this._closeSeach();
     
   }
   _navigate_user(user: User){
@@ -95,11 +96,11 @@ export class HeadersComponent implements OnInit {
     this._closeSeach();
   }
   _navigate_edit(){
+    
     this.router.navigate(['edit-profile']);
-    this._closeAll();
-  }
-  public _closeAll(){
     this._closeSeach();
+    
+    
   }
   _open_seach(){
     this.mobileSeach = true;

@@ -16,8 +16,8 @@ const routes: Routes = [
     path: "", component: HeadersComponent, children: [
       { path: "user/:id", component: UserPageComponent },
       { path: "news", component: NewsComponent},
-      { path: "followers", component: SubscribersComponent },
-      { path: "following", component: SubscribersComponent },
+      { path: "followers/:id", component: SubscribersComponent },
+      { path: "following/:id", component: SubscribersComponent },
       { path: "edit-profile", component: EditProfileComponent }
     ]
   },
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

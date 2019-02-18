@@ -125,31 +125,34 @@ export class  UserPageComponent implements OnInit {
     );
   }
   _subscribe(){
-    if(this.subString == 'Подписаться'){
-      this.userService.subscribe().subscribe(
-        res => {
-          this.subString = 'Отписка';
-          this.subCount += 1;
-        },
-        err => this.main.clientError.togleError('Ошибка, увы')
-      );
-    }else{
-      this.userService.unsubscribe().subscribe(
-        res => {
-         this.subString = 'Подписаться';
-         this.subCount -= 1;
-        },
-        err => this.main.clientError.togleError('Снова ошибка, простите')
-      )
+    if(!this.userService.currentUserId){
+      this.main.clientError.togleError('Сначала войдите');
+    } else{
+      if(this.subString == 'Подписаться'){
+        this.userService.subscribe().subscribe(
+          res => {
+            this.subString = 'Отписка';
+            this.subCount += 1;
+          },
+          err => this.main.clientError.togleError('Ошибка, увы')
+        );
+      }else{
+        this.userService.unsubscribe().subscribe(
+          res => {
+           this.subString = 'Подписаться';
+           this.subCount -= 1;
+          },
+          err => this.main.clientError.togleError('Снова ошибка, простите')
+        )
+      }
     }
-    
-    
   }
+  
   _navigateFollower(){
-    this.router.navigate(['following']);
+    this.router.navigate([`following/${this.userService.user.id}`]);
   }
   _navigateSubscribers(){
-    this.router.navigate(['followers']);
+    this.router.navigate([`followers/${this.userService.user.id}`]); 
   }
   _uploadPhoto(e){
     this.file = e.target.files[0] || e.dataTransfer.files[0];

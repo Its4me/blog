@@ -83,15 +83,13 @@ export class UserServiceService {
   public checkMe(): boolean{
     return localStorage.getItem('current_user_id') == this.user.id;
   }
-  public getSubscribers(): Observable<any>{
-    let id = this.user.id || this.currentUserId; // КОСТЫЛЬ
+  public getSubscribers(id: string): Observable<any>{
     return this.token.get(`profiles/${id}/subscriptions_list`);
   }
   public unsubscribe(id: number = Number(this.user.id)): Observable<any>{
     return this.token.get(`profiles/${id}/unsubscribe`);
   }
-  public getFollowing(): Observable<any>{
-    let id = this.user.id || this.currentUserId; // КОСТЫЛЬ
+  public getFollowing(id: string): Observable<any>{
     return this.token.get(`profiles/${id}/subscribers_list`);
   }
   public getUserPhoto(src: string): string{
