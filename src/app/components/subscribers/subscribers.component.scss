@@ -19,10 +19,12 @@ li{
     flex: 0 0 70px;
     float: left;
     height: 70px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
     img{
+        position: absolute;
         width: 100%;
-        max-height: 100%;
-        border-radius: 50%;
     }
 }
 .user{

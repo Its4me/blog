@@ -167,6 +167,7 @@ export class  UserPageComponent implements OnInit {
 
   _updatePhoto(e){
     let file = e.target.files[0] || e.dataTransfer.files[0];
+    
     this.userService.updatePhoto(file).subscribe(res => {
       let user = this.main.getBody(res).data;
       this.userService.user.photoSrc = user.avatar.url;

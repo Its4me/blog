@@ -29,10 +29,12 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 50%;
     img{ 
         width: 100%;
-        border-radius: 50%;
-        height: 100%;
+        position: absolute;
     }
 }
 .item-carousel-container{
@@ -105,7 +107,7 @@ section{
 
 @media (max-width: 992px){
     .row{
-        grid-template-columns: 1fr;
+        display: block;
     }
     .posts{
         width: 100%;
@@ -119,6 +121,7 @@ section{
     
 }
 @media (max-width: 776px){
+    
     .item-carousel-container{
         padding-bottom: calc(1em + 27px);
         button{
@@ -144,13 +147,17 @@ section{
     .item-carousel-container{
         padding: 0.2em;
     }
+    .prev, .next{
+        display: none;
+    }
     .item-carousel-container{
         padding-bottom: calc(1em + 27px);
         font-size: 12px;
         button{
             left: 0;;
             line-height: 24px;
-            width: 100%;
+            margin: 0 5%;
+            width: 90%;
         }
         .mat-stroked-button{
             padding: 0 2px;
