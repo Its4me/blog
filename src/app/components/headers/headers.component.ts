@@ -74,6 +74,7 @@ export class HeadersComponent implements OnInit {
       res =>{
         localStorage.removeItem('current_user_id');
         this.userService.currentUserId = null;
+        this.main.clientError.togleError('Вы вышли из аккаунта)');
       }
     );
   }
